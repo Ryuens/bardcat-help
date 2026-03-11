@@ -5,216 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>바드캣 키우기 - 개인정보처리방침</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    html { overflow-y: scroll; }
     :root {
       --primary: #1A1A1A;
       --primary-dark: #000000;
       --primary-light: #F5F5F5;
       --bg: #FAFAFA;
       --white: #FFFFFF;
-      --text: #2D2D3A;
-      --text-secondary: #6B7280;
+      --text: #1A1A1A;
+      --text-secondary: #888888;
       --border: #E5E5E5;
       --radius: 12px;
-      --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.1);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
+      font-family: 'Noto Sans KR','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      background: var(--bg); color: var(--text); line-height:1.8;
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── i18n ── */
+    body.lang-en .ko { display:none !important; }
+    body.lang-en .en { display:revert !important; }
+    body:not(.lang-en) .en { display:none !important; }
+    body:not(.lang-en) .ko { display:revert !important; }
+
     /* ── Header ── */
-    .header {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    .header { background:var(--white); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+    .header-inner { max-width:960px; margin:0 auto; padding:0 24px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+    .logo-area { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); }
+    .logo-icon { width:36px; height:36px; border-radius:10px; overflow:hidden; }
+    .logo-icon img { width:100%; height:100%; object-fit:cover; }
+    .logo-text { display:flex; flex-direction:column; line-height:1.2; }
+    .logo-company { font-size:11px; color:var(--text-secondary); font-weight:500; letter-spacing:0.5px; }
+    .logo-title { font-size:16px; font-weight:700; }
 
-    .header-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn-back {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--white);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-back:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-back svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .logo-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .logo-company {
-      font-size: 11px;
-      color: var(--text-secondary);
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    .logo-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
-
-    .lang-selector {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: var(--primary-light);
-      border-radius: 8px;
-      padding: 4px;
-    }
-
-    .lang-btn {
-      padding: 6px 14px;
-      border: none;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: inherit;
-      background: transparent;
-      color: var(--text-secondary);
-    }
-
-    .lang-btn.active {
-      background: var(--primary);
-      color: white;
-    }
-
-    .lang-btn:not(.active):hover {
-      background: rgba(0, 0, 0, 0.06);
-      color: var(--primary-dark);
-    }
-
-    /* ── Hero ── */
-    .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      padding: 48px 24px;
-      text-align: center;
-      color: white;
-    }
-
-    .hero h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero p {
-      font-size: 15px;
-      opacity: 0.85;
-    }
+    /* ── Lang Dropdown ── */
+    .lang-dropdown { position:relative; }
+    .lang-current { display:flex; align-items:center; gap:6px; padding:7px 12px; background:var(--white); border:1px solid var(--border); border-radius:8px; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; }
+    .lang-current:hover { border-color:var(--primary); }
+    .lang-current svg { width:14px; height:14px; color:var(--text-secondary); transition:transform 0.2s; }
+    .lang-dropdown.open .lang-current svg:last-child { transform:rotate(180deg); }
+    .lang-menu { display:none; position:absolute; top:calc(100% + 4px); right:0; min-width:120px; background:var(--white); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.1); overflow:hidden; z-index:200; }
+    .lang-dropdown.open .lang-menu { display:block; }
+    .lang-option { display:flex; align-items:center; gap:8px; width:100%; padding:10px 14px; background:none; border:none; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; }
+    .lang-option:hover { background:var(--primary-light); }
+    .lang-option.active { font-weight:600; }
+    .lang-option .ck { width:16px; text-align:center; font-size:14px; }
 
     /* ── Content ── */
-    .content-wrap {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 32px 24px 64px;
-    }
+    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 64px; }
+    .page-title { font-size:24px; font-weight:700; margin-bottom:8px; color:var(--text); }
+    .page-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:32px; }
 
     /* ── TOC ── */
-    .toc {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      margin-bottom: 32px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    .toc h2 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--primary-light);
-    }
-
+    .toc { background:var(--primary-light); border-radius:8px; padding:24px 28px; margin-bottom:32px; }
+    .toc h2 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:12px; }
     .toc-list {
       list-style: none;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px 24px;
     }
-
     .toc-list li a {
       display: block;
       padding: 6px 0;
@@ -224,11 +80,7 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-
-    .toc-list li a:hover {
-      color: var(--primary);
-    }
-
+    .toc-list li a:hover { color: var(--primary); }
     .toc-list li a .toc-num {
       color: var(--primary);
       font-weight: 700;
@@ -236,51 +88,13 @@
     }
 
     /* ── Article ── */
-    .article-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    .article-card h3 {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--primary-light);
-    }
-
-    .article-card p {
-      font-size: 14.5px;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-
-    .article-card ol,
-    .article-card ul {
-      padding-left: 20px;
-      margin-bottom: 12px;
-    }
-
-    .article-card li {
-      font-size: 14.5px;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .article-card li ol,
-    .article-card li ul {
-      margin-top: 6px;
-      margin-bottom: 6px;
-    }
-
-    .sub-list {
-      list-style-type: lower-alpha;
-    }
+    .article-section { margin-bottom:32px; }
+    .article-section h3 { font-size:17px; font-weight:700; color:var(--text); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+    .article-section p { font-size:14.5px; margin-bottom:10px; color:var(--text); line-height:1.8; }
+    .article-section ol, .article-section ul { padding-left:20px; margin-bottom:10px; }
+    .article-section li { font-size:14.5px; margin-bottom:6px; color:var(--text); line-height:1.8; }
+    .article-section li ol, .article-section li ul { margin-top:6px; margin-bottom:6px; }
+    .sub-list { list-style-type: lower-alpha; }
 
     .info-table {
       width: 100%;
@@ -288,7 +102,6 @@
       margin: 12px 0;
       font-size: 14px;
     }
-
     .info-table th,
     .info-table td {
       border: 1px solid var(--border);
@@ -296,224 +109,100 @@
       text-align: left;
       vertical-align: top;
     }
-
     .info-table th {
       background: var(--primary-light);
-      color: var(--primary-dark);
+      color: var(--text);
       font-weight: 600;
       white-space: nowrap;
     }
-
-    .info-table td {
-      line-height: 1.7;
-    }
+    .info-table td { line-height: 1.7; }
 
     .addendum {
       background: var(--primary-light);
-      border-radius: var(--radius);
-      padding: 24px 32px;
+      border-radius: 8px;
+      padding: 24px 28px;
       margin-top: 20px;
-      border: 1px solid var(--border);
     }
-
     .addendum h3 {
       font-size: 17px;
       font-weight: 700;
-      color: var(--primary-dark);
+      color: var(--text);
       margin-bottom: 12px;
     }
-
     .addendum p {
       font-size: 14.5px;
       color: var(--text);
     }
 
     /* ── Footer ── */
-    .footer {
-      background: var(--primary-dark);
-      color: rgba(255, 255, 255, 0.8);
-      padding: 40px 24px;
-      margin-top: 32px;
-    }
-
-    .footer-inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .footer-company {
-      font-size: 16px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 4px;
-    }
-
-    .footer-company-en {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 16px;
-    }
-
-    .footer-info {
-      font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    .footer-links a.active-link {
-      color: white;
-      font-weight: 700;
-    }
+    .footer { margin-top:48px; background:#111111; padding:40px 24px; }
+    .footer-inner { max-width:960px; margin:0 auto; }
+    .footer-links { display:flex; gap:24px; margin-bottom:20px; }
+    .footer-links a { font-size:13px; font-weight:600; color:#FFFFFF; text-decoration:none; }
+    .footer-links a:hover { opacity:0.7; }
+    .footer-info { font-size:12px; color:#999999; line-height:1.8; }
+    .footer-info .company-name { font-weight:600; color:#DDDDDD; }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
-      .header-inner {
-        padding: 0 16px;
-        height: 56px;
-      }
-
-      .logo-text {
-        display: none;
-      }
-
-      .lang-btn {
-        padding: 5px 10px;
-        font-size: 12px;
-      }
-
-      .hero {
-        padding: 36px 16px;
-      }
-
-      .hero h1 {
-        font-size: 22px;
-      }
-
-      .content-wrap {
-        padding: 20px 16px 48px;
-      }
-
-      .toc {
-        padding: 20px;
-      }
-
-      .toc-list {
-        grid-template-columns: 1fr;
-        gap: 2px;
-      }
-
-      .article-card {
-        padding: 20px;
-      }
-
-      .addendum {
-        padding: 20px;
-      }
-
-      .footer {
-        padding: 32px 16px;
-      }
-
-      .footer-links {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      .info-table {
-        font-size: 13px;
-      }
-
-      .info-table th,
-      .info-table td {
-        padding: 8px 10px;
-      }
+      .header-inner { padding:0 16px; height:56px; }
+      .logo-text { display:none; }
+      .content-wrap { padding:20px 16px 48px; }
+      .toc { padding:20px; }
+      .toc-list { grid-template-columns:1fr; gap:2px; }
+      .footer { padding:32px 16px; }
+      .footer-links { flex-wrap:wrap; gap:12px; }
+      .info-table { font-size:13px; }
+      .info-table th, .info-table td { padding:8px 10px; }
     }
-
-    /* ── Language toggle ── */
-    .lang-ko, .lang-en {
-      display: none;
-    }
-    body.ko .lang-ko { display: block; }
-    body.en .lang-en { display: block; }
-    body.ko .toc .lang-ko { display: block; }
-    body.en .toc .lang-en { display: block; }
-
-    /* inline elements need inline display */
-    body.ko span.lang-ko { display: inline; }
-    body.en span.lang-en { display: inline; }
-
-    /* grid for toc list */
-    body.ko .toc-list.lang-ko { display: grid; }
-    body.en .toc-list.lang-en { display: grid; }
   </style>
 </head>
-<body class="ko">
+<body>
 
   <!-- Header -->
   <header class="header">
     <div class="header-inner">
-      <div class="header-left">
-        <a href="index.html" class="btn-back" title="뒤로가기">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </a>
-        <a href="index.html" class="logo-area">
-          <div class="logo-icon">
-            <img src="icon.png" alt="바드캣 키우기">
-          </div>
-          <div class="logo-text">
-            <span class="logo-company">LAYERLAB</span>
-            <span class="logo-title">바드캣 키우기</span>
-          </div>
-        </a>
-      </div>
-      <div class="lang-selector">
-        <button class="lang-btn active" id="btnKo" onclick="setLang('ko')">한국어</button>
-        <button class="lang-btn" id="btnEn" onclick="setLang('en')">English</button>
+      <a href="index.html" class="logo-area">
+        <div class="logo-icon"><img src="icon.png" alt="바드캣 키우기"></div>
+        <div class="logo-text">
+          <span class="logo-company">LAYERLAB</span>
+          <span class="logo-title ko">바드캣 키우기</span>
+          <span class="logo-title en">Meow Rangers</span>
+        </div>
+      </a>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-current" onclick="toggleDropdown()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          <span id="currentLangText">한국어</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-menu">
+          <button class="lang-option active" data-lang="ko" onclick="setLang('ko')"><span class="ck">✓</span> 한국어</button>
+          <button class="lang-option" data-lang="en" onclick="setLang('en')"><span class="ck"></span> English</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <div class="hero">
-    <h1>
-      <span class="lang-ko">개인정보처리방침</span>
-      <span class="lang-en">Privacy Policy</span>
-    </h1>
-    <p>
-      <span class="lang-ko">바드캣 키우기 서비스의 개인정보 보호에 대한 안내</span>
-      <span class="lang-en">Information on privacy protection for Meow Rangers</span>
-    </p>
-  </div>
-
   <!-- Content -->
   <div class="content-wrap">
 
+    <h1 class="page-title">
+      <span class="ko">개인정보처리방침</span>
+      <span class="en">Privacy Policy</span>
+    </h1>
+    <p class="page-subtitle">
+      <span class="ko">바드캣 키우기 서비스의 개인정보 보호에 대한 안내</span>
+      <span class="en">Information on privacy protection for Meow Rangers</span>
+    </p>
+
     <!-- ==================== KOREAN ==================== -->
-    <div class="lang-ko">
+    <div class="ko">
 
       <!-- TOC -->
       <div class="toc">
         <h2>목차</h2>
-        <ul class="toc-list lang-ko">
+        <ul class="toc-list">
           <li><a href="#ko-1"><span class="toc-num">제1조</span> 개인정보의 수집 항목 및 수집 방법</a></li>
           <li><a href="#ko-2"><span class="toc-num">제2조</span> 개인정보의 수집 및 이용 목적</a></li>
           <li><a href="#ko-3"><span class="toc-num">제3조</span> 개인정보의 보유 및 이용 기간</a></li>
@@ -534,7 +223,7 @@
       </p>
 
       <!-- 제1조 -->
-      <div class="article-card" id="ko-1">
+      <div class="article-section" id="ko-1">
         <h3>제1조 (개인정보의 수집 항목 및 수집 방법)</h3>
         <p>① 회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집합니다.</p>
         <table class="info-table">
@@ -579,7 +268,7 @@
       </div>
 
       <!-- 제2조 -->
-      <div class="article-card" id="ko-2">
+      <div class="article-section" id="ko-2">
         <h3>제2조 (개인정보의 수집 및 이용 목적)</h3>
         <p>회사는 수집한 개인정보를 다음의 목적을 위해 이용합니다.</p>
         <ol>
@@ -593,7 +282,7 @@
       </div>
 
       <!-- 제3조 -->
-      <div class="article-card" id="ko-3">
+      <div class="article-section" id="ko-3">
         <h3>제3조 (개인정보의 보유 및 이용 기간)</h3>
         <p>① 회사는 개인정보의 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 다만, 관계 법령에 의하여 보존할 필요가 있는 경우 회사는 해당 법령에서 정한 기간 동안 개인정보를 보관합니다.</p>
         <p>② 관계 법령에 따른 개인정보 보관 기간은 다음과 같습니다.</p>
@@ -642,7 +331,7 @@
       </div>
 
       <!-- 제4조 -->
-      <div class="article-card" id="ko-4">
+      <div class="article-section" id="ko-4">
         <h3>제4조 (개인정보의 파기 절차 및 방법)</h3>
         <p>① 회사는 개인정보 보유 기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p>
         <p>② 정보주체로부터 동의받은 개인정보 보유 기간이 경과하거나 처리 목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관 장소를 달리하여 보존합니다.</p>
@@ -659,7 +348,7 @@
       </div>
 
       <!-- 제5조 -->
-      <div class="article-card" id="ko-5">
+      <div class="article-section" id="ko-5">
         <h3>제5조 (개인정보의 제3자 제공)</h3>
         <p>① 회사는 이용자의 개인정보를 제2조(개인정보의 수집 및 이용 목적)에서 고지한 범위 내에서 사용하며, 이용자의 사전 동의 없이는 동 범위를 초과하여 이용하거나 원칙적으로 제3자에게 제공하지 않습니다.</p>
         <p>② 다만, 다음의 경우에는 예외로 합니다.</p>
@@ -673,7 +362,7 @@
       </div>
 
       <!-- 제6조 -->
-      <div class="article-card" id="ko-6">
+      <div class="article-section" id="ko-6">
         <h3>제6조 (개인정보 처리의 위탁)</h3>
         <p>① 회사는 원활한 서비스 제공을 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p>
         <table class="info-table">
@@ -717,7 +406,7 @@
       </div>
 
       <!-- 제7조 -->
-      <div class="article-card" id="ko-7">
+      <div class="article-section" id="ko-7">
         <h3>제7조 (이용자 및 법정대리인의 권리와 행사 방법)</h3>
         <p>① 이용자(정보주체)는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>
         <ol>
@@ -735,7 +424,7 @@
       </div>
 
       <!-- 제8조 -->
-      <div class="article-card" id="ko-8">
+      <div class="article-section" id="ko-8">
         <h3>제8조 (개인정보의 안전성 확보 조치)</h3>
         <p>회사는 「개인정보 보호법」 제29조에 따라 다음과 같이 안전성 확보에 필요한 기술적·관리적 및 물리적 조치를 하고 있습니다.</p>
         <ol>
@@ -748,7 +437,7 @@
       </div>
 
       <!-- 제9조 -->
-      <div class="article-card" id="ko-9">
+      <div class="article-section" id="ko-9">
         <h3>제9조 (개인정보 자동 수집 장치의 설치·운영 및 거부)</h3>
         <p>① 회사는 이용자에게 개별적인 맞춤 서비스를 제공하기 위해 이용 정보를 저장하고 수시로 불러오는 '쿠키(cookie)' 및 유사한 기술을 사용합니다.</p>
         <p>② 쿠키 및 자동 수집 장치의 사용 목적은 다음과 같습니다.</p>
@@ -771,7 +460,7 @@
       </div>
 
       <!-- 제10조 -->
-      <div class="article-card" id="ko-10">
+      <div class="article-section" id="ko-10">
         <h3>제10조 (개인정보 보호책임자)</h3>
         <p>① 회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 이용자의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
         <table class="info-table">
@@ -799,7 +488,7 @@
       </div>
 
       <!-- 제11조 -->
-      <div class="article-card" id="ko-11">
+      <div class="article-section" id="ko-11">
         <h3>제11조 (권익침해 구제방법)</h3>
         <p>이용자는 아래의 기관에 대해 개인정보 침해에 대한 피해구제, 상담 등을 문의하실 수 있습니다. 아래의 기관은 회사와는 별개의 기관으로서, 회사의 자체적인 개인정보 불만 처리 및 피해구제 결과에 만족하지 못하시거나 보다 자세한 도움이 필요하신 경우 문의하여 주시기 바랍니다.</p>
         <table class="info-table">
@@ -837,7 +526,7 @@
       </div>
 
       <!-- 제12조 -->
-      <div class="article-card" id="ko-12">
+      <div class="article-section" id="ko-12">
         <h3>제12조 (개인정보 처리방침의 변경)</h3>
         <p>① 이 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경 내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 서비스 내 공지사항 또는 팝업 등을 통하여 고지할 것입니다.</p>
         <p>② 이용자의 권리에 중대한 변경이 발생하는 경우에는 최소 30일 전에 고지합니다.</p>
@@ -850,15 +539,15 @@
         <p>본 개인정보 처리방침은 2026년 3월 11일부터 시행됩니다.</p>
       </div>
 
-    </div><!-- /lang-ko -->
+    </div><!-- /ko -->
 
     <!-- ==================== ENGLISH ==================== -->
-    <div class="lang-en">
+    <div class="en">
 
       <!-- TOC -->
       <div class="toc">
         <h2>Table of Contents</h2>
-        <ul class="toc-list lang-en">
+        <ul class="toc-list">
           <li><a href="#en-1"><span class="toc-num">Art. 1</span> Items and Methods of Personal Information Collection</a></li>
           <li><a href="#en-2"><span class="toc-num">Art. 2</span> Purposes of Collection and Use</a></li>
           <li><a href="#en-3"><span class="toc-num">Art. 3</span> Retention and Use Period</a></li>
@@ -879,7 +568,7 @@
       </p>
 
       <!-- Article 1 -->
-      <div class="article-card" id="en-1">
+      <div class="article-section" id="en-1">
         <h3>Article 1 (Items and Methods of Personal Information Collection)</h3>
         <p>(1) The Company collects the following personal information for service provision:</p>
         <table class="info-table">
@@ -924,7 +613,7 @@
       </div>
 
       <!-- Article 2 -->
-      <div class="article-card" id="en-2">
+      <div class="article-section" id="en-2">
         <h3>Article 2 (Purposes of Collection and Use of Personal Information)</h3>
         <p>The Company uses collected personal information for the following purposes:</p>
         <ol>
@@ -938,7 +627,7 @@
       </div>
 
       <!-- Article 3 -->
-      <div class="article-card" id="en-3">
+      <div class="article-section" id="en-3">
         <h3>Article 3 (Retention and Use Period of Personal Information)</h3>
         <p>(1) The Company destroys personal information without delay once the purpose of collection and use has been achieved. However, if retention is required under relevant laws and regulations, the Company retains personal information for the period prescribed by such laws.</p>
         <p>(2) Retention periods under relevant laws and regulations are as follows:</p>
@@ -987,7 +676,7 @@
       </div>
 
       <!-- Article 4 -->
-      <div class="article-card" id="en-4">
+      <div class="article-section" id="en-4">
         <h3>Article 4 (Destruction Procedures and Methods of Personal Information)</h3>
         <p>(1) The Company destroys personal information without delay when it becomes unnecessary, such as when the retention period has expired or the processing purpose has been achieved.</p>
         <p>(2) If personal information must be retained under other laws despite the expiration of the consented retention period or achievement of the processing purpose, the information is transferred to a separate database (DB) or stored in a different location for retention.</p>
@@ -1004,7 +693,7 @@
       </div>
 
       <!-- Article 5 -->
-      <div class="article-card" id="en-5">
+      <div class="article-section" id="en-5">
         <h3>Article 5 (Provision of Personal Information to Third Parties)</h3>
         <p>(1) The Company uses users' personal information within the scope specified in Article 2 and does not use it beyond that scope or provide it to third parties without prior consent, in principle.</p>
         <p>(2) However, exceptions are made in the following cases:</p>
@@ -1018,7 +707,7 @@
       </div>
 
       <!-- Article 6 -->
-      <div class="article-card" id="en-6">
+      <div class="article-section" id="en-6">
         <h3>Article 6 (Entrustment of Personal Information Processing)</h3>
         <p>(1) The Company entrusts personal information processing to the following entities for smooth service provision:</p>
         <table class="info-table">
@@ -1062,7 +751,7 @@
       </div>
 
       <!-- Article 7 -->
-      <div class="article-card" id="en-7">
+      <div class="article-section" id="en-7">
         <h3>Article 7 (Rights of Users and Legal Representatives and Methods of Exercise)</h3>
         <p>(1) Users (data subjects) may exercise the following rights related to personal information protection at any time:</p>
         <ol>
@@ -1080,7 +769,7 @@
       </div>
 
       <!-- Article 8 -->
-      <div class="article-card" id="en-8">
+      <div class="article-section" id="en-8">
         <h3>Article 8 (Security Measures for Personal Information)</h3>
         <p>The Company implements the following technical, administrative, and physical measures to ensure the security of personal information in accordance with Article 29 of the Personal Information Protection Act:</p>
         <ol>
@@ -1093,7 +782,7 @@
       </div>
 
       <!-- Article 9 -->
-      <div class="article-card" id="en-9">
+      <div class="article-section" id="en-9">
         <h3>Article 9 (Installation, Operation, and Rejection of Automatic Data Collection Devices)</h3>
         <p>(1) The Company uses 'cookies' and similar technologies that store and retrieve usage information to provide individualized customized services.</p>
         <p>(2) The purposes of using cookies and automatic collection devices are as follows:</p>
@@ -1116,7 +805,7 @@
       </div>
 
       <!-- Article 10 -->
-      <div class="article-card" id="en-10">
+      <div class="article-section" id="en-10">
         <h3>Article 10 (Privacy Officer)</h3>
         <p>(1) The Company designates a Privacy Officer to oversee personal information processing and handle user complaints and damage relief related to personal information processing:</p>
         <table class="info-table">
@@ -1144,7 +833,7 @@
       </div>
 
       <!-- Article 11 -->
-      <div class="article-card" id="en-11">
+      <div class="article-section" id="en-11">
         <h3>Article 11 (Remedies for Infringement of Rights)</h3>
         <p>Users may contact the following organizations regarding damage relief and consultation for personal information infringement. These organizations are separate from the Company, and users who are not satisfied with the Company's own complaint handling and damage relief results or who need more detailed assistance may contact them:</p>
         <table class="info-table">
@@ -1182,7 +871,7 @@
       </div>
 
       <!-- Article 12 -->
-      <div class="article-card" id="en-12">
+      <div class="article-section" id="en-12">
         <h3>Article 12 (Changes to Privacy Policy)</h3>
         <p>(1) This Privacy Policy is effective from the enforcement date, and any additions, deletions, or corrections due to changes in laws or policies will be announced through in-service notices or pop-ups at least 7 days before the changes take effect.</p>
         <p>(2) In the event of material changes affecting users' rights, notice will be given at least 30 days in advance.</p>
@@ -1195,53 +884,44 @@
         <p>This Privacy Policy shall take effect on March 11, 2026.</p>
       </div>
 
-    </div><!-- /lang-en -->
+    </div><!-- /en -->
 
   </div><!-- /content-wrap -->
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-company">주식회사 레이어랩</div>
-      <div class="footer-company-en">LayerLab Inc.</div>
-      <div class="footer-info">
-        서울시 강남구 강남대로 92길 31 6층<br>
-        support@layerlab.io
-      </div>
       <div class="footer-links">
-        <a href="terms.html">
-          <span class="lang-ko">이용약관</span>
-          <span class="lang-en">Terms of Service</span>
-        </a>
-        <a href="privacy.html" class="active-link">
-          <span class="lang-ko">개인정보처리방침</span>
-          <span class="lang-en">Privacy Policy</span>
-        </a>
+        <a href="terms.html" class="ko">이용약관</a><a href="terms.html" class="en">Terms</a>
+        <a href="privacy.html"><strong class="ko">개인정보처리방침</strong><strong class="en">Privacy Policy</strong></a>
+      </div>
+      <div class="footer-info">
+        <span class="company-name ko">주식회사 레이어랩 (LayerLab Inc.)</span>
+        <span class="company-name en">LayerLab Inc.</span><br>
+        <span class="ko">서울시 강남구 강남대로 92길 31 6층</span>
+        <span class="en">6F, 31 Gangnam-daero 92-gil, Gangnam-gu, Seoul, Korea</span><br>
+        <span class="ko">이메일: support@layerlab.io</span>
+        <span class="en">Email: support@layerlab.io</span><br><br>
+        &copy; 2026 LayerLab Inc. All rights reserved.
       </div>
     </div>
   </footer>
 
   <script>
     function setLang(lang) {
-      document.body.className = lang;
-      document.getElementById('btnKo').classList.toggle('active', lang === 'ko');
-      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
-      document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
-    }
-
-    // Smooth scroll for TOC links with offset for sticky header
-    document.querySelectorAll('.toc-list a').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        var targetId = this.getAttribute('href').substring(1);
-        var target = document.getElementById(targetId);
-        if (target) {
-          e.preventDefault();
-          var headerHeight = document.querySelector('.header').offsetHeight;
-          var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 16;
-          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        }
+      if (lang === 'en') document.body.classList.add('lang-en');
+      else document.body.classList.remove('lang-en');
+      document.getElementById('currentLangText').textContent = lang === 'en' ? 'English' : '한국어';
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+        btn.querySelector('.ck').textContent = btn.dataset.lang === lang ? '✓' : '';
       });
-    });
+      document.getElementById('langDropdown').classList.remove('open');
+      localStorage.setItem('helpLang', lang);
+    }
+    function toggleDropdown() { document.getElementById('langDropdown').classList.toggle('open'); }
+    document.addEventListener('click', function(e) { if (!e.target.closest('.lang-dropdown')) document.getElementById('langDropdown').classList.remove('open'); });
+    if (localStorage.getItem('helpLang') === 'en') setLang('en');
   </script>
 
 </body>
