@@ -67,10 +67,10 @@
     .hero h1 { font-size:28px; font-weight:700; margin-bottom:8px; text-shadow:0 2px 8px rgba(0,0,0,0.2); }
     .hero p { font-size:15px; opacity:0.9; text-shadow:0 1px 4px rgba(0,0,0,0.15); }
     .search-bar { max-width:520px; margin:24px auto 0; position:relative; }
-    .search-bar input { width:100%; padding:14px 20px 14px 44px; border:2px solid #000000; border-radius:0; font-size:15px; font-family:inherit; background:rgba(255,255,255,0.95); color:var(--text); outline:none; }
+    .search-bar input { width:100%; padding:14px 20px 14px 44px; border:4px solid #000000; border-radius:0; font-size:15px; font-family:inherit; background:rgba(255,255,255,0.95); color:var(--text); outline:none; }
     .search-bar input:focus { box-shadow:0 0 0 3px rgba(255,255,255,0.3); }
     .search-bar input::placeholder { color:var(--text-secondary); }
-    .search-bar .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); }
+    .search-bar .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#000000; }
 
     /* ── Tabs ── */
     .tabs-container { max-width:960px; margin:0 auto; padding:0 24px; }
@@ -223,7 +223,7 @@
     <p class="ko">바드캣 키우기에 대해 궁금한 점을 검색해보세요.</p>
     <p class="en">Search for answers about Bardcat.</p>
     <div class="search-bar">
-      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="searchInput" placeholder="검색어를 입력하세요 (예: 계정, 결제, 쿠폰)">
     </div>
   </div>

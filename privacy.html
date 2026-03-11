@@ -58,7 +58,14 @@
     .lang-option .ck { width:16px; text-align:center; font-size:14px; }
 
     /* ── Content ── */
-    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 64px; }
+    /* ── Page Tabs ── */
+    .page-tabs { max-width:800px; margin:0 auto; padding:0 24px; }
+    .page-tabs-inner { display:flex; gap:0; border-bottom:2px solid var(--border); margin-top:24px; }
+    .page-tab { padding:14px 24px; font-size:15px; font-weight:600; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all 0.2s; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; text-decoration:none; display:inline-block; }
+    .page-tab:hover { color:var(--primary); }
+    .page-tab.active { color:var(--primary); border-bottom-color:var(--primary); }
+
+    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 120px; }
     .page-title { font-size:24px; font-weight:700; margin-bottom:8px; color:var(--text); }
     .page-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:32px; }
 
@@ -183,6 +190,14 @@
       </div>
     </div>
   </header>
+
+  <!-- Page Tabs -->
+  <div class="page-tabs">
+    <div class="page-tabs-inner">
+      <a href="terms.html" class="page-tab"><span class="ko">이용약관</span><span class="en">Terms</span></a>
+      <a href="privacy.html" class="page-tab active"><span class="ko">개인정보처리방침</span><span class="en">Privacy</span></a>
+    </div>
+  </div>
 
   <!-- Content -->
   <div class="content-wrap">
