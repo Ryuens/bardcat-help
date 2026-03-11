@@ -867,6 +867,28 @@ document.querySelectorAll('.lang-option').forEach(opt=>{
 const stb=document.getElementById('scrollTop');
 window.addEventListener('scroll',()=>stb.classList.toggle('visible',window.scrollY>300));
 stb.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ── Deep Link via URL Hash ──
+(function(){
+  const hash=window.location.hash.replace('#','');
+  if(!hash) return;
+  const map={'prob-summon':'summon','prob-town':'town','prob-trait':'trait','prob-chest':'chest','prob-roulette':'roulette'};
+  const section=map[hash];
+  if(section){
+    // Activate probability tab
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    document.querySelector('[data-tab="probability"]').classList.add('active');
+    document.getElementById('tab-probability').classList.add('active');
+    // Activate sub-section
+    document.querySelectorAll('.prob-nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.prob-panel').forEach(p=>p.classList.remove('active'));
+    const btn=document.querySelector('.prob-nav-btn[data-section="'+section+'"]');
+    if(btn) btn.classList.add('active');
+    const panel=document.getElementById('panel-'+section);
+    if(panel) panel.classList.add('active');
+  }
+})();
 </script>
 
 </body>
