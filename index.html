@@ -149,18 +149,15 @@
     .prob-section-desc { font-size:14px; color:var(--text-secondary); margin-bottom:16px; }
 
     /* ── Footer ── */
-    .footer { margin-top:48px; background:var(--white); border-top:1px solid var(--border); padding:32px 24px; }
+    .footer { margin-top:48px; background:#111111; padding:40px 24px; }
     .footer-inner { max-width:960px; margin:0 auto; }
-    .footer-links { display:flex; gap:24px; margin-bottom:16px; }
-    .footer-links a { font-size:13px; font-weight:600; color:var(--text); text-decoration:none; }
+    .footer-links { display:flex; gap:24px; margin-bottom:20px; }
+    .footer-links a { font-size:13px; font-weight:600; color:#FFFFFF; text-decoration:none; }
     .footer-links a:hover { opacity:0.7; }
-    .footer-info { font-size:12px; color:var(--text-secondary); line-height:1.8; }
-    .footer-info .company-name { font-weight:600; color:var(--text); }
+    .footer-info { font-size:12px; color:#999999; line-height:1.8; }
+    .footer-info .company-name { font-weight:600; color:#DDDDDD; }
 
     /* ── FAB + Scroll Top ── */
-    .fab-contact { position:fixed; bottom:24px; right:24px; display:flex; align-items:center; gap:8px; padding:14px 22px; background:var(--primary); color:white; border:none; border-radius:28px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; box-shadow:0 4px 16px rgba(0,0,0,0.25); transition:all 0.2s; z-index:99; font-family:inherit; }
-    .fab-contact:hover { background:var(--primary-dark); box-shadow:0 6px 20px rgba(0,0,0,0.35); transform:translateY(-2px); }
-    .fab-contact svg { width:18px; height:18px; }
     .scroll-top { position:fixed; bottom:80px; right:28px; width:44px; height:44px; background:var(--primary); color:white; border:none; border-radius:50%; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:var(--shadow-hover); z-index:99; }
     .scroll-top.visible { display:flex; }
 
@@ -180,8 +177,6 @@
       .prob-bar-cell { display:none; }
       .prob-type-btn { padding:6px 12px; font-size:13px; }
       .plv-btn { width:32px; height:32px; font-size:12px; }
-      .fab-contact span { display:none; }
-      .fab-contact { padding:14px; border-radius:50%; }
     }
   </style>
 </head>
@@ -731,15 +726,6 @@
     </div>
   </div>
 </footer>
-
-<!-- FAB Contact -->
-<a href="mailto:support@layerlab.io" class="fab-contact">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-    <polyline points="22,6 12,13 2,6"/>
-  </svg>
-  <span class="ko">문의하기</span><span class="en">Contact</span>
-</a>
 
 <!-- Scroll Top -->
 <button class="scroll-top" id="scrollTop" aria-label="Top">
