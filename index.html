@@ -603,8 +603,8 @@
     </div>
     <div class="prob-notice">
       <strong class="ko">안내사항</strong><strong class="en">Notice</strong>
-      <span class="ko">- 소환 레벨은 소환 횟수에 따라 자동으로 상승합니다.<br>- 각 등급 내 개별 아이템은 동일한 확률로 획득됩니다.</span>
-      <span class="en">- Summon level increases automatically with more summons.<br>- Individual items within each tier have equal drop rates.</span>
+      <span class="ko"><br>- 소환 레벨은 소환 횟수에 따라 자동으로 상승합니다.<br>- 각 등급 내 개별 아이템은 동일한 확률로 획득됩니다.</span>
+      <span class="en"><br>- Summon level increases automatically with more summons.<br>- Individual items within each tier have equal drop rates.</span>
     </div>
   </div>
 
@@ -862,6 +862,26 @@ document.querySelectorAll('.lang-option').forEach(opt=>{
     document.getElementById('searchInput').placeholder=lang==='ko'?'검색어를 입력하세요 (예: 계정, 결제, 쿠폰)':'Search (e.g. account, payment, coupon)';
   });
 });
+
+// ── Auto Language Detection ──
+(function(){
+  const saved=localStorage.getItem('helpLang');
+  if(saved){
+    if(saved==='ko') document.body.classList.remove('lang-en');
+    else document.body.classList.add('lang-en');
+  } else {
+    const isKo=navigator.language&&navigator.language.startsWith('ko');
+    if(!isKo) document.body.classList.add('lang-en');
+  }
+  const isEn=document.body.classList.contains('lang-en');
+  document.getElementById('langLabel').textContent=isEn?'English':'한국어';
+  document.querySelectorAll('.lang-option').forEach(o=>{
+    const match=(o.dataset.lang==='en'&&isEn)||(o.dataset.lang==='ko'&&!isEn);
+    o.classList.toggle('active',match);
+    o.querySelector('.ck').textContent=match?'✓':'';
+  });
+  document.getElementById('searchInput').placeholder=isEn?'Search (e.g. account, payment, coupon)':'검색어를 입력하세요 (예: 계정, 결제, 쿠폰)';
+})();
 
 // ── Scroll Top ──
 const stb=document.getElementById('scrollTop');
