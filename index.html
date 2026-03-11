@@ -26,7 +26,9 @@
       font-family: 'Noto Sans KR','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
       background: var(--bg); color: var(--text); line-height:1.6;
       -webkit-font-smoothing: antialiased;
+      display:flex; flex-direction:column; min-height:100vh;
     }
+    .main-content { flex:1; }
 
     /* ── i18n ── */
     body.lang-en .ko { display:none !important; }
@@ -150,7 +152,7 @@
     .prob-section-desc { font-size:14px; color:var(--text-secondary); margin-bottom:16px; }
 
     /* ── Footer ── */
-    .footer { margin-top:48px; background:#111111; padding:40px 24px; }
+    .footer { background:#111111; padding:40px 24px; }
     .footer-inner { max-width:960px; margin:0 auto; }
     .footer-links { display:flex; gap:24px; margin-bottom:20px; }
     .footer-links a { font-size:13px; font-weight:600; color:#FFFFFF; text-decoration:none; }
@@ -186,7 +188,7 @@
 <!-- Header -->
 <header class="header">
   <div class="header-inner">
-    <a href="#" class="logo-area">
+    <a href="index.html" class="logo-area">
       <div class="logo-icon"><img src="icon.png" alt="bardcat"></div>
       <div class="logo-text">
         <span class="logo-company">LAYERLAB</span>
@@ -210,6 +212,7 @@
   </div>
 </header>
 
+<div class="main-content">
 <!-- Hero -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -708,6 +711,7 @@
 </div>
 
 </main>
+</div>
 
 <!-- Footer -->
 <footer class="footer">
