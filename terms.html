@@ -58,7 +58,18 @@
     .lang-option .ck { width:16px; text-align:center; font-size:14px; }
 
     /* ── Content ── */
-    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 64px; }
+    /* ── Page Tabs ── */
+    .page-tabs { max-width:800px; margin:0 auto; padding:24px 24px 0; }
+    .page-tabs-inner { display:flex; gap:8px; }
+    .page-tab { padding:10px 24px; font-size:14px; font-weight:600; color:var(--text-secondary); border:1px solid var(--border); border-radius:24px; background:var(--white); text-decoration:none; display:inline-block; transition:all 0.2s; font-family:inherit; }
+    .page-tab:hover { border-color:var(--primary); color:var(--primary); }
+    .page-tab.active { background:var(--primary); color:white; border-color:var(--primary); }
+
+    /* ── Scroll Top ── */
+    .scroll-top { position:fixed; bottom:32px; right:28px; width:44px; height:44px; background:#F0F0F0; color:var(--text); border:1px solid #CCCCCC; border-radius:50%; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,0.1); z-index:99; }
+    .scroll-top.visible { display:flex; }
+
+    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 120px; }
     .page-title { font-size:24px; font-weight:700; margin-bottom:8px; color:var(--text); }
     .page-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:32px; }
 
@@ -160,6 +171,14 @@
       </div>
     </div>
   </header>
+
+  <!-- Page Tabs -->
+  <div class="page-tabs">
+    <div class="page-tabs-inner">
+      <a href="terms.html" class="page-tab active"><span class="ko">이용약관</span><span class="en">Terms</span></a>
+      <a href="privacy.html" class="page-tab"><span class="ko">개인정보처리방침</span><span class="en">Privacy</span></a>
+    </div>
+  </div>
 
   <!-- Content -->
   <div class="content-wrap">
@@ -904,6 +923,10 @@
     </div>
   </footer>
 
+  <button class="scroll-top" id="scrollTop" aria-label="Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script>
     function setLang(lang) {
       if (lang === 'en') document.body.classList.add('lang-en');
@@ -918,7 +941,15 @@
     }
     function toggleDropdown() { document.getElementById('langDropdown').classList.toggle('open'); }
     document.addEventListener('click', function(e) { if (!e.target.closest('.lang-dropdown')) document.getElementById('langDropdown').classList.remove('open'); });
-    if (localStorage.getItem('helpLang') === 'en') setLang('en');
+    // Auto language
+    var saved=localStorage.getItem('helpLang');
+    if(saved){if(saved==='en')setLang('en');}
+    else{if(!navigator.language||!navigator.language.startsWith('ko'))setLang('en');}
+
+    // Scroll top
+    var stb=document.getElementById('scrollTop');
+    window.addEventListener('scroll',function(){stb.classList.toggle('visible',window.scrollY>300);});
+    stb.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
   </script>
 
 </body>
