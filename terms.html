@@ -5,39 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>바드캣 키우기 - 이용약관</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    html { overflow-y: scroll; }
     :root {
       --primary: #1A1A1A;
       --primary-dark: #000000;
       --primary-light: #F5F5F5;
       --bg: #FAFAFA;
       --white: #FFFFFF;
-      --text: #2D2D3A;
-      --text-secondary: #6B7280;
+      --text: #1A1A1A;
+      --text-secondary: #888888;
       --border: #E5E5E5;
       --radius: 12px;
-      --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.1);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      overflow-y: scroll;
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
+      font-family: 'Noto Sans KR','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      background: var(--bg); color: var(--text); line-height:1.8;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -56,37 +43,49 @@
     .logo-text { display:flex; flex-direction:column; line-height:1.2; }
     .logo-company { font-size:11px; color:var(--text-secondary); font-weight:500; letter-spacing:0.5px; }
     .logo-title { font-size:16px; font-weight:700; }
+
+    /* ── Lang Dropdown ── */
     .lang-dropdown { position:relative; }
-    .lang-current { display:flex; align-items:center; gap:6px; padding:7px 12px; background:var(--white); border:1px solid var(--border); border-radius:8px; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; transition:border-color 0.2s; }
+    .lang-current { display:flex; align-items:center; gap:6px; padding:7px 12px; background:var(--white); border:1px solid var(--border); border-radius:8px; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; }
     .lang-current:hover { border-color:var(--primary); }
     .lang-current svg { width:14px; height:14px; color:var(--text-secondary); transition:transform 0.2s; }
     .lang-dropdown.open .lang-current svg:last-child { transform:rotate(180deg); }
     .lang-menu { display:none; position:absolute; top:calc(100% + 4px); right:0; min-width:120px; background:var(--white); border:1px solid var(--border); border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.1); overflow:hidden; z-index:200; }
     .lang-dropdown.open .lang-menu { display:block; }
-    .lang-option { display:flex; align-items:center; gap:8px; width:100%; padding:10px 14px; background:none; border:none; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; transition:background 0.15s; }
+    .lang-option { display:flex; align-items:center; gap:8px; width:100%; padding:10px 14px; background:none; border:none; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; }
     .lang-option:hover { background:var(--primary-light); }
     .lang-option.active { font-weight:600; }
     .lang-option .ck { width:16px; text-align:center; font-size:14px; }
 
     /* ── Content ── */
-    /* ── Page Tabs ── */
-    .page-tabs { max-width:800px; margin:0 auto; padding:0 24px; }
-    .page-tabs-inner { display:flex; gap:0; border-bottom:2px solid var(--border); margin-top:24px; }
-    .page-tab { padding:14px 24px; font-size:15px; font-weight:600; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all 0.2s; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; text-decoration:none; display:inline-block; }
-    .page-tab:hover { color:var(--primary); }
-    .page-tab.active { color:var(--primary); border-bottom-color:var(--primary); }
-
-    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 120px; }
+    .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 64px; }
     .page-title { font-size:24px; font-weight:700; margin-bottom:8px; color:var(--text); }
     .page-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:32px; }
 
     /* ── TOC ── */
     .toc { background:var(--primary-light); border-radius:8px; padding:24px 28px; margin-bottom:32px; }
     .toc h2 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:12px; }
-    .toc-list { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:4px 24px; }
-    .toc-list li a { display:block; padding:4px 0; color:var(--text-secondary); text-decoration:none; font-size:13px; font-weight:500; }
-    .toc-list li a:hover { color:var(--text); }
-    .toc-list li a .toc-num { color:var(--text); font-weight:700; margin-right:4px; }
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+    .toc-list li a {
+      display: block;
+      padding: 6px 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .toc-list li a:hover { color: var(--primary); }
+    .toc-list li a .toc-num {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 4px;
+    }
 
     /* ── Article ── */
     .article-section { margin-bottom:32px; }
@@ -97,10 +96,22 @@
     .article-section li ol, .article-section li ul { margin-top:6px; margin-bottom:6px; }
     .sub-list { list-style-type: lower-alpha; }
 
-    /* ── Addendum ── */
-    .addendum { background:var(--primary-light); border-radius:8px; padding:24px 28px; margin-top:20px; }
-    .addendum h3 { font-size:17px; font-weight:700; color:var(--text); margin-bottom:12px; }
-    .addendum p { font-size:14.5px; color:var(--text); line-height:1.8; }
+    .addendum {
+      background: var(--primary-light);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+    .addendum h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .addendum p {
+      font-size: 14.5px;
+      color: var(--text);
+    }
 
     /* ── Footer ── */
     .footer { margin-top:48px; background:#111111; padding:40px 24px; }
@@ -113,40 +124,13 @@
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
-      .header-inner {
-        padding: 0 16px;
-        height: 56px;
-      }
-
-      .logo-text {
-        display: none;
-      }
-
-      .content-wrap {
-        padding: 20px 16px 48px;
-      }
-
-      .toc {
-        padding: 20px;
-      }
-
-      .toc-list {
-        grid-template-columns: 1fr;
-        gap: 2px;
-      }
-
-      .addendum {
-        padding: 20px;
-      }
-
-      .footer {
-        padding: 32px 16px;
-      }
-
-      .footer-links {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
+      .header-inner { padding:0 16px; height:56px; }
+      .logo-text { display:none; }
+      .content-wrap { padding:20px 16px 48px; }
+      .toc { padding:20px; }
+      .toc-list { grid-template-columns:1fr; gap:2px; }
+      .footer { padding:32px 16px; }
+      .footer-links { flex-wrap:wrap; gap:12px; }
     }
   </style>
 </head>
@@ -177,95 +161,58 @@
     </div>
   </header>
 
-  <!-- Page Tabs -->
-  <div class="page-tabs">
-    <div class="page-tabs-inner">
-      <a href="terms.html" class="page-tab active"><span class="ko">이용약관</span><span class="en">Terms</span></a>
-      <a href="privacy.html" class="page-tab"><span class="ko">개인정보처리방침</span><span class="en">Privacy</span></a>
-    </div>
-  </div>
-
   <!-- Content -->
   <div class="content-wrap">
 
-    <h1 class="page-title ko">이용약관</h1>
-    <h1 class="page-title en">Terms of Service</h1>
-    <p class="page-subtitle ko">바드캣 키우기 서비스 이용약관</p>
-    <p class="page-subtitle en">Terms of Service for Meow Rangers</p>
+    <h1 class="page-title">
+      <span class="ko">이용약관</span>
+      <span class="en">Terms of Service</span>
+    </h1>
+    <p class="page-subtitle">
+      <span class="ko">바드캣 키우기 서비스 이용약관</span>
+      <span class="en">Terms of Service for Meow Rangers</span>
+    </p>
 
-    <!-- TOC Korean -->
-    <div class="toc ko">
-      <h2>목차</h2>
-      <ul class="toc-list">
-        <li><a href="#a1"><span class="toc-num">제1조</span> 목적</a></li>
-        <li><a href="#a2"><span class="toc-num">제2조</span> 용어의 정의</a></li>
-        <li><a href="#a3"><span class="toc-num">제3조</span> 약관의 효력 및 변경</a></li>
-        <li><a href="#a4"><span class="toc-num">제4조</span> 약관 외 준칙</a></li>
-        <li><a href="#a5"><span class="toc-num">제5조</span> 이용계약의 성립</a></li>
-        <li><a href="#a6"><span class="toc-num">제6조</span> 개인정보의 관리 및 보호</a></li>
-        <li><a href="#a7"><span class="toc-num">제7조</span> 회원의 계정 관리</a></li>
-        <li><a href="#a8"><span class="toc-num">제8조</span> 회원에 대한 통지</a></li>
-        <li><a href="#a9"><span class="toc-num">제9조</span> 회사의 의무</a></li>
-        <li><a href="#a10"><span class="toc-num">제10조</span> 회원의 의무</a></li>
-        <li><a href="#a11"><span class="toc-num">제11조</span> 서비스의 제공</a></li>
-        <li><a href="#a12"><span class="toc-num">제12조</span> 서비스의 변경 및 중단</a></li>
-        <li><a href="#a13"><span class="toc-num">제13조</span> 유료 콘텐츠</a></li>
-        <li><a href="#a14"><span class="toc-num">제14조</span> 청약 철회 및 환불</a></li>
-        <li><a href="#a15"><span class="toc-num">제15조</span> 과오금의 환급</a></li>
-        <li><a href="#a16"><span class="toc-num">제16조</span> 이용제한 및 이용계약의 해지</a></li>
-        <li><a href="#a17"><span class="toc-num">제17조</span> 손해배상</a></li>
-        <li><a href="#a18"><span class="toc-num">제18조</span> 면책조항</a></li>
-        <li><a href="#a19"><span class="toc-num">제19조</span> 재판권 및 준거법</a></li>
-        <li><a href="#a20"><span class="toc-num">제20조</span> 분쟁해결</a></li>
-      </ul>
-    </div>
+    <!-- ==================== KOREAN ==================== -->
+    <div class="ko">
 
-    <!-- TOC English -->
-    <div class="toc en">
-      <h2>Table of Contents</h2>
-      <ul class="toc-list">
-        <li><a href="#a1"><span class="toc-num">Art. 1</span> Purpose</a></li>
-        <li><a href="#a2"><span class="toc-num">Art. 2</span> Definitions</a></li>
-        <li><a href="#a3"><span class="toc-num">Art. 3</span> Effectiveness and Amendment</a></li>
-        <li><a href="#a4"><span class="toc-num">Art. 4</span> Supplementary Rules</a></li>
-        <li><a href="#a5"><span class="toc-num">Art. 5</span> Formation of Service Agreement</a></li>
-        <li><a href="#a6"><span class="toc-num">Art. 6</span> Personal Information</a></li>
-        <li><a href="#a7"><span class="toc-num">Art. 7</span> Account Management</a></li>
-        <li><a href="#a8"><span class="toc-num">Art. 8</span> Notices to Members</a></li>
-        <li><a href="#a9"><span class="toc-num">Art. 9</span> Obligations of the Company</a></li>
-        <li><a href="#a10"><span class="toc-num">Art. 10</span> Obligations of Members</a></li>
-        <li><a href="#a11"><span class="toc-num">Art. 11</span> Provision of Services</a></li>
-        <li><a href="#a12"><span class="toc-num">Art. 12</span> Modification and Suspension</a></li>
-        <li><a href="#a13"><span class="toc-num">Art. 13</span> Paid Content</a></li>
-        <li><a href="#a14"><span class="toc-num">Art. 14</span> Withdrawal and Refund</a></li>
-        <li><a href="#a15"><span class="toc-num">Art. 15</span> Refund of Overpayment</a></li>
-        <li><a href="#a16"><span class="toc-num">Art. 16</span> Restriction and Termination</a></li>
-        <li><a href="#a17"><span class="toc-num">Art. 17</span> Damages</a></li>
-        <li><a href="#a18"><span class="toc-num">Art. 18</span> Disclaimer</a></li>
-        <li><a href="#a19"><span class="toc-num">Art. 19</span> Jurisdiction and Governing Law</a></li>
-        <li><a href="#a20"><span class="toc-num">Art. 20</span> Dispute Resolution</a></li>
-      </ul>
-    </div>
+      <!-- TOC -->
+      <div class="toc">
+        <h2>목차</h2>
+        <ul class="toc-list">
+          <li><a href="#a1"><span class="toc-num">제1조</span> 목적</a></li>
+          <li><a href="#a2"><span class="toc-num">제2조</span> 용어의 정의</a></li>
+          <li><a href="#a3"><span class="toc-num">제3조</span> 약관의 효력 및 변경</a></li>
+          <li><a href="#a4"><span class="toc-num">제4조</span> 약관 외 준칙</a></li>
+          <li><a href="#a5"><span class="toc-num">제5조</span> 이용계약의 성립</a></li>
+          <li><a href="#a6"><span class="toc-num">제6조</span> 개인정보의 관리 및 보호</a></li>
+          <li><a href="#a7"><span class="toc-num">제7조</span> 회원의 계정 관리</a></li>
+          <li><a href="#a8"><span class="toc-num">제8조</span> 회원에 대한 통지</a></li>
+          <li><a href="#a9"><span class="toc-num">제9조</span> 회사의 의무</a></li>
+          <li><a href="#a10"><span class="toc-num">제10조</span> 회원의 의무</a></li>
+          <li><a href="#a11"><span class="toc-num">제11조</span> 서비스의 제공</a></li>
+          <li><a href="#a12"><span class="toc-num">제12조</span> 서비스의 변경 및 중단</a></li>
+          <li><a href="#a13"><span class="toc-num">제13조</span> 유료 콘텐츠</a></li>
+          <li><a href="#a14"><span class="toc-num">제14조</span> 청약 철회 및 환불</a></li>
+          <li><a href="#a15"><span class="toc-num">제15조</span> 과오금의 환급</a></li>
+          <li><a href="#a16"><span class="toc-num">제16조</span> 이용제한 및 이용계약의 해지</a></li>
+          <li><a href="#a17"><span class="toc-num">제17조</span> 손해배상</a></li>
+          <li><a href="#a18"><span class="toc-num">제18조</span> 면책조항</a></li>
+          <li><a href="#a19"><span class="toc-num">제19조</span> 재판권 및 준거법</a></li>
+          <li><a href="#a20"><span class="toc-num">제20조</span> 분쟁해결</a></li>
+        </ul>
+      </div>
 
-    <!-- 제1조 / Article 1 -->
-    <div class="article-section" id="a1">
-      <h3 class="ko">제1조 (목적)</h3>
-      <h3 class="en">Article 1 (Purpose)</h3>
-      <div class="ko">
+      <!-- 제1조 -->
+      <div class="article-section" id="a1">
+        <h3>제1조 (목적)</h3>
         <p>본 약관은 주식회사 레이어랩(이하 "회사")이 제공하는 모바일 게임 "바드캣 키우기"(이하 "서비스") 및 이에 부수하는 제반 서비스의 이용에 관한 회사와 회원 간의 권리, 의무 및 책임 사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
         <p>본 약관은 PC, 모바일 기기 등 다양한 단말기를 통해 회사가 제공하는 서비스에 대하여 적용되며, 회원이 서비스를 이용하기 위해서는 본 약관에 동의하여야 합니다.</p>
       </div>
-      <div class="en">
-        <p>These Terms of Service (hereinafter "Terms") set forth the rights, obligations, responsibilities, and other necessary matters between LayerLab Inc. (hereinafter "Company") and its members regarding the use of the mobile game "Meow Rangers" (hereinafter "Service") and all related ancillary services provided by the Company.</p>
-        <p>These Terms apply to all Services provided by the Company through various devices including PCs and mobile devices. Members must agree to these Terms in order to use the Service.</p>
-      </div>
-    </div>
 
-    <!-- 제2조 / Article 2 -->
-    <div class="article-section" id="a2">
-      <h3 class="ko">제2조 (용어의 정의)</h3>
-      <h3 class="en">Article 2 (Definitions)</h3>
-      <div class="ko">
+      <!-- 제2조 -->
+      <div class="article-section" id="a2">
+        <h3>제2조 (용어의 정의)</h3>
         <p>본 약관에서 사용하는 용어의 정의는 다음과 같습니다.</p>
         <ol>
           <li><strong>"회사"</strong>란 모바일 게임 "바드캣 키우기" 서비스를 제공하는 주식회사 레이어랩을 의미합니다.</li>
@@ -281,29 +228,10 @@
         </ol>
         <p>본 약관에서 정의되지 않은 용어는 관련 법령 및 일반적인 상관례에 따릅니다.</p>
       </div>
-      <div class="en">
-        <p>The definitions of terms used in these Terms are as follows:</p>
-        <ol>
-          <li><strong>"Company"</strong> refers to LayerLab Inc., which provides the mobile game "Meow Rangers" service.</li>
-          <li><strong>"Service"</strong> refers to the game "Meow Rangers" and all related services provided by the Company, available regardless of the type of device (PC, mobile, tablet, etc.).</li>
-          <li><strong>"Member"</strong> refers to a person who has agreed to these Terms, entered into a service agreement with the Company, and uses the services provided by the Company.</li>
-          <li><strong>"Account (ID)"</strong> refers to unique identification information set by the Member and assigned by the Company for member identification and service use. Accounts include those created through authentication methods supported by the Company, such as guest accounts, Google accounts, and Apple accounts.</li>
-          <li><strong>"Content"</strong> refers to game characters, items, skills, stages, and other digital goods provided by the Company within the Service.</li>
-          <li><strong>"Paid Content"</strong> refers to content that Members purchase by paying a certain amount to the Company, including in-game currency, items, and packages available through in-app purchases.</li>
-          <li><strong>"Game Currency"</strong> refers to virtual currency used to access or obtain content within the Service, which can be purchased with real money or obtained for free through gameplay.</li>
-          <li><strong>"In-App Purchase"</strong> refers to the act of purchasing Paid Content through an application marketplace (Google Play Store, Apple App Store, etc.).</li>
-          <li><strong>"Post"</strong> refers to text, images, and other information materials posted by Members within the Service.</li>
-          <li><strong>"Application Marketplace"</strong> refers to a digital distribution platform (Google Play Store, Apple App Store, etc.) designed for installing mobile applications.</li>
-        </ol>
-        <p>Terms not defined herein shall be governed by applicable laws and general commercial customs.</p>
-      </div>
-    </div>
 
-    <!-- 제3조 / Article 3 -->
-    <div class="article-section" id="a3">
-      <h3 class="ko">제3조 (약관의 효력 및 변경)</h3>
-      <h3 class="en">Article 3 (Effectiveness and Amendment of Terms)</h3>
-      <div class="ko">
+      <!-- 제3조 -->
+      <div class="article-section" id="a3">
+        <h3>제3조 (약관의 효력 및 변경)</h3>
         <ol>
           <li>본 약관은 서비스 화면에 게시하거나 기타 합리적인 방법으로 회원에게 공지함으로써 효력이 발생합니다.</li>
           <li>회사는 「약관의 규제에 관한 법률」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」, 「게임산업진흥에 관한 법률」, 「전자상거래 등에서의 소비자보호에 관한 법률」 등 관련 법령을 위배하지 않는 범위에서 본 약관을 개정할 수 있습니다.</li>
@@ -312,42 +240,20 @@
           <li>회원이 개정 약관에 동의하지 않는 경우 회사 또는 회원은 이용계약을 해지할 수 있습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>These Terms shall become effective when posted on the Service screen or communicated to Members through other reasonable methods.</li>
-          <li>The Company may amend these Terms to the extent that they do not violate applicable laws, including the Act on the Regulation of Terms and Conditions, the Act on Promotion of Information and Communications Network Utilization and Information Protection, the Game Industry Promotion Act, and the Act on Consumer Protection in Electronic Commerce.</li>
-          <li>When the Company amends the Terms, it shall specify the effective date and reasons for the amendment and post them alongside the current Terms on the Service notice board or initial Service screen from at least 7 days before the effective date. However, if the amendments are unfavorable to Members, the Company shall provide at least 30 days advance notice.</li>
-          <li>If the Company clearly notifies Members that failure to express objection within the notice period shall be deemed as consent to the amended Terms, and Members do not expressly refuse, Members shall be deemed to have agreed to the amended Terms.</li>
-          <li>If a Member does not agree to the amended Terms, either the Company or the Member may terminate the service agreement.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제4조 / Article 4 -->
-    <div class="article-section" id="a4">
-      <h3 class="ko">제4조 (약관 외 준칙)</h3>
-      <h3 class="en">Article 4 (Supplementary Rules)</h3>
-      <div class="ko">
+      <!-- 제4조 -->
+      <div class="article-section" id="a4">
+        <h3>제4조 (약관 외 준칙)</h3>
         <ol>
           <li>본 약관에서 정하지 아니한 사항과 본 약관의 해석에 관하여는 「약관의 규제에 관한 법률」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」, 「게임산업진흥에 관한 법률」, 「전자상거래 등에서의 소비자보호에 관한 법률」, 「콘텐츠산업 진흥법」 등 관련 법령 및 상관례에 따릅니다.</li>
           <li>회사는 필요한 경우 서비스 내의 개별 서비스에 대하여 별도의 이용약관 및 운영 정책(이하 "개별 약관 등")을 둘 수 있으며, 해당 내용이 본 약관과 상충하는 경우 개별 약관 등이 우선합니다.</li>
           <li>회사는 서비스의 특성에 맞는 운영 정책을 별도로 제정하여 시행할 수 있으며, 회원은 해당 운영 정책을 준수하여야 합니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>Matters not specified in these Terms and the interpretation of these Terms shall be governed by applicable laws including the Act on the Regulation of Terms and Conditions, the Act on Promotion of Information and Communications Network Utilization and Information Protection, the Game Industry Promotion Act, the Act on Consumer Protection in Electronic Commerce, the Content Industry Promotion Act, and general commercial customs.</li>
-          <li>The Company may establish separate terms of service and operational policies (hereinafter "Individual Terms") for individual services within the Service as necessary. In the event of any conflict between the Individual Terms and these Terms, the Individual Terms shall prevail.</li>
-          <li>The Company may separately establish and implement operational policies suited to the characteristics of the Service, and Members shall comply with such operational policies.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제5조 / Article 5 -->
-    <div class="article-section" id="a5">
-      <h3 class="ko">제5조 (이용계약의 성립)</h3>
-      <h3 class="en">Article 5 (Formation of Service Agreement)</h3>
-      <div class="ko">
+      <!-- 제5조 -->
+      <div class="article-section" id="a5">
+        <h3>제5조 (이용계약의 성립)</h3>
         <ol>
           <li>이용계약은 서비스를 이용하고자 하는 자(이하 "이용신청자")가 본 약관에 동의하고 회사가 정한 절차에 따라 이용을 신청하며, 회사가 이를 승낙함으로써 체결됩니다.</li>
           <li>이용신청자는 애플리케이션 마켓에서 서비스를 다운로드하고 실행한 후, 회사가 제공하는 인증 방식(게스트 계정, Google 계정, Apple 계정 등)을 통하여 이용을 신청합니다.</li>
@@ -366,32 +272,10 @@
           <li>만 14세 미만의 아동이 서비스를 이용하고자 하는 경우, 법정대리인의 동의를 얻어야 하며, 이에 대한 구체적인 절차는 관련 법령 및 회사의 정책에 따릅니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The service agreement is formed when a person wishing to use the Service (hereinafter "Applicant") agrees to these Terms, applies for use in accordance with the procedures established by the Company, and the Company accepts such application.</li>
-          <li>The Applicant downloads and launches the Service from an application marketplace and applies for use through the authentication methods provided by the Company (guest account, Google account, Apple account, etc.).</li>
-          <li>The Company may refuse to accept an application or subsequently terminate the service agreement in any of the following cases:
-            <ol class="sub-list">
-              <li>If the Applicant has previously had a service agreement terminated due to a violation of these Terms</li>
-              <li>If the Applicant used a false identity or another person's information</li>
-              <li>If the Applicant provided false information for required fields designated by the Company</li>
-              <li>If the application was made for the purpose of undermining public order or morals</li>
-              <li>If the Applicant intends to use the Service for fraudulent purposes or commercial profit</li>
-              <li>If the application violates applicable laws or does not meet other application requirements set by the Company</li>
-            </ol>
-          </li>
-          <li>The Company may withhold acceptance of an application due to insufficient service-related facilities, technical difficulties, or similar reasons.</li>
-          <li>If the Company does not accept or withholds acceptance pursuant to Paragraphs 3 and 4, the Company shall, in principle, notify the Applicant accordingly.</li>
-          <li>If a child under 14 years of age wishes to use the Service, consent from a legal guardian must be obtained, and the specific procedures shall follow applicable laws and the Company's policies.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제6조 / Article 6 -->
-    <div class="article-section" id="a6">
-      <h3 class="ko">제6조 (개인정보의 관리 및 보호)</h3>
-      <h3 class="en">Article 6 (Management and Protection of Personal Information)</h3>
-      <div class="ko">
+      <!-- 제6조 -->
+      <div class="article-section" id="a6">
+        <h3>제6조 (개인정보의 관리 및 보호)</h3>
         <ol>
           <li>회사는 서비스 제공을 위하여 필요한 범위에서 최소한의 개인정보를 수집합니다.</li>
           <li>회사의 개인정보 수집, 이용, 제공, 관리 등에 관한 사항은 별도의 개인정보처리방침에 따르며, 개인정보처리방침은 서비스 내 또는 회사 웹사이트에서 확인할 수 있습니다.</li>
@@ -401,23 +285,10 @@
           <li>회사는 회원의 귀책 사유로 인하여 노출된 개인정보에 대해서는 일체의 책임을 지지 않습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The Company collects the minimum personal information necessary for providing the Service.</li>
-          <li>Matters relating to the collection, use, provision, and management of personal information by the Company are governed by a separate Privacy Policy, which can be viewed within the Service or on the Company's website.</li>
-          <li>The Company strives to protect Members' personal information in accordance with applicable laws, and the protection and use of personal information shall be governed by applicable laws and the Company's Privacy Policy.</li>
-          <li>The Company's Privacy Policy does not apply to linked sites outside the Company's official Service or website.</li>
-          <li>Members must diligently manage their personal information for service use and update it if there are any changes. The Company shall not be liable for problems arising from Members' negligent management or unauthorized use of their personal information.</li>
-          <li>The Company shall not be liable for personal information exposed due to reasons attributable to the Member.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제7조 / Article 7 -->
-    <div class="article-section" id="a7">
-      <h3 class="ko">제7조 (회원의 계정 관리)</h3>
-      <h3 class="en">Article 7 (Account Management by Members)</h3>
-      <div class="ko">
+      <!-- 제7조 -->
+      <div class="article-section" id="a7">
+        <h3>제7조 (회원의 계정 관리)</h3>
         <ol>
           <li>회원의 계정에 대한 관리 책임은 회원에게 있으며, 회원은 자신의 계정을 제3자가 이용하도록 허락해서는 안 됩니다.</li>
           <li>회원은 자신의 계정이 무단으로 사용된 것을 인지한 경우 즉시 회사에 통지하여야 하며, 회사의 안내에 따라야 합니다.</li>
@@ -427,43 +298,20 @@
           <li>회원의 계정 정보가 부정확하거나 최신 정보가 아닌 경우 서비스 이용에 제한이 있을 수 있으며, 이로 인해 발생하는 문제에 대해 회사는 책임을 지지 않습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The responsibility for managing a Member's account lies with the Member, and the Member shall not allow third parties to use their account.</li>
-          <li>If a Member becomes aware that their account has been used without authorization, they must immediately notify the Company and follow the Company's instructions.</li>
-          <li>The Company shall not be liable for any disadvantages arising from a Member's failure to provide such notification or failure to follow the Company's instructions after notification.</li>
-          <li>For guest accounts, account information and game data may be deleted upon device changes or application deletion. Members should protect their data through account linking (Google, Apple, etc.). The Company shall not be liable for data loss from guest accounts.</li>
-          <li>In principle, Members shall use only one account per device and cannot simultaneously use the same account on multiple devices.</li>
-          <li>If a Member's account information is inaccurate or not up to date, service use may be restricted, and the Company shall not be liable for problems arising therefrom.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제8조 / Article 8 -->
-    <div class="article-section" id="a8">
-      <h3 class="ko">제8조 (회원에 대한 통지)</h3>
-      <h3 class="en">Article 8 (Notices to Members)</h3>
-      <div class="ko">
+      <!-- 제8조 -->
+      <div class="article-section" id="a8">
+        <h3>제8조 (회원에 대한 통지)</h3>
         <ol>
           <li>회사가 회원에 대한 통지를 하는 경우 서비스 내 팝업, 공지사항, 푸시 알림 등의 방법으로 할 수 있습니다.</li>
           <li>회사는 불특정 다수 회원에 대한 통지의 경우 서비스 내 공지사항에 7일 이상 게시함으로써 개별 통지에 갈음할 수 있습니다.</li>
           <li>회원이 회사에 통지하고자 하는 경우, 서비스 내 고객센터 또는 회사가 지정한 이메일(support@layerlab.io)을 통해 통지할 수 있습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>When the Company notifies Members, it may do so through in-service pop-ups, notice boards, push notifications, or other similar methods.</li>
-          <li>For notices to a large number of unspecified Members, the Company may substitute individual notices by posting on the in-service notice board for at least 7 days.</li>
-          <li>When Members wish to notify the Company, they may do so through the in-service customer center or the Company's designated email (support@layerlab.io).</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제9조 / Article 9 -->
-    <div class="article-section" id="a9">
-      <h3 class="ko">제9조 (회사의 의무)</h3>
-      <h3 class="en">Article 9 (Obligations of the Company)</h3>
-      <div class="ko">
+      <!-- 제9조 -->
+      <div class="article-section" id="a9">
+        <h3>제9조 (회사의 의무)</h3>
         <ol>
           <li>회사는 관련 법령과 본 약관이 금지하는 행위를 하지 않으며, 지속적이고 안정적으로 서비스를 제공하기 위하여 최선을 다합니다.</li>
           <li>회사는 회원이 안전하게 서비스를 이용할 수 있도록 개인정보 보호를 위한 보안 시스템을 갖추어야 하며, 개인정보처리방침을 공개하고 준수합니다.</li>
@@ -472,22 +320,10 @@
           <li>회사는 이용계약의 체결, 계약 사항의 변경 및 해지 등 회원과의 계약 관련 절차에 있어 회원에게 편의를 제공하도록 노력합니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The Company shall not engage in any acts prohibited by applicable laws and these Terms and shall do its best to provide continuous and stable Services.</li>
-          <li>The Company shall maintain a security system for the protection of personal information so that Members can safely use the Service, and shall disclose and comply with its Privacy Policy.</li>
-          <li>When opinions or complaints raised by Members regarding service use are deemed legitimate, the Company shall address them. If processing requires a certain period, the Company shall notify Members of the reason and processing schedule through in-service posting or email.</li>
-          <li>In the event of a service failure, the Company shall promptly repair or restore the Service unless there are unavoidable reasons.</li>
-          <li>The Company shall endeavor to provide convenience to Members in procedures related to the formation, modification, and termination of service agreements.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제10조 / Article 10 -->
-    <div class="article-section" id="a10">
-      <h3 class="ko">제10조 (회원의 의무)</h3>
-      <h3 class="en">Article 10 (Obligations of Members)</h3>
-      <div class="ko">
+      <!-- 제10조 -->
+      <div class="article-section" id="a10">
+        <h3>제10조 (회원의 의무)</h3>
         <ol>
           <li>회원은 다음 각 호의 행위를 하여서는 안 됩니다.
             <ol class="sub-list">
@@ -509,35 +345,10 @@
           <li>회원이 본 조의 의무를 위반한 경우, 회사는 제16조에 따라 서비스 이용을 제한하거나 이용계약을 해지할 수 있으며, 회원은 이로 인해 발생하는 손해에 대하여 배상 책임을 질 수 있습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>Members shall not engage in any of the following acts:
-            <ol class="sub-list">
-              <li>Stealing or fraudulently using another person's personal information</li>
-              <li>Copying, distributing, broadcasting, or providing to third parties any information obtained through the Company's service without prior consent from the Company</li>
-              <li>Infringing on the copyrights of the Company, third parties, or any other rights</li>
-              <li>Distributing information, text, graphics, or audio content that violates public order and morals</li>
-              <li>Causing malfunction of service-related equipment or destruction and confusion of information (hacking, virus distribution, DDoS attacks, etc.)</li>
-              <li>Transmitting large amounts of information with the intention of disrupting service operations</li>
-              <li>Interfering with other users' use of the Service or collecting and storing others' personal information</li>
-              <li>Using profanity, vulgar language, sexual expressions, violent expressions, hate speech, or any other content that causes discomfort to other Members within the Service</li>
-              <li>Using abnormal methods (automated programs, macros, hacks, cheat engines, memory manipulation, etc.) to use the Service or placing excessive load on the Company's servers</li>
-              <li>Exploiting in-game bugs or gaining unfair advantages through abnormal gameplay</li>
-              <li>Using the Service for commercial purposes without the Company's consent (real-money trading, account trading, etc.)</li>
-              <li>Any other acts that violate applicable laws or prohibited acts as determined by the Company's service operational policies</li>
-            </ol>
-          </li>
-          <li>Members shall comply with applicable laws, the provisions of these Terms, usage guidelines, precautions posted in connection with the Service, and matters notified by the Company, and shall not interfere with the Company's business.</li>
-          <li>If a Member violates the obligations set forth in this Article, the Company may restrict service use or terminate the service agreement pursuant to Article 16, and the Member may be liable for damages arising therefrom.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제11조 / Article 11 -->
-    <div class="article-section" id="a11">
-      <h3 class="ko">제11조 (서비스의 제공)</h3>
-      <h3 class="en">Article 11 (Provision of Services)</h3>
-      <div class="ko">
+      <!-- 제11조 -->
+      <div class="article-section" id="a11">
+        <h3>제11조 (서비스의 제공)</h3>
         <ol>
           <li>회사는 회원에게 다음과 같은 서비스를 제공합니다.
             <ol class="sub-list">
@@ -554,30 +365,10 @@
           <li>회사는 서비스에 필요한 경우 업데이트를 실시할 수 있으며, 회원이 업데이트를 하지 않는 경우 서비스 이용에 제한이 있을 수 있습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The Company provides Members with the following services:
-            <ol class="sub-list">
-              <li>The mobile game "Meow Rangers" and related game content</li>
-              <li>In-game social and community features</li>
-              <li>Paid content purchase services through in-app purchases</li>
-              <li>Customer support services</li>
-              <li>Any other services additionally developed by the Company or provided through partnership agreements</li>
-            </ol>
-          </li>
-          <li>In principle, the Company provides the Service 24 hours a day, 365 days a year. However, the Company may restrict or suspend all or part of the Service due to unavoidable reasons such as scheduled system maintenance, server expansion and replacement, network failures, natural disasters, or power outages.</li>
-          <li>The Company may conduct regular maintenance for the smooth operation of the Service, and the maintenance schedule shall be announced in advance through in-service notices.</li>
-          <li>The Service is available through devices designated by the Company (mobile devices, etc.), and service use may be restricted depending on device specifications, operating system (OS), and network environment.</li>
-          <li>The Company may implement updates as necessary for the Service, and Members who do not update may experience restrictions in service use.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제12조 / Article 12 -->
-    <div class="article-section" id="a12">
-      <h3 class="ko">제12조 (서비스의 변경 및 중단)</h3>
-      <h3 class="en">Article 12 (Modification and Suspension of Services)</h3>
-      <div class="ko">
+      <!-- 제12조 -->
+      <div class="article-section" id="a12">
+        <h3>제12조 (서비스의 변경 및 중단)</h3>
         <ol>
           <li>회사는 상당한 이유가 있는 경우 운영상, 기술상의 필요에 따라 제공하고 있는 서비스의 전부 또는 일부를 변경할 수 있습니다.</li>
           <li>회사는 서비스의 내용, 이용 방법, 이용 시간 등을 변경하는 경우 변경 사유, 변경될 서비스의 내용 및 제공 일자 등을 변경 전에 서비스 내 공지사항을 통하여 회원에게 통지합니다.</li>
@@ -594,30 +385,10 @@
           <li>무료 콘텐츠의 변경 또는 중단에 대하여 회사는 별도의 보상을 하지 않습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The Company may modify all or part of the Services being provided for operational or technical reasons when there are substantial grounds.</li>
-          <li>When the Company changes the content, method of use, or hours of the Service, it shall notify Members by posting the reasons for the change, the details of the changed Service, and the date of provision on the in-service notice board before the change.</li>
-          <li>The Company may restrict or suspend all or part of the Service in any of the following cases:
-            <ol class="sub-list">
-              <li>In the event of war, armed conflict, natural disaster, or equivalent national emergency</li>
-              <li>When normal service provision is impossible due to power outages, service equipment failures, or excessive service usage</li>
-              <li>When unavoidable due to maintenance or construction of service equipment</li>
-              <li>When the Service can no longer be provided due to critical business reasons of the Company</li>
-              <li>In cases of other force majeure events</li>
-            </ol>
-          </li>
-          <li>When the Company terminates the Service, it shall notify Members through in-service notices at least 30 days before the termination date and provide information regarding the use and refund of remaining Paid Content.</li>
-          <li>The Company shall not provide separate compensation for changes or discontinuation of free content.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제13조 / Article 13 -->
-    <div class="article-section" id="a13">
-      <h3 class="ko">제13조 (유료 콘텐츠)</h3>
-      <h3 class="en">Article 13 (Paid Content)</h3>
-      <div class="ko">
+      <!-- 제13조 -->
+      <div class="article-section" id="a13">
+        <h3>제13조 (유료 콘텐츠)</h3>
         <ol>
           <li>회사는 서비스 내에서 유료로 구매 가능한 콘텐츠(이하 "유료 콘텐츠")를 제공할 수 있으며, 회원은 애플리케이션 마켓(Google Play Store, Apple App Store 등)에서 제공하는 결제 방식을 통하여 유료 콘텐츠를 구매할 수 있습니다.</li>
           <li>유료 콘텐츠의 종류, 가격, 이용 조건 등은 서비스 내에 별도로 게시되며, 회사는 이를 변경할 수 있습니다. 변경 시 변경 내용을 사전에 공지합니다.</li>
@@ -630,26 +401,10 @@
           <li>유료 콘텐츠에는 유효기간이 있을 수 있으며, 유효기간이 경과한 유료 콘텐츠는 소멸됩니다. 유효기간은 구매 시 별도로 안내합니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The Company may offer content available for purchase (hereinafter "Paid Content") within the Service, and Members may purchase Paid Content through payment methods provided by the application marketplace (Google Play Store, Apple App Store, etc.).</li>
-          <li>The types, prices, and terms of use of Paid Content are separately posted within the Service, and the Company may change them. Changes shall be announced in advance.</li>
-          <li>The purchase of Paid Content follows the payment methods provided by the application marketplace operator, and matters related to payment shall be governed by the policies and terms of the applicable marketplace.</li>
-          <li>Communication charges (data usage fees, etc.) incurred when Members purchase Paid Content shall be borne by the Member.</li>
-          <li>Purchase records for Paid Content can be viewed on the applicable application marketplace, and the responsibility for retaining payment receipts lies with the Member.</li>
-          <li>Paid Content purchased by Members can only be used within the Service and cannot be exchanged for cash or transferred to third parties, except as provided by applicable laws.</li>
-          <li>Game currency purchased with real money and game currency obtained for free are distinguished, and refunds are available only for game currency purchased with real money.</li>
-          <li>If a Member is a minor, consent from a legal guardian must be obtained for the purchase of Paid Content, and purchases made by minors without the consent of a legal guardian may be cancelled by the legal guardian.</li>
-          <li>Paid Content may have an expiration period, and Paid Content that has exceeded its expiration period shall be forfeited. The expiration period is separately communicated at the time of purchase.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제14조 / Article 14 -->
-    <div class="article-section" id="a14">
-      <h3 class="ko">제14조 (청약 철회 및 환불)</h3>
-      <h3 class="en">Article 14 (Withdrawal of Subscription and Refund)</h3>
-      <div class="ko">
+      <!-- 제14조 -->
+      <div class="article-section" id="a14">
+        <h3>제14조 (청약 철회 및 환불)</h3>
         <ol>
           <li>회원은 유료 콘텐츠를 구매한 날로부터 7일 이내에 별도의 수수료 없이 청약 철회(구매 취소)를 할 수 있습니다. 다만, 「전자상거래 등에서의 소비자보호에 관한 법률」 및 「콘텐츠산업 진흥법」 등 관련 법령에 따라 다음 각 호에 해당하는 경우에는 청약 철회가 제한될 수 있습니다.
             <ol class="sub-list">
@@ -672,36 +427,10 @@
           <li>무료로 지급된 콘텐츠(이벤트 보상, 무료 게임머니 등)는 환불 대상에 포함되지 않습니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>Members may withdraw their subscription (cancel purchase) within 7 days from the date of purchasing Paid Content without any additional fees. However, withdrawal may be restricted in the following cases pursuant to applicable laws including the Act on Consumer Protection in Electronic Commerce and the Content Industry Promotion Act:
-            <ol class="sub-list">
-              <li>Paid Content that was immediately used or applied upon purchase</li>
-              <li>If only a portion of Paid Content that came with additional benefits has been used (refund is available only for the unused portion)</li>
-              <li>If the content has been opened or used such that its utility has been determined</li>
-              <li>Other cases where withdrawal is restricted by applicable laws</li>
-            </ol>
-          </li>
-          <li>For content subject to the proviso of Paragraph 1, the Company shall inform Members during the purchase process that withdrawal is restricted, and shall provide trial products or temporary access. If such measures are not taken, withdrawal shall not be restricted.</li>
-          <li>Refunds are processed according to the refund policies of the application marketplace (Google Play Store, Apple App Store, etc.) through which the Member made the purchase:
-            <ol class="sub-list">
-              <li><strong>Google Play Store:</strong> Members may request a refund through Google Play within a certain period after purchase in accordance with Google Play's refund policy. If the period has elapsed, Members may request a refund directly from the Company.</li>
-              <li><strong>Apple App Store:</strong> Members may request a refund through Apple in accordance with Apple's refund policy. Refunds for Paid Content purchased through the Apple App Store are subject to Apple's policies.</li>
-            </ol>
-          </li>
-          <li>When requesting a refund directly from the Company, Members must submit their request to the customer center (support@layerlab.io) including the reason for the refund, purchase details (receipt), and account information.</li>
-          <li>The Company shall notify Members of the refund decision within 3 business days from the date of receiving the refund request, and if a refund is approved, the Company shall process the refund within 7 business days from the notification date according to the payment method used.</li>
-          <li>Refunds may be restricted for payments made due to reasons attributable to the Member (identity theft, fraudulent payments, etc.), and the Company may take necessary measures in accordance with applicable laws.</li>
-          <li>Content provided for free (event rewards, free game currency, etc.) is not subject to refund.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제15조 / Article 15 -->
-    <div class="article-section" id="a15">
-      <h3 class="ko">제15조 (과오금의 환급)</h3>
-      <h3 class="en">Article 15 (Refund of Overpayment)</h3>
-      <div class="ko">
+      <!-- 제15조 -->
+      <div class="article-section" id="a15">
+        <h3>제15조 (과오금의 환급)</h3>
         <ol>
           <li>회사는 유료 콘텐츠 구매 과정에서 과오금이 발생한 경우 이를 즉시 환급합니다. 다만, 애플리케이션 마켓 사업자의 시스템 오류 등으로 인한 과오금의 경우 해당 마켓 사업자에게 환급을 요청하여야 합니다.</li>
           <li>회사의 귀책 사유로 과오금이 발생한 경우, 회사는 과오금 전액을 환급합니다. 다만, 회원의 귀책 사유로 과오금이 발생한 경우 회사가 과오금을 환급하는 데 소요되는 비용은 합리적인 범위에서 회원이 부담할 수 있습니다.</li>
@@ -709,21 +438,10 @@
           <li>회사는 과오금의 환급 절차를 개인정보처리방침, 이용약관 등에 별도로 안내하며, 회원의 정당한 환급 요청에 성실히 응합니다.</li>
         </ol>
       </div>
-      <div class="en">
-        <ol>
-          <li>The Company shall immediately refund any overpayment that occurs during the purchase of Paid Content. However, for overpayments caused by system errors of the application marketplace operator, the refund must be requested from the relevant marketplace operator.</li>
-          <li>If overpayment occurs due to reasons attributable to the Company, the Company shall refund the full amount of the overpayment. However, if overpayment occurs due to reasons attributable to the Member, the costs incurred by the Company in refunding the overpayment may be borne by the Member within a reasonable scope.</li>
-          <li>When a Member requests a refund of overpayment, the Company shall verify the cause of the overpayment and notify the Member of the refund decision within 3 business days, and if a refund is approved, the Company shall process the refund within 7 business days.</li>
-          <li>The Company shall separately outline the procedures for refunding overpayments in its Privacy Policy, Terms of Service, and other documents, and shall faithfully respond to Members' legitimate refund requests.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- 제16조 / Article 16 -->
-    <div class="article-section" id="a16">
-      <h3 class="ko">제16조 (이용제한 및 이용계약의 해지)</h3>
-      <h3 class="en">Article 16 (Restriction of Use and Termination of Service Agreement)</h3>
-      <div class="ko">
+      <!-- 제16조 -->
+      <div class="article-section" id="a16">
+        <h3>제16조 (이용제한 및 이용계약의 해지)</h3>
         <ol>
           <li>회사는 회원이 본 약관의 의무를 위반하거나 서비스의 정상적인 운영을 방해한 경우, 서비스 이용을 경고, 일시 정지, 영구 정지 등의 단계로 제한할 수 있습니다.</li>
           <li>회사는 다음 각 호에 해당하는 경우 사전 통보 없이 즉시 계정을 영구 정지하거나 이용계약을 해지할 수 있습니다.
@@ -751,7 +469,334 @@
           <li>이용계약 해지 후에는 동일 계정으로의 재가입이 일정 기간 제한될 수 있으며, 해지 전 보유하고 있던 유료 콘텐츠 및 게임 데이터는 복구되지 않습니다.</li>
         </ol>
       </div>
-      <div class="en">
+
+      <!-- 제17조 -->
+      <div class="article-section" id="a17">
+        <h3>제17조 (손해배상)</h3>
+        <ol>
+          <li>회사 또는 회원은 본 약관을 위반하여 상대방에게 손해를 입힌 경우, 그 손해를 배상하여야 합니다. 다만, 고의 또는 과실이 없는 경우에는 그러하지 않습니다.</li>
+          <li>회사가 개별 서비스의 이용과 관련하여 사전에 공지한 서비스 운영 정책에 따라 발생하는 손해에 대하여는 추가적인 배상을 하지 않습니다.</li>
+          <li>회원이 본 약관을 위반하여 회사에 손해를 입힌 경우(제10조에 정한 금지 행위 등), 회원은 회사에 발생한 모든 손해(법적 비용 포함)를 배상하여야 합니다.</li>
+          <li>회사가 무료로 제공하는 서비스의 이용과 관련하여 회원에게 발생한 손해에 대하여는, 회사의 고의 또는 중과실이 있는 경우를 제외하고 회사는 책임을 지지 않습니다.</li>
+          <li>회사는 회원 간 또는 회원과 제3자 사이에서 발생한 분쟁에 대하여 개입할 의무가 없으며, 이로 인한 손해에 대하여 책임을 지지 않습니다.</li>
+        </ol>
+      </div>
+
+      <!-- 제18조 -->
+      <div class="article-section" id="a18">
+        <h3>제18조 (면책조항)</h3>
+        <ol>
+          <li>회사는 천재지변, 전쟁, 테러, 해킹, DDoS 공격 등 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.</li>
+          <li>회사는 회원의 귀책 사유로 인한 서비스 이용의 장애에 대하여 책임을 지지 않습니다.</li>
+          <li>회사는 기간통신 사업자가 전기통신 서비스를 중지하거나 정상적으로 제공하지 아니하여 회원에게 손해가 발생한 경우에는 책임이 면제됩니다.</li>
+          <li>회사는 사전에 공지된 서비스용 설비의 보수, 교체, 정기 점검, 공사 등 부득이한 사유로 서비스가 중지되거나 장애가 발생한 경우에는 책임이 면제됩니다.</li>
+          <li>회사는 회원의 단말기 환경(기기 사양, 운영체제, 네트워크 상태 등)으로 인하여 발생하는 문제에 대하여 책임을 지지 않습니다.</li>
+          <li>회사는 회원이 서비스를 이용하여 기대하는 수익을 얻지 못하거나 상실한 것에 대하여 책임을 지지 않습니다.</li>
+          <li>회사는 회원이 자발적으로 제공한 정보의 진위, 정확성에 대하여 책임을 지지 않습니다.</li>
+          <li>회사는 서비스 내 제공되는 제3자 제공 콘텐츠(광고, 외부 링크 등)에 대하여 책임을 지지 않으며, 해당 콘텐츠의 이용으로 인해 발생하는 문제는 해당 제3자와 회원 간의 문제로 합니다.</li>
+          <li>회사는 게임의 특성상 밸런스 조정, 콘텐츠 수정, 버그 수정 등을 위하여 게임 내 데이터(캐릭터 능력치, 아이템 효과, 확률 등)를 변경할 수 있으며, 이에 대하여 별도의 보상을 하지 않습니다. 다만, 유료 콘텐츠에 직접적으로 영향을 미치는 변경의 경우 사전 공지를 통하여 안내합니다.</li>
+        </ol>
+      </div>
+
+      <!-- 제19조 -->
+      <div class="article-section" id="a19">
+        <h3>제19조 (재판권 및 준거법)</h3>
+        <ol>
+          <li>본 약관은 대한민국 법령에 의하여 규율되고 해석됩니다.</li>
+          <li>회사와 회원 간에 발생한 분쟁에 관하여 소송이 제기되는 경우, 법령에 정한 절차에 따른 관할 법원을 제1심 관할 법원으로 합니다.</li>
+          <li>해외에 주소 또는 거소가 있는 회원과의 분쟁에 대해서는 대한민국 서울중앙지방법원을 관할 법원으로 합니다.</li>
+        </ol>
+      </div>
+
+      <!-- 제20조 -->
+      <div class="article-section" id="a20">
+        <h3>제20조 (분쟁해결)</h3>
+        <ol>
+          <li>회사는 회원이 제기하는 정당한 의견이나 불만을 반영하고, 그 피해를 보상 처리하기 위하여 고객센터를 운영합니다.</li>
+          <li>회사는 회원으로부터 제출되는 불만 사항 및 의견을 우선적으로 처리합니다. 다만, 신속한 처리가 곤란한 경우에는 회원에게 그 사유와 처리 일정을 통보합니다.</li>
+          <li>회사와 회원 간에 발생한 분쟁에 대하여 회원이 「콘텐츠산업 진흥법」 제29조 및 같은 법 시행령 제19조에 따른 콘텐츠분쟁조정위원회에 조정을 신청할 수 있습니다.</li>
+          <li>회사와 회원 간에 발생한 전자상거래 관련 분쟁에 대하여 회원은 「전자상거래 등에서의 소비자보호에 관한 법률」에 따라 전자거래분쟁조정위원회, 한국소비자원 등에 분쟁 조정을 신청할 수 있습니다.</li>
+          <li>회원은 분쟁과 관련하여 고객센터(support@layerlab.io)를 통하여 회사에 문의할 수 있으며, 회사는 적절하고 신속하게 회원의 문의에 응답합니다.</li>
+        </ol>
+      </div>
+
+      <!-- 부칙 -->
+      <div class="addendum">
+        <h3>부칙</h3>
+        <p>본 약관은 2026년 3월 11일부터 시행합니다.</p>
+      </div>
+
+    </div><!-- /ko -->
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="en">
+
+      <!-- TOC -->
+      <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul class="toc-list">
+          <li><a href="#a1"><span class="toc-num">Art. 1</span> Purpose</a></li>
+          <li><a href="#a2"><span class="toc-num">Art. 2</span> Definitions</a></li>
+          <li><a href="#a3"><span class="toc-num">Art. 3</span> Effectiveness and Amendment</a></li>
+          <li><a href="#a4"><span class="toc-num">Art. 4</span> Supplementary Rules</a></li>
+          <li><a href="#a5"><span class="toc-num">Art. 5</span> Formation of Service Agreement</a></li>
+          <li><a href="#a6"><span class="toc-num">Art. 6</span> Personal Information</a></li>
+          <li><a href="#a7"><span class="toc-num">Art. 7</span> Account Management</a></li>
+          <li><a href="#a8"><span class="toc-num">Art. 8</span> Notices to Members</a></li>
+          <li><a href="#a9"><span class="toc-num">Art. 9</span> Obligations of the Company</a></li>
+          <li><a href="#a10"><span class="toc-num">Art. 10</span> Obligations of Members</a></li>
+          <li><a href="#a11"><span class="toc-num">Art. 11</span> Provision of Services</a></li>
+          <li><a href="#a12"><span class="toc-num">Art. 12</span> Modification and Suspension</a></li>
+          <li><a href="#a13"><span class="toc-num">Art. 13</span> Paid Content</a></li>
+          <li><a href="#a14"><span class="toc-num">Art. 14</span> Withdrawal and Refund</a></li>
+          <li><a href="#a15"><span class="toc-num">Art. 15</span> Refund of Overpayment</a></li>
+          <li><a href="#a16"><span class="toc-num">Art. 16</span> Restriction and Termination</a></li>
+          <li><a href="#a17"><span class="toc-num">Art. 17</span> Damages</a></li>
+          <li><a href="#a18"><span class="toc-num">Art. 18</span> Disclaimer</a></li>
+          <li><a href="#a19"><span class="toc-num">Art. 19</span> Jurisdiction and Governing Law</a></li>
+          <li><a href="#a20"><span class="toc-num">Art. 20</span> Dispute Resolution</a></li>
+        </ul>
+      </div>
+
+      <!-- Article 1 -->
+      <div class="article-section" id="a1-en">
+        <h3>Article 1 (Purpose)</h3>
+        <p>These Terms of Service (hereinafter "Terms") set forth the rights, obligations, responsibilities, and other necessary matters between LayerLab Inc. (hereinafter "Company") and its members regarding the use of the mobile game "Meow Rangers" (hereinafter "Service") and all related ancillary services provided by the Company.</p>
+        <p>These Terms apply to all Services provided by the Company through various devices including PCs and mobile devices. Members must agree to these Terms in order to use the Service.</p>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-section" id="a2-en">
+        <h3>Article 2 (Definitions)</h3>
+        <p>The definitions of terms used in these Terms are as follows:</p>
+        <ol>
+          <li><strong>"Company"</strong> refers to LayerLab Inc., which provides the mobile game "Meow Rangers" service.</li>
+          <li><strong>"Service"</strong> refers to the game "Meow Rangers" and all related services provided by the Company, available regardless of the type of device (PC, mobile, tablet, etc.).</li>
+          <li><strong>"Member"</strong> refers to a person who has agreed to these Terms, entered into a service agreement with the Company, and uses the services provided by the Company.</li>
+          <li><strong>"Account (ID)"</strong> refers to unique identification information set by the Member and assigned by the Company for member identification and service use. Accounts include those created through authentication methods supported by the Company, such as guest accounts, Google accounts, and Apple accounts.</li>
+          <li><strong>"Content"</strong> refers to game characters, items, skills, stages, and other digital goods provided by the Company within the Service.</li>
+          <li><strong>"Paid Content"</strong> refers to content that Members purchase by paying a certain amount to the Company, including in-game currency, items, and packages available through in-app purchases.</li>
+          <li><strong>"Game Currency"</strong> refers to virtual currency used to access or obtain content within the Service, which can be purchased with real money or obtained for free through gameplay.</li>
+          <li><strong>"In-App Purchase"</strong> refers to the act of purchasing Paid Content through an application marketplace (Google Play Store, Apple App Store, etc.).</li>
+          <li><strong>"Post"</strong> refers to text, images, and other information materials posted by Members within the Service.</li>
+          <li><strong>"Application Marketplace"</strong> refers to a digital distribution platform (Google Play Store, Apple App Store, etc.) designed for installing mobile applications.</li>
+        </ol>
+        <p>Terms not defined herein shall be governed by applicable laws and general commercial customs.</p>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-section" id="a3-en">
+        <h3>Article 3 (Effectiveness and Amendment of Terms)</h3>
+        <ol>
+          <li>These Terms shall become effective when posted on the Service screen or communicated to Members through other reasonable methods.</li>
+          <li>The Company may amend these Terms to the extent that they do not violate applicable laws, including the Act on the Regulation of Terms and Conditions, the Act on Promotion of Information and Communications Network Utilization and Information Protection, the Game Industry Promotion Act, and the Act on Consumer Protection in Electronic Commerce.</li>
+          <li>When the Company amends the Terms, it shall specify the effective date and reasons for the amendment and post them alongside the current Terms on the Service notice board or initial Service screen from at least 7 days before the effective date. However, if the amendments are unfavorable to Members, the Company shall provide at least 30 days advance notice.</li>
+          <li>If the Company clearly notifies Members that failure to express objection within the notice period shall be deemed as consent to the amended Terms, and Members do not expressly refuse, Members shall be deemed to have agreed to the amended Terms.</li>
+          <li>If a Member does not agree to the amended Terms, either the Company or the Member may terminate the service agreement.</li>
+        </ol>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-section" id="a4-en">
+        <h3>Article 4 (Supplementary Rules)</h3>
+        <ol>
+          <li>Matters not specified in these Terms and the interpretation of these Terms shall be governed by applicable laws including the Act on the Regulation of Terms and Conditions, the Act on Promotion of Information and Communications Network Utilization and Information Protection, the Game Industry Promotion Act, the Act on Consumer Protection in Electronic Commerce, the Content Industry Promotion Act, and general commercial customs.</li>
+          <li>The Company may establish separate terms of service and operational policies (hereinafter "Individual Terms") for individual services within the Service as necessary. In the event of any conflict between the Individual Terms and these Terms, the Individual Terms shall prevail.</li>
+          <li>The Company may separately establish and implement operational policies suited to the characteristics of the Service, and Members shall comply with such operational policies.</li>
+        </ol>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-section" id="a5-en">
+        <h3>Article 5 (Formation of Service Agreement)</h3>
+        <ol>
+          <li>The service agreement is formed when a person wishing to use the Service (hereinafter "Applicant") agrees to these Terms, applies for use in accordance with the procedures established by the Company, and the Company accepts such application.</li>
+          <li>The Applicant downloads and launches the Service from an application marketplace and applies for use through the authentication methods provided by the Company (guest account, Google account, Apple account, etc.).</li>
+          <li>The Company may refuse to accept an application or subsequently terminate the service agreement in any of the following cases:
+            <ol class="sub-list">
+              <li>If the Applicant has previously had a service agreement terminated due to a violation of these Terms</li>
+              <li>If the Applicant used a false identity or another person's information</li>
+              <li>If the Applicant provided false information for required fields designated by the Company</li>
+              <li>If the application was made for the purpose of undermining public order or morals</li>
+              <li>If the Applicant intends to use the Service for fraudulent purposes or commercial profit</li>
+              <li>If the application violates applicable laws or does not meet other application requirements set by the Company</li>
+            </ol>
+          </li>
+          <li>The Company may withhold acceptance of an application due to insufficient service-related facilities, technical difficulties, or similar reasons.</li>
+          <li>If the Company does not accept or withholds acceptance pursuant to Paragraphs 3 and 4, the Company shall, in principle, notify the Applicant accordingly.</li>
+          <li>If a child under 14 years of age wishes to use the Service, consent from a legal guardian must be obtained, and the specific procedures shall follow applicable laws and the Company's policies.</li>
+        </ol>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-section" id="a6-en">
+        <h3>Article 6 (Management and Protection of Personal Information)</h3>
+        <ol>
+          <li>The Company collects the minimum personal information necessary for providing the Service.</li>
+          <li>Matters relating to the collection, use, provision, and management of personal information by the Company are governed by a separate Privacy Policy, which can be viewed within the Service or on the Company's website.</li>
+          <li>The Company strives to protect Members' personal information in accordance with applicable laws, and the protection and use of personal information shall be governed by applicable laws and the Company's Privacy Policy.</li>
+          <li>The Company's Privacy Policy does not apply to linked sites outside the Company's official Service or website.</li>
+          <li>Members must diligently manage their personal information for service use and update it if there are any changes. The Company shall not be liable for problems arising from Members' negligent management or unauthorized use of their personal information.</li>
+          <li>The Company shall not be liable for personal information exposed due to reasons attributable to the Member.</li>
+        </ol>
+      </div>
+
+      <!-- Article 7 -->
+      <div class="article-section" id="a7-en">
+        <h3>Article 7 (Account Management by Members)</h3>
+        <ol>
+          <li>The responsibility for managing a Member's account lies with the Member, and the Member shall not allow third parties to use their account.</li>
+          <li>If a Member becomes aware that their account has been used without authorization, they must immediately notify the Company and follow the Company's instructions.</li>
+          <li>The Company shall not be liable for any disadvantages arising from a Member's failure to provide such notification or failure to follow the Company's instructions after notification.</li>
+          <li>For guest accounts, account information and game data may be deleted upon device changes or application deletion. Members should protect their data through account linking (Google, Apple, etc.). The Company shall not be liable for data loss from guest accounts.</li>
+          <li>In principle, Members shall use only one account per device and cannot simultaneously use the same account on multiple devices.</li>
+          <li>If a Member's account information is inaccurate or not up to date, service use may be restricted, and the Company shall not be liable for problems arising therefrom.</li>
+        </ol>
+      </div>
+
+      <!-- Article 8 -->
+      <div class="article-section" id="a8-en">
+        <h3>Article 8 (Notices to Members)</h3>
+        <ol>
+          <li>When the Company notifies Members, it may do so through in-service pop-ups, notice boards, push notifications, or other similar methods.</li>
+          <li>For notices to a large number of unspecified Members, the Company may substitute individual notices by posting on the in-service notice board for at least 7 days.</li>
+          <li>When Members wish to notify the Company, they may do so through the in-service customer center or the Company's designated email (support@layerlab.io).</li>
+        </ol>
+      </div>
+
+      <!-- Article 9 -->
+      <div class="article-section" id="a9-en">
+        <h3>Article 9 (Obligations of the Company)</h3>
+        <ol>
+          <li>The Company shall not engage in any acts prohibited by applicable laws and these Terms and shall do its best to provide continuous and stable Services.</li>
+          <li>The Company shall maintain a security system for the protection of personal information so that Members can safely use the Service, and shall disclose and comply with its Privacy Policy.</li>
+          <li>When opinions or complaints raised by Members regarding service use are deemed legitimate, the Company shall address them. If processing requires a certain period, the Company shall notify Members of the reason and processing schedule through in-service posting or email.</li>
+          <li>In the event of a service failure, the Company shall promptly repair or restore the Service unless there are unavoidable reasons.</li>
+          <li>The Company shall endeavor to provide convenience to Members in procedures related to the formation, modification, and termination of service agreements.</li>
+        </ol>
+      </div>
+
+      <!-- Article 10 -->
+      <div class="article-section" id="a10-en">
+        <h3>Article 10 (Obligations of Members)</h3>
+        <ol>
+          <li>Members shall not engage in any of the following acts:
+            <ol class="sub-list">
+              <li>Stealing or fraudulently using another person's personal information</li>
+              <li>Copying, distributing, broadcasting, or providing to third parties any information obtained through the Company's service without prior consent from the Company</li>
+              <li>Infringing on the copyrights of the Company, third parties, or any other rights</li>
+              <li>Distributing information, text, graphics, or audio content that violates public order and morals</li>
+              <li>Causing malfunction of service-related equipment or destruction and confusion of information (hacking, virus distribution, DDoS attacks, etc.)</li>
+              <li>Transmitting large amounts of information with the intention of disrupting service operations</li>
+              <li>Interfering with other users' use of the Service or collecting and storing others' personal information</li>
+              <li>Using profanity, vulgar language, sexual expressions, violent expressions, hate speech, or any other content that causes discomfort to other Members within the Service</li>
+              <li>Using abnormal methods (automated programs, macros, hacks, cheat engines, memory manipulation, etc.) to use the Service or placing excessive load on the Company's servers</li>
+              <li>Exploiting in-game bugs or gaining unfair advantages through abnormal gameplay</li>
+              <li>Using the Service for commercial purposes without the Company's consent (real-money trading, account trading, etc.)</li>
+              <li>Any other acts that violate applicable laws or prohibited acts as determined by the Company's service operational policies</li>
+            </ol>
+          </li>
+          <li>Members shall comply with applicable laws, the provisions of these Terms, usage guidelines, precautions posted in connection with the Service, and matters notified by the Company, and shall not interfere with the Company's business.</li>
+          <li>If a Member violates the obligations set forth in this Article, the Company may restrict service use or terminate the service agreement pursuant to Article 16, and the Member may be liable for damages arising therefrom.</li>
+        </ol>
+      </div>
+
+      <!-- Article 11 -->
+      <div class="article-section" id="a11-en">
+        <h3>Article 11 (Provision of Services)</h3>
+        <ol>
+          <li>The Company provides Members with the following services:
+            <ol class="sub-list">
+              <li>The mobile game "Meow Rangers" and related game content</li>
+              <li>In-game social and community features</li>
+              <li>Paid content purchase services through in-app purchases</li>
+              <li>Customer support services</li>
+              <li>Any other services additionally developed by the Company or provided through partnership agreements</li>
+            </ol>
+          </li>
+          <li>In principle, the Company provides the Service 24 hours a day, 365 days a year. However, the Company may restrict or suspend all or part of the Service due to unavoidable reasons such as scheduled system maintenance, server expansion and replacement, network failures, natural disasters, or power outages.</li>
+          <li>The Company may conduct regular maintenance for the smooth operation of the Service, and the maintenance schedule shall be announced in advance through in-service notices.</li>
+          <li>The Service is available through devices designated by the Company (mobile devices, etc.), and service use may be restricted depending on device specifications, operating system (OS), and network environment.</li>
+          <li>The Company may implement updates as necessary for the Service, and Members who do not update may experience restrictions in service use.</li>
+        </ol>
+      </div>
+
+      <!-- Article 12 -->
+      <div class="article-section" id="a12-en">
+        <h3>Article 12 (Modification and Suspension of Services)</h3>
+        <ol>
+          <li>The Company may modify all or part of the Services being provided for operational or technical reasons when there are substantial grounds.</li>
+          <li>When the Company changes the content, method of use, or hours of the Service, it shall notify Members by posting the reasons for the change, the details of the changed Service, and the date of provision on the in-service notice board before the change.</li>
+          <li>The Company may restrict or suspend all or part of the Service in any of the following cases:
+            <ol class="sub-list">
+              <li>In the event of war, armed conflict, natural disaster, or equivalent national emergency</li>
+              <li>When normal service provision is impossible due to power outages, service equipment failures, or excessive service usage</li>
+              <li>When unavoidable due to maintenance or construction of service equipment</li>
+              <li>When the Service can no longer be provided due to critical business reasons of the Company</li>
+              <li>In cases of other force majeure events</li>
+            </ol>
+          </li>
+          <li>When the Company terminates the Service, it shall notify Members through in-service notices at least 30 days before the termination date and provide information regarding the use and refund of remaining Paid Content.</li>
+          <li>The Company shall not provide separate compensation for changes or discontinuation of free content.</li>
+        </ol>
+      </div>
+
+      <!-- Article 13 -->
+      <div class="article-section" id="a13-en">
+        <h3>Article 13 (Paid Content)</h3>
+        <ol>
+          <li>The Company may offer content available for purchase (hereinafter "Paid Content") within the Service, and Members may purchase Paid Content through payment methods provided by the application marketplace (Google Play Store, Apple App Store, etc.).</li>
+          <li>The types, prices, and terms of use of Paid Content are separately posted within the Service, and the Company may change them. Changes shall be announced in advance.</li>
+          <li>The purchase of Paid Content follows the payment methods provided by the application marketplace operator, and matters related to payment shall be governed by the policies and terms of the applicable marketplace.</li>
+          <li>Communication charges (data usage fees, etc.) incurred when Members purchase Paid Content shall be borne by the Member.</li>
+          <li>Purchase records for Paid Content can be viewed on the applicable application marketplace, and the responsibility for retaining payment receipts lies with the Member.</li>
+          <li>Paid Content purchased by Members can only be used within the Service and cannot be exchanged for cash or transferred to third parties, except as provided by applicable laws.</li>
+          <li>Game currency purchased with real money and game currency obtained for free are distinguished, and refunds are available only for game currency purchased with real money.</li>
+          <li>If a Member is a minor, consent from a legal guardian must be obtained for the purchase of Paid Content, and purchases made by minors without the consent of a legal guardian may be cancelled by the legal guardian.</li>
+          <li>Paid Content may have an expiration period, and Paid Content that has exceeded its expiration period shall be forfeited. The expiration period is separately communicated at the time of purchase.</li>
+        </ol>
+      </div>
+
+      <!-- Article 14 -->
+      <div class="article-section" id="a14-en">
+        <h3>Article 14 (Withdrawal of Subscription and Refund)</h3>
+        <ol>
+          <li>Members may withdraw their subscription (cancel purchase) within 7 days from the date of purchasing Paid Content without any additional fees. However, withdrawal may be restricted in the following cases pursuant to applicable laws including the Act on Consumer Protection in Electronic Commerce and the Content Industry Promotion Act:
+            <ol class="sub-list">
+              <li>Paid Content that was immediately used or applied upon purchase</li>
+              <li>If only a portion of Paid Content that came with additional benefits has been used (refund is available only for the unused portion)</li>
+              <li>If the content has been opened or used such that its utility has been determined</li>
+              <li>Other cases where withdrawal is restricted by applicable laws</li>
+            </ol>
+          </li>
+          <li>For content subject to the proviso of Paragraph 1, the Company shall inform Members during the purchase process that withdrawal is restricted, and shall provide trial products or temporary access. If such measures are not taken, withdrawal shall not be restricted.</li>
+          <li>Refunds are processed according to the refund policies of the application marketplace (Google Play Store, Apple App Store, etc.) through which the Member made the purchase:
+            <ol class="sub-list">
+              <li><strong>Google Play Store:</strong> Members may request a refund through Google Play within a certain period after purchase in accordance with Google Play's refund policy. If the period has elapsed, Members may request a refund directly from the Company.</li>
+              <li><strong>Apple App Store:</strong> Members may request a refund through Apple in accordance with Apple's refund policy. Refunds for Paid Content purchased through the Apple App Store are subject to Apple's policies.</li>
+            </ol>
+          </li>
+          <li>When requesting a refund directly from the Company, Members must submit their request to the customer center (support@layerlab.io) including the reason for the refund, purchase details (receipt), and account information.</li>
+          <li>The Company shall notify Members of the refund decision within 3 business days from the date of receiving the refund request, and if a refund is approved, the Company shall process the refund within 7 business days from the notification date according to the payment method used.</li>
+          <li>Refunds may be restricted for payments made due to reasons attributable to the Member (identity theft, fraudulent payments, etc.), and the Company may take necessary measures in accordance with applicable laws.</li>
+          <li>Content provided for free (event rewards, free game currency, etc.) is not subject to refund.</li>
+        </ol>
+      </div>
+
+      <!-- Article 15 -->
+      <div class="article-section" id="a15-en">
+        <h3>Article 15 (Refund of Overpayment)</h3>
+        <ol>
+          <li>The Company shall immediately refund any overpayment that occurs during the purchase of Paid Content. However, for overpayments caused by system errors of the application marketplace operator, the refund must be requested from the relevant marketplace operator.</li>
+          <li>If overpayment occurs due to reasons attributable to the Company, the Company shall refund the full amount of the overpayment. However, if overpayment occurs due to reasons attributable to the Member, the costs incurred by the Company in refunding the overpayment may be borne by the Member within a reasonable scope.</li>
+          <li>When a Member requests a refund of overpayment, the Company shall verify the cause of the overpayment and notify the Member of the refund decision within 3 business days, and if a refund is approved, the Company shall process the refund within 7 business days.</li>
+          <li>The Company shall separately outline the procedures for refunding overpayments in its Privacy Policy, Terms of Service, and other documents, and shall faithfully respond to Members' legitimate refund requests.</li>
+        </ol>
+      </div>
+
+      <!-- Article 16 -->
+      <div class="article-section" id="a16-en">
+        <h3>Article 16 (Restriction of Use and Termination of Service Agreement)</h3>
         <ol>
           <li>The Company may restrict service use through graduated measures such as warnings, temporary suspension, and permanent suspension if a Member violates the obligations under these Terms or interferes with the normal operation of the Service.</li>
           <li>The Company may permanently suspend an account or terminate the service agreement without prior notice in any of the following cases:
@@ -779,22 +824,10 @@
           <li>After termination of the service agreement, re-registration with the same account may be restricted for a certain period, and Paid Content and game data held prior to termination shall not be restored.</li>
         </ol>
       </div>
-    </div>
 
-    <!-- 제17조 / Article 17 -->
-    <div class="article-section" id="a17">
-      <h3 class="ko">제17조 (손해배상)</h3>
-      <h3 class="en">Article 17 (Damages)</h3>
-      <div class="ko">
-        <ol>
-          <li>회사 또는 회원은 본 약관을 위반하여 상대방에게 손해를 입힌 경우, 그 손해를 배상하여야 합니다. 다만, 고의 또는 과실이 없는 경우에는 그러하지 않습니다.</li>
-          <li>회사가 개별 서비스의 이용과 관련하여 사전에 공지한 서비스 운영 정책에 따라 발생하는 손해에 대하여는 추가적인 배상을 하지 않습니다.</li>
-          <li>회원이 본 약관을 위반하여 회사에 손해를 입힌 경우(제10조에 정한 금지 행위 등), 회원은 회사에 발생한 모든 손해(법적 비용 포함)를 배상하여야 합니다.</li>
-          <li>회사가 무료로 제공하는 서비스의 이용과 관련하여 회원에게 발생한 손해에 대하여는, 회사의 고의 또는 중과실이 있는 경우를 제외하고 회사는 책임을 지지 않습니다.</li>
-          <li>회사는 회원 간 또는 회원과 제3자 사이에서 발생한 분쟁에 대하여 개입할 의무가 없으며, 이로 인한 손해에 대하여 책임을 지지 않습니다.</li>
-        </ol>
-      </div>
-      <div class="en">
+      <!-- Article 17 -->
+      <div class="article-section" id="a17-en">
+        <h3>Article 17 (Damages)</h3>
         <ol>
           <li>If the Company or a Member causes damage to the other party by violating these Terms, the party at fault shall compensate for such damage. However, this shall not apply if there is no intentional or negligent conduct.</li>
           <li>The Company shall not provide additional compensation for damages arising from service operational policies that were announced in advance regarding the use of individual services.</li>
@@ -803,26 +836,10 @@
           <li>The Company has no obligation to intervene in disputes between Members or between Members and third parties, and shall not be liable for damages arising therefrom.</li>
         </ol>
       </div>
-    </div>
 
-    <!-- 제18조 / Article 18 -->
-    <div class="article-section" id="a18">
-      <h3 class="ko">제18조 (면책조항)</h3>
-      <h3 class="en">Article 18 (Disclaimer)</h3>
-      <div class="ko">
-        <ol>
-          <li>회사는 천재지변, 전쟁, 테러, 해킹, DDoS 공격 등 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.</li>
-          <li>회사는 회원의 귀책 사유로 인한 서비스 이용의 장애에 대하여 책임을 지지 않습니다.</li>
-          <li>회사는 기간통신 사업자가 전기통신 서비스를 중지하거나 정상적으로 제공하지 아니하여 회원에게 손해가 발생한 경우에는 책임이 면제됩니다.</li>
-          <li>회사는 사전에 공지된 서비스용 설비의 보수, 교체, 정기 점검, 공사 등 부득이한 사유로 서비스가 중지되거나 장애가 발생한 경우에는 책임이 면제됩니다.</li>
-          <li>회사는 회원의 단말기 환경(기기 사양, 운영체제, 네트워크 상태 등)으로 인하여 발생하는 문제에 대하여 책임을 지지 않습니다.</li>
-          <li>회사는 회원이 서비스를 이용하여 기대하는 수익을 얻지 못하거나 상실한 것에 대하여 책임을 지지 않습니다.</li>
-          <li>회사는 회원이 자발적으로 제공한 정보의 진위, 정확성에 대하여 책임을 지지 않습니다.</li>
-          <li>회사는 서비스 내 제공되는 제3자 제공 콘텐츠(광고, 외부 링크 등)에 대하여 책임을 지지 않으며, 해당 콘텐츠의 이용으로 인해 발생하는 문제는 해당 제3자와 회원 간의 문제로 합니다.</li>
-          <li>회사는 게임의 특성상 밸런스 조정, 콘텐츠 수정, 버그 수정 등을 위하여 게임 내 데이터(캐릭터 능력치, 아이템 효과, 확률 등)를 변경할 수 있으며, 이에 대하여 별도의 보상을 하지 않습니다. 다만, 유료 콘텐츠에 직접적으로 영향을 미치는 변경의 경우 사전 공지를 통하여 안내합니다.</li>
-        </ol>
-      </div>
-      <div class="en">
+      <!-- Article 18 -->
+      <div class="article-section" id="a18-en">
+        <h3>Article 18 (Disclaimer)</h3>
         <ol>
           <li>The Company shall be exempt from liability for service provision when the Service cannot be provided due to force majeure events such as natural disasters, wars, terrorism, hacking, or DDoS attacks.</li>
           <li>The Company shall not be liable for service interruptions caused by reasons attributable to Members.</li>
@@ -835,42 +852,20 @@
           <li>Due to the nature of the game, the Company may change in-game data (character stats, item effects, probabilities, etc.) for balance adjustments, content modifications, and bug fixes, and shall not provide separate compensation therefor. However, for changes that directly affect Paid Content, the Company shall provide advance notice.</li>
         </ol>
       </div>
-    </div>
 
-    <!-- 제19조 / Article 19 -->
-    <div class="article-section" id="a19">
-      <h3 class="ko">제19조 (재판권 및 준거법)</h3>
-      <h3 class="en">Article 19 (Jurisdiction and Governing Law)</h3>
-      <div class="ko">
-        <ol>
-          <li>본 약관은 대한민국 법령에 의하여 규율되고 해석됩니다.</li>
-          <li>회사와 회원 간에 발생한 분쟁에 관하여 소송이 제기되는 경우, 법령에 정한 절차에 따른 관할 법원을 제1심 관할 법원으로 합니다.</li>
-          <li>해외에 주소 또는 거소가 있는 회원과의 분쟁에 대해서는 대한민국 서울중앙지방법원을 관할 법원으로 합니다.</li>
-        </ol>
-      </div>
-      <div class="en">
+      <!-- Article 19 -->
+      <div class="article-section" id="a19-en">
+        <h3>Article 19 (Jurisdiction and Governing Law)</h3>
         <ol>
           <li>These Terms shall be governed by and interpreted in accordance with the laws of the Republic of Korea.</li>
           <li>In the event that a lawsuit is filed regarding a dispute between the Company and a Member, the court with jurisdiction pursuant to applicable laws shall be the court of first instance.</li>
           <li>For disputes with Members who have an address or residence overseas, the Seoul Central District Court of the Republic of Korea shall be the court of jurisdiction.</li>
         </ol>
       </div>
-    </div>
 
-    <!-- 제20조 / Article 20 -->
-    <div class="article-section" id="a20">
-      <h3 class="ko">제20조 (분쟁해결)</h3>
-      <h3 class="en">Article 20 (Dispute Resolution)</h3>
-      <div class="ko">
-        <ol>
-          <li>회사는 회원이 제기하는 정당한 의견이나 불만을 반영하고, 그 피해를 보상 처리하기 위하여 고객센터를 운영합니다.</li>
-          <li>회사는 회원으로부터 제출되는 불만 사항 및 의견을 우선적으로 처리합니다. 다만, 신속한 처리가 곤란한 경우에는 회원에게 그 사유와 처리 일정을 통보합니다.</li>
-          <li>회사와 회원 간에 발생한 분쟁에 대하여 회원이 「콘텐츠산업 진흥법」 제29조 및 같은 법 시행령 제19조에 따른 콘텐츠분쟁조정위원회에 조정을 신청할 수 있습니다.</li>
-          <li>회사와 회원 간에 발생한 전자상거래 관련 분쟁에 대하여 회원은 「전자상거래 등에서의 소비자보호에 관한 법률」에 따라 전자거래분쟁조정위원회, 한국소비자원 등에 분쟁 조정을 신청할 수 있습니다.</li>
-          <li>회원은 분쟁과 관련하여 고객센터(support@layerlab.io)를 통하여 회사에 문의할 수 있으며, 회사는 적절하고 신속하게 회원의 문의에 응답합니다.</li>
-        </ol>
-      </div>
-      <div class="en">
+      <!-- Article 20 -->
+      <div class="article-section" id="a20-en">
+        <h3>Article 20 (Dispute Resolution)</h3>
         <ol>
           <li>The Company operates a customer center to reflect legitimate opinions and complaints raised by Members and to process their damages.</li>
           <li>The Company shall prioritize the processing of complaints and opinions submitted by Members. However, when prompt processing is difficult, the Company shall notify the Member of the reason and the processing schedule.</li>
@@ -879,15 +874,14 @@
           <li>Members may contact the Company through the customer center (support@layerlab.io) regarding disputes, and the Company shall respond appropriately and promptly to Members' inquiries.</li>
         </ol>
       </div>
-    </div>
 
-    <!-- 부칙 / Addendum -->
-    <div class="addendum">
-      <h3 class="ko">부칙</h3>
-      <h3 class="en">Addendum</h3>
-      <p class="ko">본 약관은 2026년 3월 11일부터 시행합니다.</p>
-      <p class="en">These Terms of Service shall take effect on March 11, 2026.</p>
-    </div>
+      <!-- Addendum -->
+      <div class="addendum">
+        <h3>Addendum</h3>
+        <p>These Terms of Service shall take effect on March 11, 2026.</p>
+      </div>
+
+    </div><!-- /en -->
 
   </div><!-- /content-wrap -->
 
@@ -895,8 +889,8 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-links">
-        <a href="terms.html" class="ko">이용약관</a><a href="terms.html" class="en">Terms</a>
-        <a href="privacy.html"><strong class="ko">개인정보처리방침</strong><strong class="en">Privacy Policy</strong></a>
+        <a href="terms.html"><strong class="ko">이용약관</strong><strong class="en">Terms</strong></a>
+        <a href="privacy.html" class="ko">개인정보처리방침</a><a href="privacy.html" class="en">Privacy Policy</a>
       </div>
       <div class="footer-info">
         <span class="company-name ko">주식회사 레이어랩 (LayerLab Inc.)</span>
@@ -912,11 +906,8 @@
 
   <script>
     function setLang(lang) {
-      if (lang === 'en') {
-        document.body.classList.add('lang-en');
-      } else {
-        document.body.classList.remove('lang-en');
-      }
+      if (lang === 'en') document.body.classList.add('lang-en');
+      else document.body.classList.remove('lang-en');
       document.getElementById('currentLangText').textContent = lang === 'en' ? 'English' : '한국어';
       document.querySelectorAll('.lang-option').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
@@ -925,15 +916,8 @@
       document.getElementById('langDropdown').classList.remove('open');
       localStorage.setItem('helpLang', lang);
     }
-    function toggleDropdown() {
-      document.getElementById('langDropdown').classList.toggle('open');
-    }
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.lang-dropdown')) {
-        document.getElementById('langDropdown').classList.remove('open');
-      }
-    });
-    // Restore language
+    function toggleDropdown() { document.getElementById('langDropdown').classList.toggle('open'); }
+    document.addEventListener('click', function(e) { if (!e.target.closest('.lang-dropdown')) document.getElementById('langDropdown').classList.remove('open'); });
     if (localStorage.getItem('helpLang') === 'en') setLang('en');
   </script>
 
