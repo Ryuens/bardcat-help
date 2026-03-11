@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>바드캣 키우기 - 고객센터</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A1A1A;
+      --primary-dark: #000000;
+      --primary-light: #F5F5F5;
+      --bg: #FAFAFA;
+      --white: #FFFFFF;
+      --text: #1A1A1A;
+      --text-secondary: #888888;
+      --border: #E5E5E5;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Noto Sans KR','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      background: var(--bg); color: var(--text); line-height:1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── i18n ── */
+    body.lang-en .ko { display:none !important; }
+    body.lang-en .en { display:revert !important; }
+    body:not(.lang-en) .en { display:none !important; }
+    body:not(.lang-en) .ko { display:revert !important; }
+
+    /* ── Header ── */
+    .header { background:var(--white); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+    .header-inner { max-width:960px; margin:0 auto; padding:0 24px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+    .logo-area { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); }
+    .logo-icon { width:36px; height:36px; border-radius:10px; overflow:hidden; }
+    .logo-icon img { width:100%; height:100%; object-fit:cover; }
+    .logo-text { display:flex; flex-direction:column; line-height:1.2; }
+    .logo-company { font-size:11px; color:var(--text-secondary); font-weight:500; letter-spacing:0.5px; }
+    .logo-title { font-size:16px; font-weight:700; }
+
+    /* ── Lang Dropdown ── */
+    .lang-dropdown { position:relative; }
+    .lang-current { display:flex; align-items:center; gap:6px; padding:7px 12px; background:var(--white); border:1px solid var(--border); border-radius:8px; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; transition:border-color 0.2s; }
+    .lang-current:hover { border-color:var(--primary); }
+    .lang-current svg { width:14px; height:14px; color:var(--text-secondary); transition:transform 0.2s; }
+    .lang-dropdown.open .lang-current svg:last-child { transform:rotate(180deg); }
+    .lang-menu { display:none; position:absolute; top:calc(100% + 4px); right:0; min-width:120px; background:var(--white); border:1px solid var(--border); border-radius:8px; box-shadow:var(--shadow-hover); overflow:hidden; z-index:200; }
+    .lang-dropdown.open .lang-menu { display:block; }
+    .lang-option { display:flex; align-items:center; gap:8px; width:100%; padding:10px 14px; background:none; border:none; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; font-family:inherit; transition:background 0.15s; }
+    .lang-option:hover { background:var(--primary-light); }
+    .lang-option.active { font-weight:600; }
+    .lang-option .ck { width:16px; text-align:center; font-size:14px; }
+
+    /* ── Hero ── */
+    .hero { position:relative; padding:48px 24px; text-align:center; color:white; overflow:hidden; min-height:400px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .hero-bg { position:absolute; inset:0; background:url('banner.png') center/cover no-repeat; }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35)); }
+    .hero-content { position:relative; z-index:1; width:100%; }
+    .hero h1 { font-size:28px; font-weight:700; margin-bottom:8px; text-shadow:0 2px 8px rgba(0,0,0,0.2); }
+    .hero p { font-size:15px; opacity:0.9; text-shadow:0 1px 4px rgba(0,0,0,0.15); }
+    .search-bar { max-width:520px; margin:24px auto 0; position:relative; }
+    .search-bar input { width:100%; padding:14px 20px 14px 44px; border:none; border-radius:10px; font-size:15px; font-family:inherit; background:rgba(255,255,255,0.95); color:var(--text); outline:none; }
+    .search-bar input:focus { box-shadow:0 0 0 3px rgba(255,255,255,0.3); }
+    .search-bar input::placeholder { color:var(--text-secondary); }
+    .search-bar .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); }
+
+    /* ── Tabs ── */
+    .tabs-container { max-width:960px; margin:0 auto; padding:0 24px; }
+    .tabs { display:flex; gap:0; border-bottom:2px solid var(--border); margin-top:24px; }
+    .tab { padding:14px 24px; font-size:15px; font-weight:600; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all 0.2s; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; }
+    .tab:hover { color:var(--primary); }
+    .tab.active { color:var(--primary); border-bottom-color:var(--primary); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+    .content { max-width:960px; margin:0 auto; padding:24px; }
+
+    /* ── Categories ── */
+    .categories { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+    .category-btn { padding:8px 16px; border:1px solid var(--border); border-radius:20px; background:var(--white); font-size:13px; font-weight:500; color:var(--text-secondary); cursor:pointer; transition:all 0.2s; font-family:inherit; }
+    .category-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .category-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
+
+    /* ── FAQ ── */
+    .faq-list { display:flex; flex-direction:column; gap:8px; }
+    .faq-item { background:var(--white); border-radius:var(--radius); border:1px solid var(--border); overflow:hidden; transition:box-shadow 0.2s; }
+    .faq-item:hover { box-shadow:var(--shadow-hover); }
+    .faq-question { display:flex; align-items:center; gap:12px; padding:18px 20px; cursor:pointer; user-select:none; width:100%; background:none; border:none; text-align:left; font-family:inherit; color:var(--text); }
+    .faq-question .q-badge { flex-shrink:0; width:28px; height:28px; background:var(--primary-light); color:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
+    .faq-question .q-text { flex:1; font-size:15px; font-weight:500; }
+    .faq-question .q-category { flex-shrink:0; font-size:12px; color:var(--text-secondary); background:var(--bg); padding:4px 10px; border-radius:12px; }
+    .faq-question .q-arrow { flex-shrink:0; width:20px; height:20px; color:var(--text-secondary); transition:transform 0.3s; }
+    .faq-item.open .q-arrow { transform:rotate(180deg); }
+    .faq-answer { max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+    .faq-answer-inner { padding:0 20px 20px 60px; font-size:14px; color:var(--text-secondary); line-height:1.8; }
+    .faq-answer-inner p { margin-bottom:8px; }
+    .faq-answer-inner p:last-child { margin-bottom:0; }
+    .faq-answer-inner strong { color:var(--text); }
+    .faq-answer-inner a { color:var(--primary); font-weight:600; }
+
+    /* ── Notice ── */
+    .notice-list { display:flex; flex-direction:column; gap:8px; }
+    .notice-item { background:var(--white); border-radius:var(--radius); border:1px solid var(--border); padding:18px 20px; display:flex; align-items:center; gap:12px; }
+    .notice-badge { flex-shrink:0; padding:4px 10px; border-radius:6px; font-size:12px; font-weight:600; }
+    .notice-badge.update { background:#E8F5E9; color:#2E7D32; }
+    .notice-badge.event { background:#FFF3E0; color:#E65100; }
+    .notice-badge.notice { background:var(--primary-light); color:var(--primary); }
+    .notice-title { flex:1; font-size:15px; font-weight:500; }
+    .notice-date { flex-shrink:0; font-size:13px; color:var(--text-secondary); }
+    .empty-state { text-align:center; padding:60px 20px; color:var(--text-secondary); }
+    .empty-state svg { width:48px; height:48px; margin-bottom:16px; opacity:0.4; }
+
+    /* ── Probability Tab ── */
+    .prob-update-date { font-size:12px; color:var(--text-secondary); margin-bottom:16px; }
+    .prob-nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+    .prob-nav-btn { padding:8px 16px; border:1px solid var(--border); border-radius:20px; background:var(--white); font-size:13px; font-weight:500; color:var(--text-secondary); cursor:pointer; font-family:inherit; transition:all 0.2s; }
+    .prob-nav-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .prob-nav-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
+    .prob-panel { display:none; }
+    .prob-panel.active { display:block; }
+    .prob-type-selector { display:flex; gap:6px; margin-bottom:12px; }
+    .prob-type-btn { padding:8px 18px; border:1px solid var(--border); border-radius:8px; background:var(--white); font-size:14px; font-weight:600; color:var(--text-secondary); cursor:pointer; font-family:inherit; transition:all 0.2s; }
+    .prob-type-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .prob-type-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
+    .prob-level-selector { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+    .prob-level-label { font-size:14px; font-weight:600; flex-shrink:0; }
+    .prob-level-btns { display:flex; gap:6px; flex-wrap:wrap; }
+    .plv-btn { width:36px; height:36px; border:1px solid var(--border); border-radius:8px; background:var(--white); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.2s; color:var(--text); }
+    .plv-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .plv-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
+    .prob-table-wrap { background:var(--white); border-radius:var(--radius); border:1px solid var(--border); overflow:hidden; margin-bottom:12px; }
+    .prob-table { width:100%; border-collapse:collapse; font-size:14px; }
+    .prob-table thead th { background:var(--primary-light); padding:12px 16px; text-align:left; font-weight:600; font-size:13px; color:var(--text-secondary); border-bottom:1px solid var(--border); }
+    .prob-table tbody td { padding:12px 16px; border-bottom:1px solid var(--border); }
+    .prob-table tbody tr:last-child td { border-bottom:none; }
+    .prob-table tbody tr:hover { background:#FAFAFA; }
+    .tier-dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+    .pv { font-weight:600; text-align:right; }
+    .pv.zero { color:#D1D5DB; }
+    .prob-bar-cell { width:35%; }
+    .prob-bar { height:8px; border-radius:4px; background:var(--primary-light); overflow:hidden; }
+    .prob-bar-fill { height:100%; border-radius:4px; transition:width 0.3s ease; }
+    .prob-notice { background:#FFF8F0; border:1px solid #FFE0B2; border-radius:var(--radius); padding:16px 20px; font-size:13px; color:#7A5A2E; line-height:1.8; margin-top:12px; }
+    .prob-notice strong { display:block; margin-bottom:4px; color:#5D3A0A; }
+    .prob-section-desc { font-size:14px; color:var(--text-secondary); margin-bottom:16px; }
+
+    /* ── Footer ── */
+    .footer { margin-top:48px; background:var(--white); border-top:1px solid var(--border); padding:32px 24px; }
+    .footer-inner { max-width:960px; margin:0 auto; }
+    .footer-links { display:flex; gap:24px; margin-bottom:16px; }
+    .footer-links a { font-size:13px; font-weight:600; color:var(--text); text-decoration:none; }
+    .footer-links a:hover { opacity:0.7; }
+    .footer-info { font-size:12px; color:var(--text-secondary); line-height:1.8; }
+    .footer-info .company-name { font-weight:600; color:var(--text); }
+
+    /* ── FAB + Scroll Top ── */
+    .fab-contact { position:fixed; bottom:24px; right:24px; display:flex; align-items:center; gap:8px; padding:14px 22px; background:var(--primary); color:white; border:none; border-radius:28px; font-size:14px; font-weight:600; cursor:pointer; text-decoration:none; box-shadow:0 4px 16px rgba(0,0,0,0.25); transition:all 0.2s; z-index:99; font-family:inherit; }
+    .fab-contact:hover { background:var(--primary-dark); box-shadow:0 6px 20px rgba(0,0,0,0.35); transform:translateY(-2px); }
+    .fab-contact svg { width:18px; height:18px; }
+    .scroll-top { position:fixed; bottom:80px; right:28px; width:44px; height:44px; background:var(--primary); color:white; border:none; border-radius:50%; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:var(--shadow-hover); z-index:99; }
+    .scroll-top.visible { display:flex; }
+
+    /* ── Responsive ── */
+    @media(max-width:640px) {
+      .header-inner { height:56px; padding:0 16px; }
+      .logo-title { font-size:14px; }
+      .logo-company { display:none; }
+      .hero { min-height:280px; padding:32px 20px; }
+      .hero h1 { font-size:22px; }
+      .tabs .tab { padding:12px 14px; font-size:14px; }
+      .categories { gap:6px; }
+      .category-btn { padding:6px 12px; font-size:12px; }
+      .faq-question .q-category { display:none; }
+      .notice-date { display:none; }
+      .footer-links { flex-wrap:wrap; gap:12px; }
+      .prob-bar-cell { display:none; }
+      .prob-type-btn { padding:6px 12px; font-size:13px; }
+      .plv-btn { width:32px; height:32px; font-size:12px; }
+      .fab-contact span { display:none; }
+      .fab-contact { padding:14px; border-radius:50%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo-area">
+      <div class="logo-icon"><img src="icon.png" alt="bardcat"></div>
+      <div class="logo-text">
+        <span class="logo-company">LAYERLAB</span>
+        <span class="logo-title ko">바드캣 키우기 고객센터</span>
+        <span class="logo-title en">Bardcat Help Center</span>
+      </div>
+    </a>
+    <div class="header-right">
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-current" id="langToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langLabel">한국어</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-menu">
+          <button class="lang-option active" data-lang="ko"><span class="ck">&#10003;</span>한국어</button>
+          <button class="lang-option" data-lang="en"><span class="ck"></span>English</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="ko">무엇을 도와드릴까요?</h1>
+    <h1 class="en">How can we help you?</h1>
+    <p class="ko">바드캣 키우기에 대해 궁금한 점을 검색해보세요.</p>
+    <p class="en">Search for answers about Bardcat.</p>
+    <div class="search-bar">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="검색어를 입력하세요 (예: 계정, 결제, 쿠폰)">
+    </div>
+  </div>
+</section>
+
+<!-- Tabs -->
+<div class="tabs-container">
+  <div class="tabs">
+    <button class="tab active" data-tab="faq"><span class="ko">자주 묻는 질문</span><span class="en">FAQ</span></button>
+    <button class="tab" data-tab="probability"><span class="ko">확률 정보</span><span class="en">Drop Rates</span></button>
+    <button class="tab" data-tab="notice"><span class="ko">공지사항</span><span class="en">Notice</span></button>
+    <button class="tab" data-tab="news"><span class="ko">게임소식</span><span class="en">News</span></button>
+  </div>
+</div>
+
+<main class="content">
+
+<!-- ═══ FAQ Tab ═══ -->
+<div id="tab-faq" class="tab-content active">
+  <div class="categories">
+    <button class="category-btn active" data-category="all"><span class="ko">전체</span><span class="en">All</span></button>
+    <button class="category-btn" data-category="gameplay"><span class="ko">게임 이용</span><span class="en">Gameplay</span></button>
+    <button class="category-btn" data-category="account"><span class="ko">계정 문제</span><span class="en">Account</span></button>
+    <button class="category-btn" data-category="payment"><span class="ko">결제 문의</span><span class="en">Payment</span></button>
+    <button class="category-btn" data-category="bug"><span class="ko">버그/장애</span><span class="en">Bugs</span></button>
+    <button class="category-btn" data-category="lost"><span class="ko">소실/미지급</span><span class="en">Missing Items</span></button>
+    <button class="category-btn" data-category="suggestion"><span class="ko">건의사항</span><span class="en">Feedback</span></button>
+  </div>
+  <div class="faq-list" id="faqList">
+
+    <!-- 게임 이용 -->
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">게임 데이터를 다른 기기로 옮길 수 있나요?</span>
+        <span class="q-text en">Can I transfer my data to another device?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p>네, 계정 연동을 통해 데이터를 이전할 수 있습니다.</p>
+          <p><strong>방법:</strong> 설정 → 계정 연동에서 Google 또는 Apple 계정으로 연동한 뒤, 새 기기에서 같은 계정으로 로그인하시면 됩니다.</p>
+          <p>※ 게스트 계정은 데이터 이전이 불가하오니 반드시 계정 연동을 해주세요.</p>
+        </div>
+        <div class="en">
+          <p>Yes, you can transfer data via account linking.</p>
+          <p><strong>How:</strong> Go to Settings → Account Link, link your Google or Apple account, then sign in with the same account on the new device.</p>
+          <p>※ Guest accounts cannot transfer data. Please make sure to link your account.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">게임 언어를 변경할 수 있나요?</span>
+        <span class="q-text en">Can I change the game language?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>설정 → 언어 설정에서 한국어, 영어, 일본어 중 선택하실 수 있습니다.</p></div>
+        <div class="en"><p>Go to Settings → Language to choose between Korean, English, and Japanese.</p></div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">쿠폰은 어떻게 사용하나요?</span>
+        <span class="q-text en">How do I use a coupon?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p>설정 → 쿠폰 입력에서 쿠폰 코드를 입력하시면 보상을 받으실 수 있습니다.</p>
+          <p>※ 쿠폰은 계정당 1회만 사용 가능하며, 유효기간이 있을 수 있습니다.</p>
+        </div>
+        <div class="en">
+          <p>Go to Settings → Coupon and enter your coupon code to receive rewards.</p>
+          <p>※ Each coupon can be used once per account and may have an expiration date.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">푸시 알림을 끌 수 있나요?</span>
+        <span class="q-text en">Can I turn off push notifications?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>설정 → 알림 설정에서 푸시 알림을 켜거나 끌 수 있습니다. 기기의 설정 앱에서도 앱별 알림을 관리하실 수 있습니다.</p></div>
+        <div class="en"><p>Go to Settings → Notifications to toggle push notifications. You can also manage app notifications in your device settings.</p></div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">소환(뽑기) 확률은 어떻게 되나요?</span>
+        <span class="q-text en">What are the summon drop rates?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p>소환 확률은 소환 레벨에 따라 달라집니다. 소환 레벨이 높아질수록 높은 등급의 아이템 획득 확률이 증가합니다.</p>
+          <p>상세 확률 정보는 상단의 <strong>확률 정보</strong> 탭에서 확인하실 수 있습니다.</p>
+        </div>
+        <div class="en">
+          <p>Summon rates vary based on summon level. Higher levels increase the chance of obtaining higher-tier items.</p>
+          <p>See the <strong>Drop Rates</strong> tab above for detailed information.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">소환 레벨은 어떻게 올리나요?</span>
+        <span class="q-text en">How do I increase my summon level?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>소환 횟수가 누적되면 자동으로 상승합니다. 장비/스킬/버디/악세서리 별로 각각 관리되며, 최대 레벨은 10입니다.</p></div>
+        <div class="en"><p>Summon level increases automatically as you summon more. Each type (Gear/Skill/Buddy/Accessory) is tracked separately, with a max level of 10.</p></div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="gameplay">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">특성/악세서리 옵션 등급 확률은 어떻게 되나요?</span>
+        <span class="q-text en">What are the trait/accessory option tier rates?</span>
+        <span class="q-category ko">게임 이용</span><span class="q-category en">Gameplay</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>SS: 0.07% / S: 0.15% / A: 0.50% / B: 4.50% / C: 10.00% / D: 30.00% / E: 35.00% / F: 19.78%</p></div>
+        <div class="en"><p>SS: 0.07% / S: 0.15% / A: 0.50% / B: 4.50% / C: 10.00% / D: 30.00% / E: 35.00% / F: 19.78%</p></div>
+      </div></div>
+    </div>
+
+    <!-- 계정 문제 -->
+    <div class="faq-item" data-category="account">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">계정 연동은 어떻게 하나요?</span>
+        <span class="q-text en">How do I link my account?</span>
+        <span class="q-category ko">계정 문제</span><span class="q-category en">Account</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>설정 → 계정 연동에서 Google(Android) 또는 Apple(iOS) 계정과 연동하실 수 있습니다. 연동 후에는 앱 삭제 또는 기기 변경 시에도 데이터가 보존됩니다.</p></div>
+        <div class="en"><p>Go to Settings → Account Link to connect with Google (Android) or Apple (iOS). Once linked, your data is preserved even if you delete the app or change devices.</p></div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="account">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">게스트 계정의 데이터가 사라졌어요.</span>
+        <span class="q-text en">My guest account data is gone.</span>
+        <span class="q-category ko">계정 문제</span><span class="q-category en">Account</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p>게스트 계정은 앱 삭제 또는 기기 초기화 시 복구되지 않습니다. 복구를 원하시면 <strong>문의하기</strong>를 통해 유저 ID, 마지막 접속 일시, 기기 정보를 보내주세요.</p>
+        </div>
+        <div class="en">
+          <p>Guest accounts cannot be recovered after app deletion or device reset. For recovery, contact us with your User ID, last login date, and device info.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="account">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">계정을 탈퇴하고 싶어요.</span>
+        <span class="q-text en">I want to delete my account.</span>
+        <span class="q-category ko">계정 문제</span><span class="q-category en">Account</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>설정 → 계정 → 계정 탈퇴에서 진행하실 수 있습니다. <strong>주의:</strong> 탈퇴 시 모든 데이터가 영구 삭제되며 복구가 불가능합니다.</p></div>
+        <div class="en"><p>Go to Settings → Account → Delete Account. <strong>Warning:</strong> All data will be permanently deleted and cannot be recovered.</p></div>
+      </div></div>
+    </div>
+
+    <!-- 결제 문의 -->
+    <div class="faq-item" data-category="payment">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">결제했는데 아이템이 지급되지 않았어요.</span>
+        <span class="q-text en">I paid but didn't receive my items.</span>
+        <span class="q-category ko">결제 문의</span><span class="q-category en">Payment</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p>1. 게임을 완전히 종료 후 재실행해주세요.</p>
+          <p>2. 그래도 지급되지 않으면 <strong>문의하기</strong>를 통해 결제 영수증과 유저 ID를 보내주세요.</p>
+        </div>
+        <div class="en">
+          <p>1. Fully close and restart the game.</p>
+          <p>2. If still not received, contact us with your purchase receipt and User ID.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="payment">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">결제를 환불받고 싶어요.</span>
+        <span class="q-text en">I want a refund.</span>
+        <span class="q-category ko">결제 문의</span><span class="q-category en">Payment</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p><strong>Google Play:</strong> Google Play 앱 → 계정 → 주문 내역에서 환불 요청</p>
+          <p><strong>App Store:</strong> reportaproblem.apple.com에서 환불 요청</p>
+          <p>※ 이미 사용한 재화가 포함된 경우 환불이 제한될 수 있습니다.</p>
+        </div>
+        <div class="en">
+          <p><strong>Google Play:</strong> Request refund via Google Play → Account → Order History</p>
+          <p><strong>App Store:</strong> Request refund at reportaproblem.apple.com</p>
+          <p>※ Refunds may be limited if purchased currency has been used.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="payment">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">구독 상품을 해지하고 싶어요.</span>
+        <span class="q-text en">I want to cancel my subscription.</span>
+        <span class="q-category ko">결제 문의</span><span class="q-category en">Payment</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p><strong>Google Play:</strong> Google Play 앱 → 결제 및 구독 → 구독에서 해지</p>
+          <p><strong>App Store:</strong> 설정 → Apple ID → 구독에서 해지</p>
+          <p>※ 앱을 삭제하는 것만으로는 구독이 해지되지 않습니다.</p>
+        </div>
+        <div class="en">
+          <p><strong>Google Play:</strong> Google Play → Payments & subscriptions → Subscriptions</p>
+          <p><strong>App Store:</strong> Settings → Apple ID → Subscriptions</p>
+          <p>※ Deleting the app does not cancel your subscription.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 버그/장애 -->
+    <div class="faq-item" data-category="bug">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">게임이 자꾸 튕겨요.</span>
+        <span class="q-text en">The game keeps crashing.</span>
+        <span class="q-category ko">버그/장애</span><span class="q-category en">Bugs</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko">
+          <p>1. 기기를 재부팅합니다.</p><p>2. 게임을 최신 버전으로 업데이트합니다.</p><p>3. 저장 공간이 충분한지 확인합니다. (1GB 이상 권장)</p><p>4. 다른 앱을 모두 종료한 후 게임을 실행합니다.</p>
+          <p>위 방법으로도 해결되지 않으면 문의하기로 기기 모델명과 OS 버전을 알려주세요.</p>
+        </div>
+        <div class="en">
+          <p>1. Restart your device.</p><p>2. Update the game to the latest version.</p><p>3. Ensure you have at least 1GB of free storage.</p><p>4. Close all other apps and relaunch.</p>
+          <p>If the issue persists, contact us with your device model and OS version.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="bug">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">로딩이 끝나지 않아요.</span>
+        <span class="q-text en">Loading won't finish.</span>
+        <span class="q-category ko">버그/장애</span><span class="q-category en">Bugs</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>네트워크 상태를 확인해주세요. VPN을 사용 중이라면 해제 후 다시 시도해주세요. 문제가 지속되면 게임을 삭제 후 재설치해주세요. (계정 연동 필수)</p></div>
+        <div class="en"><p>Check your network connection. If using a VPN, disable it and try again. If the issue persists, reinstall the game. (Account linking required)</p></div>
+      </div></div>
+    </div>
+
+    <!-- 소실/미지급 -->
+    <div class="faq-item" data-category="lost">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">보상을 받지 못했어요.</span>
+        <span class="q-text en">I didn't receive my reward.</span>
+        <span class="q-category ko">소실/미지급</span><span class="q-category en">Missing Items</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>우편함을 확인해주세요. 일부 보상은 우편함으로 지급됩니다. 우편함에도 없다면 문의하기를 통해 유저 ID, 보상 내용, 발생 일시를 보내주세요.</p></div>
+        <div class="en"><p>Please check your mailbox. Some rewards are delivered there. If not found, contact us with your User ID, reward details, and the date it occurred.</p></div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-category="lost">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">재화가 갑자기 줄어들었어요.</span>
+        <span class="q-text en">My currency suddenly decreased.</span>
+        <span class="q-category ko">소실/미지급</span><span class="q-category en">Missing Items</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>의도치 않은 구매나 사용이 발생했을 수 있습니다. 부당하게 차감된 것으로 판단되시면 문의하기를 통해 상세 내용을 알려주세요.</p></div>
+        <div class="en"><p>An unintended purchase or usage may have occurred. If you believe the deduction was unfair, please contact us with details.</p></div>
+      </div></div>
+    </div>
+
+    <!-- 건의사항 -->
+    <div class="faq-item" data-category="suggestion">
+      <button class="faq-question">
+        <span class="q-badge">Q</span>
+        <span class="q-text ko">새로운 기능을 건의하고 싶어요.</span>
+        <span class="q-text en">I'd like to suggest a new feature.</span>
+        <span class="q-category ko">건의사항</span><span class="q-category en">Feedback</span>
+        <svg class="q-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <div class="ko"><p>유저분들의 소중한 의견은 항상 환영합니다! 문의하기를 통해 건의사항을 남겨주시면, 개발팀에서 검토 후 반영 여부를 결정합니다.</p></div>
+        <div class="en"><p>We always welcome your valuable feedback! Please use the contact button to share your suggestions, and our dev team will review them.</p></div>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ Probability Tab ═══ -->
+<div id="tab-probability" class="tab-content">
+  <p class="prob-update-date ko">최종 업데이트: 2026년 3월 11일</p>
+  <p class="prob-update-date en">Last updated: March 11, 2026</p>
+
+  <nav class="prob-nav">
+    <button class="prob-nav-btn active" data-section="summon"><span class="ko">소환 확률</span><span class="en">Summon Rates</span></button>
+    <button class="prob-nav-btn" data-section="town"><span class="ko">마을 건물</span><span class="en">Town Building</span></button>
+    <button class="prob-nav-btn" data-section="trait"><span class="ko">특성/옵션</span><span class="en">Traits</span></button>
+    <button class="prob-nav-btn" data-section="chest"><span class="ko">상자</span><span class="en">Chests</span></button>
+    <button class="prob-nav-btn" data-section="roulette"><span class="ko">일일 룰렛</span><span class="en">Roulette</span></button>
+  </nav>
+
+  <!-- 소환 확률 -->
+  <div class="prob-panel active" id="panel-summon">
+    <div class="prob-type-selector">
+      <button class="prob-type-btn active" data-type="gear"><span class="ko">장비</span><span class="en">Gear</span></button>
+      <button class="prob-type-btn" data-type="skill"><span class="ko">스킬</span><span class="en">Skill</span></button>
+      <button class="prob-type-btn" data-type="buddy"><span class="ko">버디</span><span class="en">Buddy</span></button>
+      <button class="prob-type-btn" data-type="accessory"><span class="ko">악세서리</span><span class="en">Accessory</span></button>
+    </div>
+    <div class="prob-level-selector">
+      <span class="prob-level-label ko">소환 레벨</span><span class="prob-level-label en">Summon Lv.</span>
+      <div class="prob-level-btns" id="summonLvBtns">
+        <button class="plv-btn active" data-level="1">1</button><button class="plv-btn" data-level="2">2</button><button class="plv-btn" data-level="3">3</button><button class="plv-btn" data-level="4">4</button><button class="plv-btn" data-level="5">5</button><button class="plv-btn" data-level="6">6</button><button class="plv-btn" data-level="7">7</button><button class="plv-btn" data-level="8">8</button><button class="plv-btn" data-level="9">9</button><button class="plv-btn" data-level="10">10</button>
+      </div>
+    </div>
+    <div class="prob-table-wrap">
+      <table class="prob-table" id="probTableSummon">
+        <thead><tr><th class="ko">등급</th><th class="en">Tier</th><th class="ko">확률</th><th class="en">Rate</th><th class="prob-bar-cell"></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="prob-notice">
+      <strong class="ko">안내사항</strong><strong class="en">Notice</strong>
+      <span class="ko">- 소환 레벨은 소환 횟수에 따라 자동으로 상승합니다.<br>- 각 등급 내 개별 아이템은 동일한 확률로 획득됩니다.</span>
+      <span class="en">- Summon level increases automatically with more summons.<br>- Individual items within each tier have equal drop rates.</span>
+    </div>
+  </div>
+
+  <!-- 마을 건물 -->
+  <div class="prob-panel" id="panel-town">
+    <div class="prob-level-selector">
+      <span class="prob-level-label ko">건물 레벨</span><span class="prob-level-label en">Building Lv.</span>
+      <div class="prob-level-btns" id="townLvBtns">
+        <button class="plv-btn active" data-level="1">1</button><button class="plv-btn" data-level="2">2</button><button class="plv-btn" data-level="3">3</button><button class="plv-btn" data-level="4">4</button><button class="plv-btn" data-level="5">5</button><button class="plv-btn" data-level="6">6</button><button class="plv-btn" data-level="7">7</button><button class="plv-btn" data-level="8">8</button><button class="plv-btn" data-level="9">9</button><button class="plv-btn" data-level="10">10</button>
+      </div>
+    </div>
+    <div class="prob-table-wrap">
+      <table class="prob-table" id="probTableTown">
+        <thead><tr><th class="ko">등급</th><th class="en">Tier</th><th class="ko">확률</th><th class="en">Rate</th><th class="prob-bar-cell"></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 특성/옵션 -->
+  <div class="prob-panel" id="panel-trait">
+    <p class="prob-section-desc ko">특성 및 악세서리 옵션 획득 시 등급별 확률입니다.</p>
+    <p class="prob-section-desc en">Tier rates when obtaining traits and accessory options.</p>
+    <div class="prob-table-wrap">
+      <table class="prob-table">
+        <thead><tr><th class="ko">등급</th><th class="en">Tier</th><th class="ko">확률</th><th class="en">Rate</th><th class="prob-bar-cell"></th></tr></thead>
+        <tbody>
+          <tr><td><span class="tier-dot" style="background:#E91E63"></span>SS</td><td class="pv">0.07%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:0.2%;background:#E91E63"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#F44336"></span>S</td><td class="pv">0.15%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:0.4%;background:#F44336"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#FF9800"></span>A</td><td class="pv">0.50%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:1.2%;background:#FF9800"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#9C27B0"></span>B</td><td class="pv">4.50%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:10%;background:#9C27B0"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#2196F3"></span>C</td><td class="pv">10.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:22%;background:#2196F3"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#4CAF50"></span>D</td><td class="pv">30.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:65%;background:#4CAF50"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#9E9E9E"></span>E</td><td class="pv">35.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:76%;background:#9E9E9E"></div></div></td></tr>
+          <tr><td><span class="tier-dot" style="background:#BDBDBD"></span>F</td><td class="pv">19.78%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:43%;background:#BDBDBD"></div></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 상자 -->
+  <div class="prob-panel" id="panel-chest">
+    <p class="prob-section-desc ko">소환 상자를 열면 아래 비율로 장비/스킬/버디 중 랜덤 소환이 진행됩니다.</p>
+    <p class="prob-section-desc en">Opening a chest triggers summons distributed by the ratios below.</p>
+    <div class="prob-table-wrap">
+      <table class="prob-table">
+        <thead><tr><th class="ko">상자</th><th class="en">Chest</th><th class="ko">소환 횟수</th><th class="en">Summons</th><th class="ko">장비</th><th class="en">Gear</th><th class="ko">스킬</th><th class="en">Skill</th><th class="ko">버디</th><th class="en">Buddy</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ko">나무 상자</span><span class="en">Wood</span></td><td>15</td><td class="pv">50%</td><td class="pv">25%</td><td class="pv">25%</td></tr>
+          <tr><td><span class="ko">행운 상자</span><span class="en">Lucky</span></td><td>35</td><td class="pv">50%</td><td class="pv">25%</td><td class="pv">25%</td></tr>
+          <tr><td><span class="ko">실버 상자</span><span class="en">Silver</span></td><td>70</td><td class="pv">50%</td><td class="pv">25%</td><td class="pv">25%</td></tr>
+          <tr><td><span class="ko">골드 상자</span><span class="en">Gold</span></td><td>105</td><td class="pv">50%</td><td class="pv">25%</td><td class="pv">25%</td></tr>
+          <tr><td><span class="ko">자이언트 상자</span><span class="en">Giant</span></td><td>140</td><td class="pv">50%</td><td class="pv">25%</td><td class="pv">25%</td></tr>
+          <tr><td><span class="ko">메가 냥이 상자</span><span class="en">Mega</span></td><td>175</td><td class="pv">50%</td><td class="pv">25%</td><td class="pv">25%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 일일 룰렛 -->
+  <div class="prob-panel" id="panel-roulette">
+    <p class="prob-section-desc ko">매일 무료로 돌릴 수 있는 룰렛의 보상 확률입니다.</p>
+    <p class="prob-section-desc en">Daily free roulette reward rates.</p>
+    <div class="prob-table-wrap">
+      <table class="prob-table">
+        <thead><tr><th class="ko">보상</th><th class="en">Reward</th><th class="ko">확률</th><th class="en">Rate</th><th class="prob-bar-cell"></th></tr></thead>
+        <tbody>
+          <tr><td><span class="ko">보석 250개</span><span class="en">250 Gems</span></td><td class="pv">30.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:65%;background:#2196F3"></div></div></td></tr>
+          <tr><td><span class="ko">보스 챌린지 열쇠 1개</span><span class="en">Boss Key x1</span></td><td class="pv">7.50%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:#9C27B0"></div></div></td></tr>
+          <tr><td><span class="ko">보석 500개</span><span class="en">500 Gems</span></td><td class="pv">20.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:43%;background:#2196F3"></div></div></td></tr>
+          <tr><td><span class="ko">황금마차 열쇠 1개</span><span class="en">Gold Cart Key x1</span></td><td class="pv">7.50%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:#9C27B0"></div></div></td></tr>
+          <tr><td><span class="ko">보석 1,000개</span><span class="en">1,000 Gems</span></td><td class="pv">15.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:32%;background:#FF9800"></div></div></td></tr>
+          <tr><td><span class="ko">젤리 던전 열쇠 1개</span><span class="en">Jelly Dungeon Key x1</span></td><td class="pv">7.50%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:#9C27B0"></div></div></td></tr>
+          <tr><td><span class="ko">보석 1,500개</span><span class="en">1,500 Gems</span></td><td class="pv">5.00%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:10%;background:#F44336"></div></div></td></tr>
+          <tr><td><span class="ko">은화 던전 열쇠 1개</span><span class="en">Silver Dungeon Key x1</span></td><td class="pv">7.50%</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:#9C27B0"></div></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Notice Tab ═══ -->
+<div id="tab-notice" class="tab-content">
+  <div class="notice-list">
+    <div class="notice-item">
+      <span class="notice-badge notice ko">공지</span><span class="notice-badge notice en">Notice</span>
+      <span class="notice-title ko">바드캣 키우기 서비스 안내</span><span class="notice-title en">Bardcat Service Information</span>
+      <span class="notice-date">2026.03.11</span>
+    </div>
+    <div class="notice-item">
+      <span class="notice-badge update ko">업데이트</span><span class="notice-badge update en">Update</span>
+      <span class="notice-title ko">v1.0.0 업데이트 안내</span><span class="notice-title en">v1.0.0 Update Notes</span>
+      <span class="notice-date">2026.03.11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ News Tab ═══ -->
+<div id="tab-news" class="tab-content">
+  <div class="empty-state">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 12h10"/></svg>
+    <p class="ko">아직 등록된 게임소식이 없습니다.</p>
+    <p class="en">No news available yet.</p>
+  </div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="terms.html" class="ko">이용약관</a><a href="terms.html" class="en">Terms</a>
+      <a href="privacy.html"><strong class="ko">개인정보처리방침</strong><strong class="en">Privacy Policy</strong></a>
+    </div>
+    <div class="footer-info">
+      <span class="company-name ko">주식회사 레이어랩 (LayerLab Inc.)</span>
+      <span class="company-name en">LayerLab Inc.</span><br>
+      <span class="ko">서울시 강남구 강남대로 92길 31 6층</span>
+      <span class="en">6F, 31 Gangnam-daero 92-gil, Gangnam-gu, Seoul, Korea</span><br>
+      <span class="ko">이메일: support@layerlab.io</span>
+      <span class="en">Email: support@layerlab.io</span><br><br>
+      &copy; 2026 LayerLab Inc. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- FAB Contact -->
+<a href="mailto:support@layerlab.io" class="fab-contact">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+  </svg>
+  <span class="ko">문의하기</span><span class="en">Contact</span>
+</a>
+
+<!-- Scroll Top -->
+<button class="scroll-top" id="scrollTop" aria-label="Top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+// ── Probability Data ──
+const summonData = {
+  gear:{1:{C:1000000,U:0,R:0,E:0,L:0,M:0,X:0},2:{C:750000,U:250000,R:0,E:0,L:0,M:0,X:0},3:{C:500000,U:400000,R:100000,E:0,L:0,M:0,X:0},4:{C:330000,U:450000,R:200000,E:20000,L:0,M:0,X:0},5:{C:199500,U:500000,R:250000,E:50000,L:500,M:0,X:0},6:{C:99200,U:500000,R:300000,E:100000,L:700,M:100,X:0},7:{C:88699,U:390000,R:320000,E:200000,L:1000,M:300,X:1},8:{C:77295,U:240000,R:280000,E:400000,L:2000,M:700,X:5},9:{C:74480,U:220000,R:200000,E:500000,L:4000,M:1500,X:20},10:{C:57900,U:210000,R:120000,E:600000,L:9000,M:3000,X:100}},
+  skill:{1:{C:1000000,U:0,R:0,E:0,L:0,M:0,X:0},2:{C:750000,U:250000,R:0,E:0,L:0,M:0,X:0},3:{C:500000,U:400000,R:100000,E:0,L:0,M:0,X:0},4:{C:330000,U:450000,R:200000,E:20000,L:0,M:0,X:0},5:{C:199500,U:500000,R:250000,E:50000,L:500,M:0,X:0},6:{C:99200,U:500000,R:300000,E:100000,L:700,M:100,X:0},7:{C:88699,U:390000,R:320000,E:200000,L:1000,M:300,X:1},8:{C:77295,U:240000,R:280000,E:400000,L:2000,M:700,X:5},9:{C:74480,U:220000,R:200000,E:500000,L:4000,M:1500,X:20},10:{C:57900,U:210000,R:120000,E:600000,L:9000,M:3000,X:100}},
+  buddy:{1:{C:1000000,U:0,R:0,E:0,L:0,M:0,X:0},2:{C:750000,U:250000,R:0,E:0,L:0,M:0,X:0},3:{C:500000,U:400000,R:100000,E:0,L:0,M:0,X:0},4:{C:330000,U:450000,R:200000,E:20000,L:0,M:0,X:0},5:{C:199500,U:500000,R:250000,E:50000,L:500,M:0,X:0},6:{C:99200,U:500000,R:300000,E:100000,L:700,M:100,X:0},7:{C:88699,U:390000,R:320000,E:200000,L:1000,M:300,X:1},8:{C:77295,U:240000,R:280000,E:400000,L:2000,M:700,X:5},9:{C:74480,U:220000,R:200000,E:500000,L:4000,M:1500,X:20},10:{C:57900,U:210000,R:120000,E:600000,L:9000,M:3000,X:100}},
+  accessory:{1:{C:1000000,U:0,R:0,E:0,L:0,M:0,X:0},2:{C:900000,U:100000,R:0,E:0,L:0,M:0,X:0},3:{C:600000,U:300000,R:100000,E:0,L:0,M:0,X:0},4:{C:490000,U:350000,R:150000,E:10000,L:0,M:0,X:0},5:{C:369500,U:400000,R:200000,E:30000,L:500,M:0,X:0},6:{C:299200,U:400000,R:250000,E:50000,L:700,M:100,X:0},7:{C:228699,U:400000,R:270000,E:100000,L:1000,M:300,X:1},8:{C:167295,U:350000,R:280000,E:200000,L:2000,M:700,X:5},9:{C:94480,U:300000,R:300000,E:300000,L:4000,M:1500,X:20},10:{C:87900,U:200000,R:300000,E:400000,L:9000,M:3000,X:100}}
+};
+const townData = {
+  1:{C:70000,U:30000,R:0,E:0,L:0,M:0,X:0},2:{C:65000,U:35000,R:0,E:0,L:0,M:0,X:0},3:{C:45000,U:40000,R:15000,E:0,L:0,M:0,X:0},4:{C:20000,U:45000,R:30000,E:5000,L:0,M:0,X:0},5:{C:0,U:52000,R:37500,E:10000,L:500,M:0,X:0},6:{C:0,U:44200,R:45000,E:10000,L:700,M:100,X:0},7:{C:0,U:30695,R:48000,E:20000,L:1000,M:300,X:5},8:{C:0,U:0,R:57275,E:40000,L:2000,M:700,X:25},9:{C:0,U:0,R:44400,E:50000,L:4000,M:1500,X:100},10:{C:0,U:0,R:27500,E:60000,L:9000,M:3000,X:500}
+};
+const tierMeta = [
+  {k:'C',name:'Common',color:'#9E9E9E'},{k:'U',name:'Uncommon',color:'#4CAF50'},{k:'R',name:'Rare',color:'#2196F3'},
+  {k:'E',name:'Epic',color:'#9C27B0'},{k:'L',name:'Legendary',color:'#FF9800'},{k:'M',name:'Mythic',color:'#F44336'},{k:'X',name:'Exotic',color:'#E91E63'}
+];
+
+function fmtPct(v,t){const p=v/t*100;if(p===0)return'—';if(p<0.001)return p.toFixed(5)+'%';if(p<0.01)return p.toFixed(4)+'%';if(p<1)return p.toFixed(3)+'%';return p.toFixed(2)+'%';}
+
+function renderTable(id,data,total){
+  const tb=document.querySelector('#'+id+' tbody');tb.innerHTML='';
+  tierMeta.forEach(t=>{const v=data[t.k],p=v/total*100;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="tier-dot" style="background:${t.color}"></span>${t.name}</td><td class="pv ${v===0?'zero':''}">${fmtPct(v,total)}</td><td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:${Math.min(p,100)}%;background:${t.color}"></div></div></td>`;
+    tb.appendChild(tr);
+  });
+}
+
+let curType='gear',curLv=1,curTownLv=1;
+function refreshSummon(){renderTable('probTableSummon',summonData[curType][curLv],1000000);}
+function refreshTown(){renderTable('probTableTown',townData[curTownLv],100000);}
+refreshSummon();refreshTown();
+
+// ── Tab Switching ──
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+// ── Category Filter ──
+document.querySelectorAll('.category-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.category;
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.style.display=(cat==='all'||item.dataset.category===cat)?'':'none';
+    });
+  });
+});
+
+// ── FAQ Accordion ──
+document.querySelectorAll('.faq-question').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item'),ans=item.querySelector('.faq-answer'),open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-answer').style.maxHeight=null;});
+    if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+  });
+});
+
+// ── Search ──
+document.getElementById('searchInput').addEventListener('input',function(){
+  const q=this.value.toLowerCase().trim();
+  if(q.length>0){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    document.querySelector('[data-tab="faq"]').classList.add('active');
+    document.getElementById('tab-faq').classList.add('active');
+    document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector('[data-category="all"]').classList.add('active');
+  }
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.style.display=(q===''||item.textContent.toLowerCase().includes(q))?'':'none';
+  });
+});
+
+// ── Prob Nav ──
+document.querySelectorAll('.prob-nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.prob-nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.prob-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.section).classList.add('active');
+  });
+});
+
+// ── Summon Type ──
+document.querySelectorAll('.prob-type-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.prob-type-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');curType=btn.dataset.type;refreshSummon();
+  });
+});
+
+// ── Summon Level ──
+document.getElementById('summonLvBtns').querySelectorAll('.plv-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.getElementById('summonLvBtns').querySelectorAll('.plv-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');curLv=+btn.dataset.level;refreshSummon();
+  });
+});
+
+// ── Town Level ──
+document.getElementById('townLvBtns').querySelectorAll('.plv-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.getElementById('townLvBtns').querySelectorAll('.plv-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');curTownLv=+btn.dataset.level;refreshTown();
+  });
+});
+
+// ── Language Dropdown ──
+const langDD=document.getElementById('langDropdown');
+document.getElementById('langToggle').addEventListener('click',e=>{e.stopPropagation();langDD.classList.toggle('open');});
+document.addEventListener('click',()=>langDD.classList.remove('open'));
+
+document.querySelectorAll('.lang-option').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    const lang=opt.dataset.lang;
+    document.getElementById('langLabel').textContent=lang==='ko'?'한국어':'English';
+    document.querySelectorAll('.lang-option').forEach(o=>{o.classList.remove('active');o.querySelector('.ck').textContent='';});
+    opt.classList.add('active');opt.querySelector('.ck').textContent='✓';
+    langDD.classList.remove('open');
+    document.body.classList.toggle('lang-en',lang==='en');
+    document.getElementById('searchInput').placeholder=lang==='ko'?'검색어를 입력하세요 (예: 계정, 결제, 쿠폰)':'Search (e.g. account, payment, coupon)';
+  });
+});
+
+// ── Scroll Top ──
+const stb=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>stb.classList.toggle('visible',window.scrollY>300));
+stb.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+
+</body>
+</html>

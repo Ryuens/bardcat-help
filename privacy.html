@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>바드캣 키우기 - 개인정보처리방침</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2B8C7E;
+      --primary-dark: #1F6E63;
+      --primary-light: #E6F5F2;
+      --bg: #F3F8F7;
+      --white: #FFFFFF;
+      --text: #2D2D3A;
+      --text-secondary: #6B7280;
+      --border: #D4E4E1;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(43, 140, 126, 0.08);
+      --shadow-hover: 0 4px 16px rgba(43, 140, 126, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-back svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .logo-company {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .lang-selector {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--primary-light);
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .lang-btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      background: transparent;
+      color: var(--text-secondary);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .lang-btn:not(.active):hover {
+      background: rgba(43, 140, 126, 0.1);
+      color: var(--primary-dark);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 48px 24px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      opacity: 0.85;
+    }
+
+    /* ── Content ── */
+    .content-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .toc h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .toc-list li a {
+      display: block;
+      padding: 6px 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .toc-list li a:hover {
+      color: var(--primary);
+    }
+
+    .toc-list li a .toc-num {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    /* ── Article ── */
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .article-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .article-card p {
+      font-size: 14.5px;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .article-card ol,
+    .article-card ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .article-card li {
+      font-size: 14.5px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .article-card li ol,
+    .article-card li ul {
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    .sub-list {
+      list-style-type: lower-alpha;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .info-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .info-table td {
+      line-height: 1.7;
+    }
+
+    .addendum {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+      margin-top: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .addendum h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+
+    .addendum p {
+      font-size: 14.5px;
+      color: var(--text);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--primary-dark);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 40px 24px;
+      margin-top: 32px;
+    }
+
+    .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-company {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .footer-company-en {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 16px;
+    }
+
+    .footer-info {
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-links a.active-link {
+      color: white;
+      font-weight: 700;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 0 16px;
+        height: 56px;
+      }
+
+      .logo-text {
+        display: none;
+      }
+
+      .lang-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 36px 16px;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .content-wrap {
+        padding: 20px 16px 48px;
+      }
+
+      .toc {
+        padding: 20px;
+      }
+
+      .toc-list {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .article-card {
+        padding: 20px;
+      }
+
+      .addendum {
+        padding: 20px;
+      }
+
+      .footer {
+        padding: 32px 16px;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .info-table {
+        font-size: 13px;
+      }
+
+      .info-table th,
+      .info-table td {
+        padding: 8px 10px;
+      }
+    }
+
+    /* ── Language toggle ── */
+    .lang-ko, .lang-en {
+      display: none;
+    }
+    body.ko .lang-ko { display: block; }
+    body.en .lang-en { display: block; }
+    body.ko .toc .lang-ko { display: block; }
+    body.en .toc .lang-en { display: block; }
+
+    /* inline elements need inline display */
+    body.ko span.lang-ko { display: inline; }
+    body.en span.lang-en { display: inline; }
+
+    /* grid for toc list */
+    body.ko .toc-list.lang-ko { display: grid; }
+    body.en .toc-list.lang-en { display: grid; }
+  </style>
+</head>
+<body class="ko">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html" class="btn-back" title="뒤로가기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </a>
+        <a href="index.html" class="logo-area">
+          <div class="logo-icon">
+            <img src="icon.png" alt="바드캣 키우기">
+          </div>
+          <div class="logo-text">
+            <span class="logo-company">LAYERLAB</span>
+            <span class="logo-title">바드캣 키우기</span>
+          </div>
+        </a>
+      </div>
+      <div class="lang-selector">
+        <button class="lang-btn active" id="btnKo" onclick="setLang('ko')">한국어</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">English</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>
+      <span class="lang-ko">개인정보처리방침</span>
+      <span class="lang-en">Privacy Policy</span>
+    </h1>
+    <p>
+      <span class="lang-ko">바드캣 키우기 서비스의 개인정보 보호에 대한 안내</span>
+      <span class="lang-en">Information on privacy protection for Meow Rangers</span>
+    </p>
+  </div>
+
+  <!-- Content -->
+  <div class="content-wrap">
+
+    <!-- ==================== KOREAN ==================== -->
+    <div class="lang-ko">
+
+      <!-- TOC -->
+      <div class="toc">
+        <h2>목차</h2>
+        <ul class="toc-list lang-ko">
+          <li><a href="#ko-1"><span class="toc-num">제1조</span> 개인정보의 수집 항목 및 수집 방법</a></li>
+          <li><a href="#ko-2"><span class="toc-num">제2조</span> 개인정보의 수집 및 이용 목적</a></li>
+          <li><a href="#ko-3"><span class="toc-num">제3조</span> 개인정보의 보유 및 이용 기간</a></li>
+          <li><a href="#ko-4"><span class="toc-num">제4조</span> 개인정보의 파기 절차 및 방법</a></li>
+          <li><a href="#ko-5"><span class="toc-num">제5조</span> 개인정보의 제3자 제공</a></li>
+          <li><a href="#ko-6"><span class="toc-num">제6조</span> 개인정보 처리의 위탁</a></li>
+          <li><a href="#ko-7"><span class="toc-num">제7조</span> 이용자 및 법정대리인의 권리와 행사 방법</a></li>
+          <li><a href="#ko-8"><span class="toc-num">제8조</span> 개인정보의 안전성 확보 조치</a></li>
+          <li><a href="#ko-9"><span class="toc-num">제9조</span> 개인정보 자동 수집 장치의 설치·운영 및 거부</a></li>
+          <li><a href="#ko-10"><span class="toc-num">제10조</span> 개인정보 보호책임자</a></li>
+          <li><a href="#ko-11"><span class="toc-num">제11조</span> 권익침해 구제방법</a></li>
+          <li><a href="#ko-12"><span class="toc-num">제12조</span> 개인정보 처리방침의 변경</a></li>
+        </ul>
+      </div>
+
+      <p style="font-size:14.5px; margin-bottom:24px; color:var(--text-secondary);">
+        주식회사 레이어랩(이하 "회사")은 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. 본 방침은 회사가 운영하는 모바일 게임 "바드캣 키우기"(iOS/Android, 이하 "서비스") 이용자에게 적용됩니다.
+      </p>
+
+      <!-- 제1조 -->
+      <div class="article-card" id="ko-1">
+        <h3>제1조 (개인정보의 수집 항목 및 수집 방법)</h3>
+        <p>① 회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집합니다.</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>수집 항목</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>필수 수집 항목</strong></td>
+              <td>기기식별자(ADID/IDFA), OS 정보(종류, 버전), 기기 모델명, 앱 버전, 언어 및 국가 정보</td>
+            </tr>
+            <tr>
+              <td><strong>선택 수집 항목</strong></td>
+              <td>닉네임(이용자가 직접 설정하는 경우)</td>
+            </tr>
+            <tr>
+              <td><strong>결제 시 수집 항목</strong></td>
+              <td>결제 기록, 구매 내역, 영수증 정보(거래번호, 결제일시, 결제금액), 결제 수단 종류</td>
+            </tr>
+            <tr>
+              <td><strong>계정 연동 시 수집 항목</strong></td>
+              <td>Google 계정 정보(고유 식별자, 이메일 주소), Apple ID 정보(고유 식별자, 이메일 주소 또는 릴레이 이메일)</td>
+            </tr>
+            <tr>
+              <td><strong>자동 수집 항목</strong></td>
+              <td>IP 주소, 접속 로그(접속일시, 접속 빈도), 쿠키, 서비스 이용 기록(게임 플레이 기록, 이벤트 참여 기록, 스테이지 진행 정보), 광고 식별자</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>② 회사는 다음과 같은 방법으로 개인정보를 수집합니다.</p>
+        <ol>
+          <li>서비스 이용 과정에서 이용자의 동의에 따른 자동 수집</li>
+          <li>이용자가 직접 입력(닉네임 설정 등)</li>
+          <li>소셜 계정 연동(Google 로그인, Apple 로그인) 시 제공받는 정보</li>
+          <li>인앱 결제 시 앱스토어(App Store, Google Play)를 통해 전달받는 정보</li>
+          <li>고객 문의 및 이벤트 응모 과정에서 이메일, 게시물 등을 통한 수집</li>
+          <li>협력업체로부터의 제공(광고 성과 측정 등)</li>
+        </ol>
+      </div>
+
+      <!-- 제2조 -->
+      <div class="article-card" id="ko-2">
+        <h3>제2조 (개인정보의 수집 및 이용 목적)</h3>
+        <p>회사는 수집한 개인정보를 다음의 목적을 위해 이용합니다.</p>
+        <ol>
+          <li><strong>서비스 제공 및 운영</strong>: 게임 서비스 제공, 계정 생성 및 관리, 본인 식별 및 인증, 게임 데이터 저장 및 동기화, 인앱 결제 처리 및 구매 내역 관리</li>
+          <li><strong>회원 관리</strong>: 서비스 이용에 따른 본인 확인, 부정 이용 방지, 비인가 사용 방지, 가입 의사 확인, 분쟁 조정을 위한 기록 보존, 고지사항 전달</li>
+          <li><strong>서비스 개선 및 개발</strong>: 서비스 이용 통계 분석, 신규 서비스 개발 및 기존 서비스 개선, 이용자 사용 환경 최적화, 버그 탐지 및 오류 수정</li>
+          <li><strong>마케팅 및 광고</strong>: 이벤트 정보 및 참여 기회 제공, 맞춤형 광고 제공, 광고 성과 측정 및 분석, 서비스 관련 공지사항 및 안내 발송</li>
+          <li><strong>안전한 서비스 운영</strong>: 해킹, 치팅, 어뷰징 등 부정행위 탐지 및 방지, 계정 도용 방지, 시스템 보안 유지</li>
+          <li><strong>법적 의무 이행</strong>: 관련 법령에 따른 의무 이행, 법적 분쟁 대응</li>
+        </ol>
+      </div>
+
+      <!-- 제3조 -->
+      <div class="article-card" id="ko-3">
+        <h3>제3조 (개인정보의 보유 및 이용 기간)</h3>
+        <p>① 회사는 개인정보의 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 다만, 관계 법령에 의하여 보존할 필요가 있는 경우 회사는 해당 법령에서 정한 기간 동안 개인정보를 보관합니다.</p>
+        <p>② 관계 법령에 따른 개인정보 보관 기간은 다음과 같습니다.</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>보관 항목</th>
+              <th>근거 법령</th>
+              <th>보관 기간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>계약 또는 청약철회 등에 관한 기록</td>
+              <td>전자상거래 등에서의 소비자보호에 관한 법률</td>
+              <td>5년</td>
+            </tr>
+            <tr>
+              <td>대금결제 및 재화 등의 공급에 관한 기록</td>
+              <td>전자상거래 등에서의 소비자보호에 관한 법률</td>
+              <td>5년</td>
+            </tr>
+            <tr>
+              <td>소비자의 불만 또는 분쟁 처리에 관한 기록</td>
+              <td>전자상거래 등에서의 소비자보호에 관한 법률</td>
+              <td>3년</td>
+            </tr>
+            <tr>
+              <td>표시·광고에 관한 기록</td>
+              <td>전자상거래 등에서의 소비자보호에 관한 법률</td>
+              <td>6개월</td>
+            </tr>
+            <tr>
+              <td>서비스 이용 관련 개인정보(로그인 기록)</td>
+              <td>통신비밀보호법</td>
+              <td>3개월</td>
+            </tr>
+            <tr>
+              <td>전자금융 거래에 관한 기록</td>
+              <td>전자금융거래법</td>
+              <td>5년</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>③ 이용자가 1년 이상 서비스를 이용하지 않은 경우, 회사는 「개인정보 보호법」 제39조의6에 따라 해당 이용자의 개인정보를 파기하거나 다른 이용자의 개인정보와 분리하여 별도로 저장·관리합니다. 이 경우 회사는 해당 이용자에게 사전에 통지합니다.</p>
+      </div>
+
+      <!-- 제4조 -->
+      <div class="article-card" id="ko-4">
+        <h3>제4조 (개인정보의 파기 절차 및 방법)</h3>
+        <p>① 회사는 개인정보 보유 기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p>
+        <p>② 정보주체로부터 동의받은 개인정보 보유 기간이 경과하거나 처리 목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관 장소를 달리하여 보존합니다.</p>
+        <p>③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.</p>
+        <ol>
+          <li><strong>파기 절차</strong>: 회사는 파기 사유가 발생한 개인정보를 선정하고, 회사의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.</li>
+          <li><strong>파기 방법</strong>:
+            <ul class="sub-list">
+              <li>전자적 파일 형태의 정보: 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다. (로우레벨 포맷, 덮어쓰기 등)</li>
+              <li>종이에 기록된 개인정보: 분쇄기로 분쇄하거나 소각하여 파기합니다.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <!-- 제5조 -->
+      <div class="article-card" id="ko-5">
+        <h3>제5조 (개인정보의 제3자 제공)</h3>
+        <p>① 회사는 이용자의 개인정보를 제2조(개인정보의 수집 및 이용 목적)에서 고지한 범위 내에서 사용하며, 이용자의 사전 동의 없이는 동 범위를 초과하여 이용하거나 원칙적으로 제3자에게 제공하지 않습니다.</p>
+        <p>② 다만, 다음의 경우에는 예외로 합니다.</p>
+        <ol>
+          <li>이용자가 사전에 제3자 제공에 동의한 경우</li>
+          <li>법령의 규정에 의하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+          <li>통계 작성 및 학술 연구 등의 목적을 위하여 필요한 경우로서 특정 개인을 알아볼 수 없는 형태로 개인정보를 제공하는 경우</li>
+          <li>서비스 제공에 따른 요금 정산을 위하여 필요한 경우</li>
+        </ol>
+        <p>③ 현재 회사는 이용자의 개인정보를 제3자에게 제공하고 있지 않습니다. 향후 제3자 제공이 필요한 경우, 이용자에게 제공받는 자, 제공 목적, 제공 항목, 보유 및 이용 기간 등을 사전에 고지하고 동의를 받겠습니다.</p>
+      </div>
+
+      <!-- 제6조 -->
+      <div class="article-card" id="ko-6">
+        <h3>제6조 (개인정보 처리의 위탁)</h3>
+        <p>① 회사는 원활한 서비스 제공을 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>수탁업체</th>
+              <th>위탁 업무 내용</th>
+              <th>보유 및 이용 기간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google LLC (Firebase)</td>
+              <td>앱 분석(Firebase Analytics), 원격 구성(Remote Config), 푸시 알림(Firebase Cloud Messaging), 크래시 리포트(Crashlytics)</td>
+              <td>위탁 계약 종료 시 또는 이용 목적 달성 시까지</td>
+            </tr>
+            <tr>
+              <td>Google LLC (AdMob)</td>
+              <td>인앱 광고 제공 및 광고 성과 측정</td>
+              <td>위탁 계약 종료 시 또는 이용 목적 달성 시까지</td>
+            </tr>
+            <tr>
+              <td>AppLovin Corporation (MAX)</td>
+              <td>광고 미디에이션 및 인앱 광고 제공</td>
+              <td>위탁 계약 종료 시 또는 이용 목적 달성 시까지</td>
+            </tr>
+            <tr>
+              <td>Apple Inc.</td>
+              <td>인앱 결제 처리(App Store)</td>
+              <td>위탁 계약 종료 시 또는 이용 목적 달성 시까지</td>
+            </tr>
+            <tr>
+              <td>Google LLC (Google Play)</td>
+              <td>인앱 결제 처리(Google Play)</td>
+              <td>위탁 계약 종료 시 또는 이용 목적 달성 시까지</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>② 위탁 계약 시 개인정보가 안전하게 관리될 수 있도록 필요한 사항을 규정하고 있으며, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.</p>
+        <p>③ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체 없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</p>
+      </div>
+
+      <!-- 제7조 -->
+      <div class="article-card" id="ko-7">
+        <h3>제7조 (이용자 및 법정대리인의 권리와 행사 방법)</h3>
+        <p>① 이용자(정보주체)는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>
+        <ol>
+          <li>개인정보 열람 요구</li>
+          <li>오류 등이 있을 경우 정정 요구</li>
+          <li>삭제 요구</li>
+          <li>처리 정지 요구</li>
+        </ol>
+        <p>② 제1항에 따른 권리 행사는 회사에 대해 이메일(support@layerlab.io)을 통하여 하실 수 있으며, 회사는 이에 대해 지체 없이 조치하겠습니다.</p>
+        <p>③ 제1항에 따른 권리 행사는 이용자의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 「개인정보 보호법 시행규칙」 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.</p>
+        <p>④ 이용자가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우에는 회사는 정정 또는 삭제를 완료할 때까지 당해 개인정보를 이용하거나 제공하지 않습니다.</p>
+        <p>⑤ 만 14세 미만 아동의 경우, 법정대리인이 아동의 개인정보에 대한 열람, 정정·삭제, 처리 정지를 요청할 수 있으며, 회사는 만 14세 미만 아동의 개인정보를 수집할 때 법정대리인의 동의를 받습니다.</p>
+        <p>⑥ 개인정보 열람 및 처리 정지 요구는 「개인정보 보호법」 제35조 제4항 및 제37조 제2항에 의하여 이용자의 권리가 제한될 수 있습니다.</p>
+        <p>⑦ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다.</p>
+      </div>
+
+      <!-- 제8조 -->
+      <div class="article-card" id="ko-8">
+        <h3>제8조 (개인정보의 안전성 확보 조치)</h3>
+        <p>회사는 「개인정보 보호법」 제29조에 따라 다음과 같이 안전성 확보에 필요한 기술적·관리적 및 물리적 조치를 하고 있습니다.</p>
+        <ol>
+          <li><strong>관리적 조치</strong>: 내부 관리 계획 수립·시행, 개인정보 취급 직원의 최소화 및 정기적 교육 실시, 개인정보 처리 관련 보안 서약서 징구</li>
+          <li><strong>기술적 조치</strong>: 개인정보 처리 시스템에 대한 접근 권한 관리, 고유 식별정보 등의 암호화, 보안 프로그램 설치 및 주기적 갱신·점검, 해킹 등에 대비한 기술적 대책(방화벽 설치, 침입탐지시스템 운영 등)</li>
+          <li><strong>물리적 조치</strong>: 전산실 및 자료보관실 등에 대한 접근 통제, 개인정보가 포함된 서류·보조 저장매체의 잠금장치가 있는 안전한 장소에 보관</li>
+          <li><strong>접속 기록의 보관</strong>: 개인정보 처리 시스템에 접속한 기록을 최소 1년 이상 보관·관리하며, 접속 기록이 위·변조 및 도난·분실되지 않도록 보안 기능을 사용</li>
+          <li><strong>데이터 전송 보안</strong>: 이용자의 개인정보를 전송할 때에는 SSL(Secure Socket Layer) 등의 보안 프로토콜을 사용하여 암호화 전송</li>
+        </ol>
+      </div>
+
+      <!-- 제9조 -->
+      <div class="article-card" id="ko-9">
+        <h3>제9조 (개인정보 자동 수집 장치의 설치·운영 및 거부)</h3>
+        <p>① 회사는 이용자에게 개별적인 맞춤 서비스를 제공하기 위해 이용 정보를 저장하고 수시로 불러오는 '쿠키(cookie)' 및 유사한 기술을 사용합니다.</p>
+        <p>② 쿠키 및 자동 수집 장치의 사용 목적은 다음과 같습니다.</p>
+        <ol>
+          <li>이용자의 접속 빈도나 방문 시간 등을 분석하여 서비스 이용 현황을 파악</li>
+          <li>이용자의 관심 분야를 파악하여 맞춤형 광고 제공</li>
+          <li>서비스 이용 패턴 분석을 통한 서비스 개선</li>
+        </ol>
+        <p>③ 이용자는 쿠키 및 광고 식별자의 수집을 거부할 수 있습니다.</p>
+        <ul>
+          <li><strong>광고 식별자(ADID/IDFA) 거부 방법</strong>:
+            <ul>
+              <li>Android: 설정 &gt; Google &gt; 광고 &gt; 광고 ID 삭제 또는 재설정</li>
+              <li>iOS: 설정 &gt; 개인정보 보호 및 보안 &gt; 추적 &gt; 앱이 추적을 요청하도록 허용 끄기</li>
+            </ul>
+          </li>
+          <li><strong>Firebase Analytics 거부</strong>: 앱 설정에서 데이터 수집을 비활성화하거나, 기기 설정에서 앱 권한을 제한할 수 있습니다.</li>
+        </ul>
+        <p>④ 쿠키 및 광고 식별자 수집을 거부하는 경우, 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.</p>
+      </div>
+
+      <!-- 제10조 -->
+      <div class="article-card" id="ko-10">
+        <h3>제10조 (개인정보 보호책임자)</h3>
+        <p>① 회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 이용자의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th colspan="2">개인정보 보호책임자</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>소속/직책</strong></td>
+              <td>주식회사 레이어랩 / 대표이사</td>
+            </tr>
+            <tr>
+              <td><strong>이메일</strong></td>
+              <td>support@layerlab.io</td>
+            </tr>
+            <tr>
+              <td><strong>주소</strong></td>
+              <td>서울시 강남구 강남대로 92길 31 6층</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>② 이용자는 서비스를 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만 처리, 피해 구제 등에 관한 사항을 개인정보 보호책임자에게 문의하실 수 있습니다. 회사는 이용자의 문의에 대해 지체 없이 답변 및 처리해 드릴 것입니다.</p>
+      </div>
+
+      <!-- 제11조 -->
+      <div class="article-card" id="ko-11">
+        <h3>제11조 (권익침해 구제방법)</h3>
+        <p>이용자는 아래의 기관에 대해 개인정보 침해에 대한 피해구제, 상담 등을 문의하실 수 있습니다. 아래의 기관은 회사와는 별개의 기관으로서, 회사의 자체적인 개인정보 불만 처리 및 피해구제 결과에 만족하지 못하시거나 보다 자세한 도움이 필요하신 경우 문의하여 주시기 바랍니다.</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>기관명</th>
+              <th>연락처</th>
+              <th>홈페이지</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>개인정보침해신고센터 (한국인터넷진흥원 운영)</td>
+              <td>(국번없이) 118</td>
+              <td>privacy.kisa.or.kr</td>
+            </tr>
+            <tr>
+              <td>개인정보 분쟁조정위원회</td>
+              <td>(국번없이) 1833-6972</td>
+              <td>www.kopico.go.kr</td>
+            </tr>
+            <tr>
+              <td>대검찰청 사이버수사과</td>
+              <td>(국번없이) 1301</td>
+              <td>www.spo.go.kr</td>
+            </tr>
+            <tr>
+              <td>경찰청 사이버수사국</td>
+              <td>(국번없이) 182</td>
+              <td>ecrm.cyber.go.kr</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>또한, 「개인정보 보호법」 제35조(개인정보의 열람), 제36조(개인정보의 정정·삭제), 제37조(개인정보의 처리정지 등)의 규정에 의한 요구에 대하여 공공기관의 장이 행한 처분 또는 부작위로 인하여 권리 또는 이익의 침해를 받은 자는 행정심판법이 정하는 바에 따라 행정심판을 청구할 수 있습니다.</p>
+      </div>
+
+      <!-- 제12조 -->
+      <div class="article-card" id="ko-12">
+        <h3>제12조 (개인정보 처리방침의 변경)</h3>
+        <p>① 이 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경 내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 서비스 내 공지사항 또는 팝업 등을 통하여 고지할 것입니다.</p>
+        <p>② 이용자의 권리에 중대한 변경이 발생하는 경우에는 최소 30일 전에 고지합니다.</p>
+        <p>③ 회사는 개인정보 처리방침을 변경하는 경우 변경 전·후를 비교하여 이용자가 쉽게 알 수 있도록 표시합니다.</p>
+      </div>
+
+      <!-- 부칙 -->
+      <div class="addendum">
+        <h3>부칙</h3>
+        <p>본 개인정보 처리방침은 2026년 3월 11일부터 시행됩니다.</p>
+      </div>
+
+    </div><!-- /lang-ko -->
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="lang-en">
+
+      <!-- TOC -->
+      <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul class="toc-list lang-en">
+          <li><a href="#en-1"><span class="toc-num">Art. 1</span> Items and Methods of Personal Information Collection</a></li>
+          <li><a href="#en-2"><span class="toc-num">Art. 2</span> Purposes of Collection and Use</a></li>
+          <li><a href="#en-3"><span class="toc-num">Art. 3</span> Retention and Use Period</a></li>
+          <li><a href="#en-4"><span class="toc-num">Art. 4</span> Destruction Procedures and Methods</a></li>
+          <li><a href="#en-5"><span class="toc-num">Art. 5</span> Provision to Third Parties</a></li>
+          <li><a href="#en-6"><span class="toc-num">Art. 6</span> Entrustment of Processing</a></li>
+          <li><a href="#en-7"><span class="toc-num">Art. 7</span> Rights of Users and Legal Representatives</a></li>
+          <li><a href="#en-8"><span class="toc-num">Art. 8</span> Security Measures</a></li>
+          <li><a href="#en-9"><span class="toc-num">Art. 9</span> Automatic Data Collection Devices</a></li>
+          <li><a href="#en-10"><span class="toc-num">Art. 10</span> Privacy Officer</a></li>
+          <li><a href="#en-11"><span class="toc-num">Art. 11</span> Remedies for Infringement of Rights</a></li>
+          <li><a href="#en-12"><span class="toc-num">Art. 12</span> Changes to Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <p style="font-size:14.5px; margin-bottom:24px; color:var(--text-secondary);">
+        LayerLab Inc. (hereinafter "Company") establishes and discloses this Privacy Policy in accordance with Article 30 of the Personal Information Protection Act of the Republic of Korea, to protect the personal information of data subjects and to process related grievances promptly and smoothly. This policy applies to users of the mobile game "Meow Rangers" (iOS/Android, hereinafter "Service") operated by the Company.
+      </p>
+
+      <!-- Article 1 -->
+      <div class="article-card" id="en-1">
+        <h3>Article 1 (Items and Methods of Personal Information Collection)</h3>
+        <p>(1) The Company collects the following personal information for service provision:</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Items Collected</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Required Items</strong></td>
+              <td>Device identifier (ADID/IDFA), OS information (type, version), device model name, app version, language and country information</td>
+            </tr>
+            <tr>
+              <td><strong>Optional Items</strong></td>
+              <td>Nickname (when set by the user)</td>
+            </tr>
+            <tr>
+              <td><strong>Payment Items</strong></td>
+              <td>Payment records, purchase history, receipt information (transaction number, payment date/time, payment amount), payment method type</td>
+            </tr>
+            <tr>
+              <td><strong>Account Linking</strong></td>
+              <td>Google account information (unique identifier, email address), Apple ID information (unique identifier, email address or relay email)</td>
+            </tr>
+            <tr>
+              <td><strong>Automatically Collected</strong></td>
+              <td>IP address, access logs (access date/time, frequency), cookies, service usage records (gameplay records, event participation records, stage progress information), advertising identifier</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>(2) The Company collects personal information through the following methods:</p>
+        <ol>
+          <li>Automatic collection during service use with user consent</li>
+          <li>Direct input by users (e.g., setting a nickname)</li>
+          <li>Information received through social account linking (Google Sign-In, Apple Sign-In)</li>
+          <li>Information received through app stores (App Store, Google Play) during in-app purchases</li>
+          <li>Collection through emails and posts during customer inquiries and event participation</li>
+          <li>Provision from partner companies (for advertising performance measurement, etc.)</li>
+        </ol>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-card" id="en-2">
+        <h3>Article 2 (Purposes of Collection and Use of Personal Information)</h3>
+        <p>The Company uses collected personal information for the following purposes:</p>
+        <ol>
+          <li><strong>Service Provision and Operation</strong>: Providing game services, account creation and management, identity verification and authentication, game data storage and synchronization, in-app payment processing and purchase history management</li>
+          <li><strong>User Management</strong>: Identity verification for service use, prevention of fraudulent use, prevention of unauthorized access, confirmation of registration intent, record keeping for dispute resolution, delivery of notices</li>
+          <li><strong>Service Improvement and Development</strong>: Analysis of service usage statistics, development of new services and improvement of existing services, optimization of user experience, bug detection and error correction</li>
+          <li><strong>Marketing and Advertising</strong>: Providing event information and participation opportunities, personalized advertising, advertising performance measurement and analysis, service-related announcements and notifications</li>
+          <li><strong>Safe Service Operation</strong>: Detection and prevention of hacking, cheating, abusing and other fraudulent activities, account theft prevention, system security maintenance</li>
+          <li><strong>Legal Compliance</strong>: Fulfillment of obligations under relevant laws and regulations, response to legal disputes</li>
+        </ol>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-card" id="en-3">
+        <h3>Article 3 (Retention and Use Period of Personal Information)</h3>
+        <p>(1) The Company destroys personal information without delay once the purpose of collection and use has been achieved. However, if retention is required under relevant laws and regulations, the Company retains personal information for the period prescribed by such laws.</p>
+        <p>(2) Retention periods under relevant laws and regulations are as follows:</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Retained Items</th>
+              <th>Legal Basis</th>
+              <th>Retention Period</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Records on contracts or subscription withdrawal</td>
+              <td>Act on Consumer Protection in Electronic Commerce</td>
+              <td>5 years</td>
+            </tr>
+            <tr>
+              <td>Records on payment and supply of goods</td>
+              <td>Act on Consumer Protection in Electronic Commerce</td>
+              <td>5 years</td>
+            </tr>
+            <tr>
+              <td>Records on consumer complaints or dispute resolution</td>
+              <td>Act on Consumer Protection in Electronic Commerce</td>
+              <td>3 years</td>
+            </tr>
+            <tr>
+              <td>Records on display and advertising</td>
+              <td>Act on Consumer Protection in Electronic Commerce</td>
+              <td>6 months</td>
+            </tr>
+            <tr>
+              <td>Service usage-related personal information (login records)</td>
+              <td>Protection of Communications Secrets Act</td>
+              <td>3 months</td>
+            </tr>
+            <tr>
+              <td>Records on electronic financial transactions</td>
+              <td>Electronic Financial Transactions Act</td>
+              <td>5 years</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>(3) If a user has not used the Service for more than one year, the Company will either destroy or separately store and manage such user's personal information in accordance with Article 39-6 of the Personal Information Protection Act. In such cases, the Company will notify the user in advance.</p>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-card" id="en-4">
+        <h3>Article 4 (Destruction Procedures and Methods of Personal Information)</h3>
+        <p>(1) The Company destroys personal information without delay when it becomes unnecessary, such as when the retention period has expired or the processing purpose has been achieved.</p>
+        <p>(2) If personal information must be retained under other laws despite the expiration of the consented retention period or achievement of the processing purpose, the information is transferred to a separate database (DB) or stored in a different location for retention.</p>
+        <p>(3) The procedures and methods for destroying personal information are as follows:</p>
+        <ol>
+          <li><strong>Destruction Procedure</strong>: The Company selects personal information for which destruction reasons have arisen and destroys the personal information with the approval of the Company's Privacy Officer.</li>
+          <li><strong>Destruction Methods</strong>:
+            <ul class="sub-list">
+              <li>Electronic files: Deleted using technical methods that make records irrecoverable (low-level formatting, overwriting, etc.)</li>
+              <li>Paper documents: Shredded with a paper shredder or incinerated</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-card" id="en-5">
+        <h3>Article 5 (Provision of Personal Information to Third Parties)</h3>
+        <p>(1) The Company uses users' personal information within the scope specified in Article 2 and does not use it beyond that scope or provide it to third parties without prior consent, in principle.</p>
+        <p>(2) However, exceptions are made in the following cases:</p>
+        <ol>
+          <li>When the user has given prior consent to provision to third parties</li>
+          <li>When required by law, or when requested by an investigative agency in accordance with procedures and methods prescribed by law for investigation purposes</li>
+          <li>When personal information is provided in a form that does not identify specific individuals for the purpose of statistical compilation and academic research</li>
+          <li>When necessary for billing settlements related to service provision</li>
+        </ol>
+        <p>(3) Currently, the Company does not provide users' personal information to third parties. If third-party provision becomes necessary in the future, the Company will notify users of the recipient, purpose, items provided, and retention period in advance and obtain consent.</p>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-card" id="en-6">
+        <h3>Article 6 (Entrustment of Personal Information Processing)</h3>
+        <p>(1) The Company entrusts personal information processing to the following entities for smooth service provision:</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Entrusted Party</th>
+              <th>Entrusted Tasks</th>
+              <th>Retention Period</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google LLC (Firebase)</td>
+              <td>App analytics (Firebase Analytics), remote configuration (Remote Config), push notifications (Firebase Cloud Messaging), crash reporting (Crashlytics)</td>
+              <td>Until termination of entrustment contract or achievement of purpose</td>
+            </tr>
+            <tr>
+              <td>Google LLC (AdMob)</td>
+              <td>In-app advertising delivery and advertising performance measurement</td>
+              <td>Until termination of entrustment contract or achievement of purpose</td>
+            </tr>
+            <tr>
+              <td>AppLovin Corporation (MAX)</td>
+              <td>Ad mediation and in-app advertising delivery</td>
+              <td>Until termination of entrustment contract or achievement of purpose</td>
+            </tr>
+            <tr>
+              <td>Apple Inc.</td>
+              <td>In-app payment processing (App Store)</td>
+              <td>Until termination of entrustment contract or achievement of purpose</td>
+            </tr>
+            <tr>
+              <td>Google LLC (Google Play)</td>
+              <td>In-app payment processing (Google Play)</td>
+              <td>Until termination of entrustment contract or achievement of purpose</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>(2) When entering into entrustment contracts, the Company stipulates necessary matters to ensure the safe management of personal information and supervises whether the entrusted parties process personal information securely.</p>
+        <p>(3) If the content of entrusted tasks or entrusted parties change, the Company will disclose such changes through this Privacy Policy without delay.</p>
+      </div>
+
+      <!-- Article 7 -->
+      <div class="article-card" id="en-7">
+        <h3>Article 7 (Rights of Users and Legal Representatives and Methods of Exercise)</h3>
+        <p>(1) Users (data subjects) may exercise the following rights related to personal information protection at any time:</p>
+        <ol>
+          <li>Request to access personal information</li>
+          <li>Request to correct errors, if any</li>
+          <li>Request for deletion</li>
+          <li>Request to suspend processing</li>
+        </ol>
+        <p>(2) Rights under Paragraph 1 may be exercised by contacting the Company via email (support@layerlab.io), and the Company will take action without delay.</p>
+        <p>(3) Rights under Paragraph 1 may be exercised through a legal representative or an authorized agent. In such cases, a power of attorney in the form prescribed by the Enforcement Rules of the Personal Information Protection Act must be submitted.</p>
+        <p>(4) If a user requests correction or deletion of personal information errors, the Company will not use or provide such personal information until the correction or deletion is completed.</p>
+        <p>(5) For children under the age of 14, legal representatives may request access to, correction/deletion of, or suspension of processing of the child's personal information. The Company obtains consent from legal representatives when collecting personal information of children under 14.</p>
+        <p>(6) The right to access and request suspension of processing may be restricted pursuant to Article 35(4) and Article 37(2) of the Personal Information Protection Act.</p>
+        <p>(7) Requests for correction and deletion cannot be made if the personal information is specified as a collection target under other laws and regulations.</p>
+      </div>
+
+      <!-- Article 8 -->
+      <div class="article-card" id="en-8">
+        <h3>Article 8 (Security Measures for Personal Information)</h3>
+        <p>The Company implements the following technical, administrative, and physical measures to ensure the security of personal information in accordance with Article 29 of the Personal Information Protection Act:</p>
+        <ol>
+          <li><strong>Administrative Measures</strong>: Establishment and implementation of an internal management plan, minimization of personnel handling personal information and regular training, collection of security pledges related to personal information processing</li>
+          <li><strong>Technical Measures</strong>: Access control for personal information processing systems, encryption of unique identification information, installation of security programs with regular updates and inspections, technical countermeasures against hacking (firewall installation, intrusion detection system operation, etc.)</li>
+          <li><strong>Physical Measures</strong>: Access control for server rooms and data storage rooms, secure storage of documents and auxiliary storage media containing personal information in locked facilities</li>
+          <li><strong>Access Log Retention</strong>: Access records to personal information processing systems are retained and managed for at least one year, with security features used to prevent forgery, tampering, theft, or loss of access records</li>
+          <li><strong>Data Transmission Security</strong>: When transmitting users' personal information, encrypted transmission using security protocols such as SSL (Secure Socket Layer) is employed</li>
+        </ol>
+      </div>
+
+      <!-- Article 9 -->
+      <div class="article-card" id="en-9">
+        <h3>Article 9 (Installation, Operation, and Rejection of Automatic Data Collection Devices)</h3>
+        <p>(1) The Company uses 'cookies' and similar technologies that store and retrieve usage information to provide individualized customized services.</p>
+        <p>(2) The purposes of using cookies and automatic collection devices are as follows:</p>
+        <ol>
+          <li>Analyzing access frequency and visit times to understand service usage patterns</li>
+          <li>Identifying users' areas of interest to provide personalized advertising</li>
+          <li>Improving services through analysis of usage patterns</li>
+        </ol>
+        <p>(3) Users may refuse the collection of cookies and advertising identifiers:</p>
+        <ul>
+          <li><strong>Advertising Identifier (ADID/IDFA) Opt-out</strong>:
+            <ul>
+              <li>Android: Settings &gt; Google &gt; Ads &gt; Delete or reset advertising ID</li>
+              <li>iOS: Settings &gt; Privacy &amp; Security &gt; Tracking &gt; Turn off "Allow Apps to Request to Track"</li>
+            </ul>
+          </li>
+          <li><strong>Firebase Analytics Opt-out</strong>: Users can disable data collection in app settings or restrict app permissions in device settings.</li>
+        </ul>
+        <p>(4) Refusing the collection of cookies and advertising identifiers may cause difficulties in using personalized services.</p>
+      </div>
+
+      <!-- Article 10 -->
+      <div class="article-card" id="en-10">
+        <h3>Article 10 (Privacy Officer)</h3>
+        <p>(1) The Company designates a Privacy Officer to oversee personal information processing and handle user complaints and damage relief related to personal information processing:</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th colspan="2">Privacy Officer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Organization/Title</strong></td>
+              <td>LayerLab Inc. / CEO</td>
+            </tr>
+            <tr>
+              <td><strong>Email</strong></td>
+              <td>support@layerlab.io</td>
+            </tr>
+            <tr>
+              <td><strong>Address</strong></td>
+              <td>6F, 31 Gangnam-daero 92-gil, Gangnam-gu, Seoul, Republic of Korea</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>(2) Users may direct all inquiries, complaints, and damage relief requests related to personal information protection arising from the use of the Service to the Privacy Officer. The Company will respond to and process user inquiries without delay.</p>
+      </div>
+
+      <!-- Article 11 -->
+      <div class="article-card" id="en-11">
+        <h3>Article 11 (Remedies for Infringement of Rights)</h3>
+        <p>Users may contact the following organizations regarding damage relief and consultation for personal information infringement. These organizations are separate from the Company, and users who are not satisfied with the Company's own complaint handling and damage relief results or who need more detailed assistance may contact them:</p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Organization</th>
+              <th>Contact</th>
+              <th>Website</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Personal Information Infringement Report Center (operated by KISA)</td>
+              <td>118 (no area code)</td>
+              <td>privacy.kisa.or.kr</td>
+            </tr>
+            <tr>
+              <td>Personal Information Dispute Mediation Committee</td>
+              <td>1833-6972 (no area code)</td>
+              <td>www.kopico.go.kr</td>
+            </tr>
+            <tr>
+              <td>Supreme Prosecutors' Office Cyber Investigation Division</td>
+              <td>1301 (no area code)</td>
+              <td>www.spo.go.kr</td>
+            </tr>
+            <tr>
+              <td>National Police Agency Cyber Bureau</td>
+              <td>182 (no area code)</td>
+              <td>ecrm.cyber.go.kr</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Furthermore, persons whose rights or interests have been infringed by dispositions or omissions by the head of a public institution regarding requests under Article 35 (Access to Personal Information), Article 36 (Correction/Deletion of Personal Information), or Article 37 (Suspension of Processing of Personal Information) of the Personal Information Protection Act may file administrative appeals as prescribed by the Administrative Appeals Act.</p>
+      </div>
+
+      <!-- Article 12 -->
+      <div class="article-card" id="en-12">
+        <h3>Article 12 (Changes to Privacy Policy)</h3>
+        <p>(1) This Privacy Policy is effective from the enforcement date, and any additions, deletions, or corrections due to changes in laws or policies will be announced through in-service notices or pop-ups at least 7 days before the changes take effect.</p>
+        <p>(2) In the event of material changes affecting users' rights, notice will be given at least 30 days in advance.</p>
+        <p>(3) When the Company changes this Privacy Policy, it will display a comparison of the before and after versions so that users can easily identify the changes.</p>
+      </div>
+
+      <!-- Addendum -->
+      <div class="addendum">
+        <h3>Addendum</h3>
+        <p>This Privacy Policy shall take effect on March 11, 2026.</p>
+      </div>
+
+    </div><!-- /lang-en -->
+
+  </div><!-- /content-wrap -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-company">주식회사 레이어랩</div>
+      <div class="footer-company-en">LayerLab Inc.</div>
+      <div class="footer-info">
+        서울시 강남구 강남대로 92길 31 6층<br>
+        support@layerlab.io
+      </div>
+      <div class="footer-links">
+        <a href="terms.html">
+          <span class="lang-ko">이용약관</span>
+          <span class="lang-en">Terms of Service</span>
+        </a>
+        <a href="privacy.html" class="active-link">
+          <span class="lang-ko">개인정보처리방침</span>
+          <span class="lang-en">Privacy Policy</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.body.className = lang;
+      document.getElementById('btnKo').classList.toggle('active', lang === 'ko');
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+    }
+
+    // Smooth scroll for TOC links with offset for sticky header
+    document.querySelectorAll('.toc-list a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var targetId = this.getAttribute('href').substring(1);
+        var target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          var headerHeight = document.querySelector('.header').offsetHeight;
+          var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 16;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>바드캣 키우기 - 확률 정보</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2B8C7E;
+      --primary-dark: #1F6E63;
+      --primary-light: #E6F5F2;
+      --accent: #FF8C42;
+      --bg: #F3F8F7;
+      --white: #FFFFFF;
+      --text: #2D2D3A;
+      --text-secondary: #6B7280;
+      --border: #D8E8E5;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(43, 140, 126, 0.08);
+
+      --tier-common: #9E9E9E;
+      --tier-uncommon: #4CAF50;
+      --tier-rare: #2196F3;
+      --tier-epic: #9C27B0;
+      --tier-legendary: #FF9800;
+      --tier-mythic: #F44336;
+      --tier-exotic: #E91E63;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--white);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .page-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* ── Section Nav ── */
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .section-nav a {
+      padding: 10px 18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .section-nav a:hover, .section-nav a.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ── Section ── */
+    .prob-section {
+      margin-bottom: 48px;
+    }
+
+    .prob-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      padding-top: 16px;
+    }
+
+    .prob-section .section-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* ── Level Selector ── */
+    .level-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .level-selector label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .level-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+
+    .level-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .level-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ── Table ── */
+    .prob-table-wrap {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .prob-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .prob-table thead th {
+      background: var(--bg);
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prob-table tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prob-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .prob-table tbody tr:hover {
+      background: #FAFBFF;
+    }
+
+    .tier-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .tier-name {
+      font-weight: 500;
+    }
+
+    .prob-value {
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .prob-value.zero {
+      color: #D1D5DB;
+    }
+
+    .prob-bar-cell {
+      width: 40%;
+    }
+
+    .prob-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .prob-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* ── Notice Box ── */
+    .notice-box {
+      background: #FFF8F0;
+      border: 1px solid #FFE0B2;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #7A5A2E;
+      line-height: 1.8;
+      margin-top: 16px;
+    }
+
+    .notice-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #5D3A0A;
+    }
+
+    /* ── Sub Tables ── */
+    .sub-section {
+      margin-top: 24px;
+    }
+
+    .sub-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .update-date {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .prob-table { font-size: 13px; }
+      .prob-table thead th, .prob-table tbody td { padding: 10px 12px; }
+      .prob-bar-cell { display: none; }
+      .section-nav a { padding: 8px 14px; font-size: 13px; }
+      .level-btn { width: 32px; height: 32px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="back-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <span class="header-title">바드캣 키우기 - 확률 정보</span>
+    </div>
+  </header>
+
+  <main class="content">
+    <h1 class="page-title">확률 정보 안내</h1>
+    <p class="page-desc">바드캣 키우기의 아이템 획득 확률 정보를 안내해 드립니다.</p>
+    <p class="update-date">최종 업데이트: 2026년 3월 11일</p>
+
+    <nav class="section-nav">
+      <a href="#summon-gear" class="active">장비 소환</a>
+      <a href="#summon-skill">스킬 소환</a>
+      <a href="#summon-buddy">버디 소환</a>
+      <a href="#summon-accessory">악세서리 소환</a>
+      <a href="#town-building">마을 건물</a>
+      <a href="#trait">특성</a>
+      <a href="#chest">상자</a>
+      <a href="#roulette">일일 룰렛</a>
+    </nav>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 장비 소환 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="summon-gear" class="prob-section">
+      <h2>장비 소환 확률</h2>
+      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 장비가 등장할 확률이 증가합니다.</p>
+
+      <div class="level-selector" data-target="gear">
+        <label>소환 레벨:</label>
+        <button class="level-btn active" data-level="1">1</button>
+        <button class="level-btn" data-level="2">2</button>
+        <button class="level-btn" data-level="3">3</button>
+        <button class="level-btn" data-level="4">4</button>
+        <button class="level-btn" data-level="5">5</button>
+        <button class="level-btn" data-level="6">6</button>
+        <button class="level-btn" data-level="7">7</button>
+        <button class="level-btn" data-level="8">8</button>
+        <button class="level-btn" data-level="9">9</button>
+        <button class="level-btn" data-level="10">10</button>
+      </div>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table" id="table-gear">
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="notice-box">
+        <strong>안내사항</strong>
+        - 확률은 소수점 이하 절사 없이 표시됩니다.<br>
+        - 소환 레벨은 소환 횟수에 따라 자동으로 상승합니다.<br>
+        - 각 등급 내 개별 아이템은 동일한 확률로 획득됩니다.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 스킬 소환 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="summon-skill" class="prob-section">
+      <h2>스킬 소환 확률</h2>
+      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 스킬이 등장할 확률이 증가합니다.</p>
+
+      <div class="level-selector" data-target="skill">
+        <label>소환 레벨:</label>
+        <button class="level-btn active" data-level="1">1</button>
+        <button class="level-btn" data-level="2">2</button>
+        <button class="level-btn" data-level="3">3</button>
+        <button class="level-btn" data-level="4">4</button>
+        <button class="level-btn" data-level="5">5</button>
+        <button class="level-btn" data-level="6">6</button>
+        <button class="level-btn" data-level="7">7</button>
+        <button class="level-btn" data-level="8">8</button>
+        <button class="level-btn" data-level="9">9</button>
+        <button class="level-btn" data-level="10">10</button>
+      </div>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table" id="table-skill">
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 버디 소환 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="summon-buddy" class="prob-section">
+      <h2>버디 소환 확률</h2>
+      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 버디가 등장할 확률이 증가합니다.</p>
+
+      <div class="level-selector" data-target="buddy">
+        <label>소환 레벨:</label>
+        <button class="level-btn active" data-level="1">1</button>
+        <button class="level-btn" data-level="2">2</button>
+        <button class="level-btn" data-level="3">3</button>
+        <button class="level-btn" data-level="4">4</button>
+        <button class="level-btn" data-level="5">5</button>
+        <button class="level-btn" data-level="6">6</button>
+        <button class="level-btn" data-level="7">7</button>
+        <button class="level-btn" data-level="8">8</button>
+        <button class="level-btn" data-level="9">9</button>
+        <button class="level-btn" data-level="10">10</button>
+      </div>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table" id="table-buddy">
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 악세서리 소환 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="summon-accessory" class="prob-section">
+      <h2>악세서리 소환 확률</h2>
+      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 악세서리가 등장할 확률이 증가합니다.</p>
+
+      <div class="level-selector" data-target="accessory">
+        <label>소환 레벨:</label>
+        <button class="level-btn active" data-level="1">1</button>
+        <button class="level-btn" data-level="2">2</button>
+        <button class="level-btn" data-level="3">3</button>
+        <button class="level-btn" data-level="4">4</button>
+        <button class="level-btn" data-level="5">5</button>
+        <button class="level-btn" data-level="6">6</button>
+        <button class="level-btn" data-level="7">7</button>
+        <button class="level-btn" data-level="8">8</button>
+        <button class="level-btn" data-level="9">9</button>
+        <button class="level-btn" data-level="10">10</button>
+      </div>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table" id="table-accessory">
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 마을 건물 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="town-building" class="prob-section">
+      <h2>마을 건물 아이템 획득 확률</h2>
+      <p class="section-desc">마을 건물 레벨에 따른 아이템 등급별 획득 확률입니다.</p>
+
+      <div class="level-selector" data-target="town">
+        <label>건물 레벨:</label>
+        <button class="level-btn active" data-level="1">1</button>
+        <button class="level-btn" data-level="2">2</button>
+        <button class="level-btn" data-level="3">3</button>
+        <button class="level-btn" data-level="4">4</button>
+        <button class="level-btn" data-level="5">5</button>
+        <button class="level-btn" data-level="6">6</button>
+        <button class="level-btn" data-level="7">7</button>
+        <button class="level-btn" data-level="8">8</button>
+        <button class="level-btn" data-level="9">9</button>
+        <button class="level-btn" data-level="10">10</button>
+      </div>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table" id="table-town">
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 특성 등급 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="trait" class="prob-section">
+      <h2>특성 등급 확률</h2>
+      <p class="section-desc">특성 획득 시 등급별 확률입니다. 악세서리 옵션 등급도 동일한 확률이 적용됩니다.</p>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table">
+          <thead>
+            <tr>
+              <th>등급</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-exotic)"></span><span class="tier-name">SS</span></td>
+              <td class="prob-value">0.07%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:0.2%;background:var(--tier-exotic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-mythic)"></span><span class="tier-name">S</span></td>
+              <td class="prob-value">0.15%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:0.4%;background:var(--tier-mythic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-legendary)"></span><span class="tier-name">A</span></td>
+              <td class="prob-value">0.50%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:1.2%;background:var(--tier-legendary)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-epic)"></span><span class="tier-name">B</span></td>
+              <td class="prob-value">4.50%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:10%;background:var(--tier-epic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-rare)"></span><span class="tier-name">C</span></td>
+              <td class="prob-value">10.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:22%;background:var(--tier-rare)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-uncommon)"></span><span class="tier-name">D</span></td>
+              <td class="prob-value">30.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:65%;background:var(--tier-uncommon)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:var(--tier-common)"></span><span class="tier-name">E</span></td>
+              <td class="prob-value">35.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:76%;background:var(--tier-common)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-dot" style="background:#BDBDBD"></span><span class="tier-name">F</span></td>
+              <td class="prob-value">19.78%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:43%;background:#BDBDBD"></div></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 상자 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="chest" class="prob-section">
+      <h2>소환 상자 종류별 구성</h2>
+      <p class="section-desc">소환 상자를 열면 아래 비율로 장비/스킬/버디 중 랜덤한 아이템이 획득됩니다.</p>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table">
+          <thead>
+            <tr>
+              <th>상자</th>
+              <th>소환 횟수</th>
+              <th>장비</th>
+              <th>스킬</th>
+              <th>버디</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tier-name">나무 상자</span></td>
+              <td>15회</td>
+              <td class="prob-value">50%</td>
+              <td class="prob-value">25%</td>
+              <td class="prob-value">25%</td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">행운 상자</span></td>
+              <td>35회</td>
+              <td class="prob-value">50%</td>
+              <td class="prob-value">25%</td>
+              <td class="prob-value">25%</td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">실버 상자</span></td>
+              <td>70회</td>
+              <td class="prob-value">50%</td>
+              <td class="prob-value">25%</td>
+              <td class="prob-value">25%</td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">골드 상자</span></td>
+              <td>105회</td>
+              <td class="prob-value">50%</td>
+              <td class="prob-value">25%</td>
+              <td class="prob-value">25%</td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">자이언트 상자</span></td>
+              <td>140회</td>
+              <td class="prob-value">50%</td>
+              <td class="prob-value">25%</td>
+              <td class="prob-value">25%</td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">메가 냥이 상자</span></td>
+              <td>175회</td>
+              <td class="prob-value">50%</td>
+              <td class="prob-value">25%</td>
+              <td class="prob-value">25%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice-box">
+        <strong>안내사항</strong>
+        - 상자를 열면 해당 횟수만큼 소환이 진행됩니다.<br>
+        - 각 소환의 등급 확률은 현재 소환 레벨에 따라 결정됩니다.<br>
+        - 등급별 확정 상자(레어 장비 상자, 에픽 스킬 상자 등)는 해당 등급 이상의 아이템만 획득됩니다.
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- 일일 룰렛 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="roulette" class="prob-section">
+      <h2>일일 룰렛 확률</h2>
+      <p class="section-desc">매일 무료로 돌릴 수 있는 룰렛의 보상 확률입니다.</p>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table">
+          <thead>
+            <tr>
+              <th>보상</th>
+              <th>확률</th>
+              <th class="prob-bar-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tier-name">보석 250개</span></td>
+              <td class="prob-value">30.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:65%;background:var(--tier-rare)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">보스 챌린지 열쇠 1개</span></td>
+              <td class="prob-value">7.50%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:var(--tier-epic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">보석 500개</span></td>
+              <td class="prob-value">20.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:43%;background:var(--tier-rare)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">황금마차 열쇠 1개</span></td>
+              <td class="prob-value">7.50%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:var(--tier-epic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">보석 1,000개</span></td>
+              <td class="prob-value">15.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:32%;background:var(--tier-legendary)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">젤리 던전 열쇠 1개</span></td>
+              <td class="prob-value">7.50%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:var(--tier-epic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">보석 1,500개</span></td>
+              <td class="prob-value">5.00%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:10%;background:var(--tier-mythic)"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="tier-name">은화 던전 열쇠 1개</span></td>
+              <td class="prob-value">7.50%</td>
+              <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:16%;background:var(--tier-epic)"></div></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 LayerLab Inc. All rights reserved.
+  </footer>
+
+  <script>
+    // ── Summon probability data (values / 1,000,000 = percentage / 100) ──
+    const summonData = {
+      // Gear (10700001)
+      gear: {
+        1:  { COMMON:1000000, UNCOMMON:0, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        2:  { COMMON:750000, UNCOMMON:250000, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        3:  { COMMON:500000, UNCOMMON:400000, RARE:100000, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        4:  { COMMON:330000, UNCOMMON:450000, RARE:200000, EPIC:20000, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        5:  { COMMON:199500, UNCOMMON:500000, RARE:250000, EPIC:50000, LEGENDARY:500, MYTHIC:0, EXOTIC:0 },
+        6:  { COMMON:99200, UNCOMMON:500000, RARE:300000, EPIC:100000, LEGENDARY:700, MYTHIC:100, EXOTIC:0 },
+        7:  { COMMON:88699, UNCOMMON:390000, RARE:320000, EPIC:200000, LEGENDARY:1000, MYTHIC:300, EXOTIC:1 },
+        8:  { COMMON:77295, UNCOMMON:240000, RARE:280000, EPIC:400000, LEGENDARY:2000, MYTHIC:700, EXOTIC:5 },
+        9:  { COMMON:74480, UNCOMMON:220000, RARE:200000, EPIC:500000, LEGENDARY:4000, MYTHIC:1500, EXOTIC:20 },
+        10: { COMMON:57900, UNCOMMON:210000, RARE:120000, EPIC:600000, LEGENDARY:9000, MYTHIC:3000, EXOTIC:100 }
+      },
+      // Skill (10700002) - same as gear
+      skill: {
+        1:  { COMMON:1000000, UNCOMMON:0, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        2:  { COMMON:750000, UNCOMMON:250000, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        3:  { COMMON:500000, UNCOMMON:400000, RARE:100000, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        4:  { COMMON:330000, UNCOMMON:450000, RARE:200000, EPIC:20000, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        5:  { COMMON:199500, UNCOMMON:500000, RARE:250000, EPIC:50000, LEGENDARY:500, MYTHIC:0, EXOTIC:0 },
+        6:  { COMMON:99200, UNCOMMON:500000, RARE:300000, EPIC:100000, LEGENDARY:700, MYTHIC:100, EXOTIC:0 },
+        7:  { COMMON:88699, UNCOMMON:390000, RARE:320000, EPIC:200000, LEGENDARY:1000, MYTHIC:300, EXOTIC:1 },
+        8:  { COMMON:77295, UNCOMMON:240000, RARE:280000, EPIC:400000, LEGENDARY:2000, MYTHIC:700, EXOTIC:5 },
+        9:  { COMMON:74480, UNCOMMON:220000, RARE:200000, EPIC:500000, LEGENDARY:4000, MYTHIC:1500, EXOTIC:20 },
+        10: { COMMON:57900, UNCOMMON:210000, RARE:120000, EPIC:600000, LEGENDARY:9000, MYTHIC:3000, EXOTIC:100 }
+      },
+      // Buddy (10700003) - same as gear
+      buddy: {
+        1:  { COMMON:1000000, UNCOMMON:0, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        2:  { COMMON:750000, UNCOMMON:250000, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        3:  { COMMON:500000, UNCOMMON:400000, RARE:100000, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        4:  { COMMON:330000, UNCOMMON:450000, RARE:200000, EPIC:20000, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        5:  { COMMON:199500, UNCOMMON:500000, RARE:250000, EPIC:50000, LEGENDARY:500, MYTHIC:0, EXOTIC:0 },
+        6:  { COMMON:99200, UNCOMMON:500000, RARE:300000, EPIC:100000, LEGENDARY:700, MYTHIC:100, EXOTIC:0 },
+        7:  { COMMON:88699, UNCOMMON:390000, RARE:320000, EPIC:200000, LEGENDARY:1000, MYTHIC:300, EXOTIC:1 },
+        8:  { COMMON:77295, UNCOMMON:240000, RARE:280000, EPIC:400000, LEGENDARY:2000, MYTHIC:700, EXOTIC:5 },
+        9:  { COMMON:74480, UNCOMMON:220000, RARE:200000, EPIC:500000, LEGENDARY:4000, MYTHIC:1500, EXOTIC:20 },
+        10: { COMMON:57900, UNCOMMON:210000, RARE:120000, EPIC:600000, LEGENDARY:9000, MYTHIC:3000, EXOTIC:100 }
+      },
+      // Accessory (10700004) - different rates
+      accessory: {
+        1:  { COMMON:1000000, UNCOMMON:0, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        2:  { COMMON:900000, UNCOMMON:100000, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        3:  { COMMON:600000, UNCOMMON:300000, RARE:100000, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        4:  { COMMON:490000, UNCOMMON:350000, RARE:150000, EPIC:10000, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+        5:  { COMMON:369500, UNCOMMON:400000, RARE:200000, EPIC:30000, LEGENDARY:500, MYTHIC:0, EXOTIC:0 },
+        6:  { COMMON:299200, UNCOMMON:400000, RARE:250000, EPIC:50000, LEGENDARY:700, MYTHIC:100, EXOTIC:0 },
+        7:  { COMMON:228699, UNCOMMON:400000, RARE:270000, EPIC:100000, LEGENDARY:1000, MYTHIC:300, EXOTIC:1 },
+        8:  { COMMON:167295, UNCOMMON:350000, RARE:280000, EPIC:200000, LEGENDARY:2000, MYTHIC:700, EXOTIC:5 },
+        9:  { COMMON:94480, UNCOMMON:300000, RARE:300000, EPIC:300000, LEGENDARY:4000, MYTHIC:1500, EXOTIC:20 },
+        10: { COMMON:87900, UNCOMMON:200000, RARE:300000, EPIC:400000, LEGENDARY:9000, MYTHIC:3000, EXOTIC:100 }
+      }
+    };
+
+    // Town building data (values / 100,000)
+    const townData = {
+      1:  { COMMON:70000, UNCOMMON:30000, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+      2:  { COMMON:65000, UNCOMMON:35000, RARE:0, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+      3:  { COMMON:45000, UNCOMMON:40000, RARE:15000, EPIC:0, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+      4:  { COMMON:20000, UNCOMMON:45000, RARE:30000, EPIC:5000, LEGENDARY:0, MYTHIC:0, EXOTIC:0 },
+      5:  { COMMON:0, UNCOMMON:52000, RARE:37500, EPIC:10000, LEGENDARY:500, MYTHIC:0, EXOTIC:0 },
+      6:  { COMMON:0, UNCOMMON:44200, RARE:45000, EPIC:10000, LEGENDARY:700, MYTHIC:100, EXOTIC:0 },
+      7:  { COMMON:0, UNCOMMON:30695, RARE:48000, EPIC:20000, LEGENDARY:1000, MYTHIC:300, EXOTIC:5 },
+      8:  { COMMON:0, UNCOMMON:0, RARE:57275, EPIC:40000, LEGENDARY:2000, MYTHIC:700, EXOTIC:25 },
+      9:  { COMMON:0, UNCOMMON:0, RARE:44400, EPIC:50000, LEGENDARY:4000, MYTHIC:1500, EXOTIC:100 },
+      10: { COMMON:0, UNCOMMON:0, RARE:27500, EPIC:60000, LEGENDARY:9000, MYTHIC:3000, EXOTIC:500 }
+    };
+
+    const tierColors = {
+      COMMON: '#9E9E9E',
+      UNCOMMON: '#4CAF50',
+      RARE: '#2196F3',
+      EPIC: '#9C27B0',
+      LEGENDARY: '#FF9800',
+      MYTHIC: '#F44336',
+      EXOTIC: '#E91E63'
+    };
+
+    const tierNames = {
+      COMMON: '커먼 (Common)',
+      UNCOMMON: '언커먼 (Uncommon)',
+      RARE: '레어 (Rare)',
+      EPIC: '에픽 (Epic)',
+      LEGENDARY: '레전더리 (Legendary)',
+      MYTHIC: '미식 (Mythic)',
+      EXOTIC: '이그조틱 (Exotic)'
+    };
+
+    const tierOrder = ['COMMON','UNCOMMON','RARE','EPIC','LEGENDARY','MYTHIC','EXOTIC'];
+
+    function toPercent(val, total) {
+      return (val / total * 100);
+    }
+
+    function formatPercent(val, total) {
+      const pct = toPercent(val, total);
+      if (pct === 0) return '—';
+      if (pct < 0.001) return pct.toFixed(5) + '%';
+      if (pct < 0.01) return pct.toFixed(4) + '%';
+      if (pct < 1) return pct.toFixed(3) + '%';
+      return pct.toFixed(2) + '%';
+    }
+
+    function renderTable(tableId, data, total) {
+      const tbody = document.querySelector('#' + tableId + ' tbody');
+      tbody.innerHTML = '';
+
+      tierOrder.forEach(tier => {
+        const val = data[tier];
+        const pct = toPercent(val, total);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="tier-dot" style="background:${tierColors[tier]}"></span><span class="tier-name">${tierNames[tier]}</span></td>
+          <td class="prob-value ${val === 0 ? 'zero' : ''}">${formatPercent(val, total)}</td>
+          <td class="prob-bar-cell"><div class="prob-bar"><div class="prob-bar-fill" style="width:${Math.min(pct, 100)}%;background:${tierColors[tier]}"></div></div></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Initialize tables
+    function initSummonTable(type) {
+      renderTable('table-' + type, summonData[type][1], 1000000);
+    }
+
+    function initTownTable() {
+      renderTable('table-town', townData[1], 100000);
+    }
+
+    initSummonTable('gear');
+    initSummonTable('skill');
+    initSummonTable('buddy');
+    initSummonTable('accessory');
+    initTownTable();
+
+    // Level selector events
+    document.querySelectorAll('.level-selector').forEach(selector => {
+      const target = selector.dataset.target;
+      selector.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selector.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const level = parseInt(btn.dataset.level);
+
+          if (target === 'town') {
+            renderTable('table-town', townData[level], 100000);
+          } else {
+            renderTable('table-' + target, summonData[target][level], 1000000);
+          }
+        });
+      });
+    });
+
+    // Section nav active state
+    const navLinks = document.querySelectorAll('.section-nav a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.section-nav a[href="#${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.prob-section').forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
