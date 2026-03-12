@@ -60,8 +60,8 @@
     /* ── Content ── */
     /* ── Page Tabs ── */
     .page-tabs { max-width:800px; margin:0 auto; padding:24px 24px 0; }
-    .page-tabs-inner { display:flex; gap:8px; }
-    .page-tab { padding:10px 24px; font-size:14px; font-weight:600; color:var(--text-secondary); border:1px solid var(--border); border-radius:24px; background:var(--white); text-decoration:none; display:inline-block; transition:all 0.2s; font-family:inherit; }
+    .page-tabs-inner { display:flex; gap:8px; width:100%; }
+    .page-tab { flex:1; text-align:center; padding:12px 24px; font-size:15px; font-weight:600; color:var(--text-secondary); border:1px solid var(--border); border-radius:24px; background:var(--white); text-decoration:none; display:inline-block; transition:all 0.2s; font-family:inherit; }
     .page-tab:hover { border-color:var(--primary); color:var(--primary); }
     .page-tab.active { background:var(--primary); color:white; border-color:var(--primary); }
 
@@ -70,7 +70,7 @@
     .scroll-top.visible { display:flex; }
 
     .content-wrap { max-width:800px; margin:0 auto; padding:32px 24px 120px; }
-    .page-title { font-size:24px; font-weight:700; margin-bottom:8px; color:var(--text); }
+    .page-title { font-size:32px; font-weight:700; margin-bottom:8px; color:var(--text); }
     .page-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:32px; }
 
     /* ── TOC ── */
@@ -229,6 +229,7 @@
           <li><a href="#ko-5"><span class="toc-num">제5조</span> 개인정보의 제3자 제공</a></li>
           <li><a href="#ko-6"><span class="toc-num">제6조</span> 개인정보 처리의 위탁</a></li>
           <li><a href="#ko-7"><span class="toc-num">제7조</span> 이용자 및 법정대리인의 권리와 행사 방법</a></li>
+          <li><a href="#ko-7-2"><span class="toc-num">제7조의2</span> 회원 탈퇴 및 계정 삭제</a></li>
           <li><a href="#ko-8"><span class="toc-num">제8조</span> 개인정보의 안전성 확보 조치</a></li>
           <li><a href="#ko-9"><span class="toc-num">제9조</span> 개인정보 자동 수집 장치의 설치·운영 및 거부</a></li>
           <li><a href="#ko-10"><span class="toc-num">제10조</span> 개인정보 보호책임자</a></li>
@@ -442,6 +443,24 @@
         <p>⑦ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다.</p>
       </div>
 
+      <!-- 제7조의2 -->
+      <div class="article-section" id="ko-7-2">
+        <h3>제7조의2 (회원 탈퇴 및 계정 삭제)</h3>
+        <p>① 이용자는 언제든지 앱 내에서 직접 회원 탈퇴(계정 삭제)를 요청할 수 있습니다.</p>
+        <p><strong>앱 내 계정 삭제 방법:</strong></p>
+        <ol>
+          <li>앱 실행 → 설정(⚙️) 메뉴 진입</li>
+          <li>"회원탈퇴" 버튼 클릭</li>
+          <li>안내 문구에 따라 확인 텍스트 입력</li>
+          <li>삭제 버튼 클릭하여 탈퇴 요청 완료</li>
+        </ol>
+        <p>② 탈퇴 요청 후 일정 유예기간이 부여되며, 유예기간 내에는 앱에 재로그인하여 탈퇴를 철회할 수 있습니다.</p>
+        <p>③ 유예기간이 만료되면 계정 및 관련 개인정보가 영구적으로 삭제되며, 복구할 수 없습니다.</p>
+        <p>④ 삭제되는 데이터: 계정 정보(Google/Apple 연동 ID), 게임 진행 데이터, 구매 내역, 닉네임 등 서비스 이용 중 수집된 모든 개인정보</p>
+        <p>⑤ 단, 관련 법령에 따라 일정 기간 보관이 필요한 정보(결제 기록 등)는 해당 법령에서 정한 기간 동안 보관 후 파기합니다.</p>
+        <p>⑥ 앱 내 탈퇴가 어려운 경우, 이메일(support@layerlab.io)을 통해 계정 삭제를 요청하실 수 있습니다.</p>
+      </div>
+
       <!-- 제8조 -->
       <div class="article-section" id="ko-8">
         <h3>제8조 (개인정보의 안전성 확보 조치)</h3>
@@ -574,6 +593,7 @@
           <li><a href="#en-5"><span class="toc-num">Art. 5</span> Provision to Third Parties</a></li>
           <li><a href="#en-6"><span class="toc-num">Art. 6</span> Entrustment of Processing</a></li>
           <li><a href="#en-7"><span class="toc-num">Art. 7</span> Rights of Users and Legal Representatives</a></li>
+          <li><a href="#en-7-2"><span class="toc-num">Art. 7-2</span> Account Withdrawal and Deletion</a></li>
           <li><a href="#en-8"><span class="toc-num">Art. 8</span> Security Measures</a></li>
           <li><a href="#en-9"><span class="toc-num">Art. 9</span> Automatic Data Collection Devices</a></li>
           <li><a href="#en-10"><span class="toc-num">Art. 10</span> Privacy Officer</a></li>
@@ -785,6 +805,24 @@
         <p>(5) For children under the age of 14, legal representatives may request access to, correction/deletion of, or suspension of processing of the child's personal information. The Company obtains consent from legal representatives when collecting personal information of children under 14.</p>
         <p>(6) The right to access and request suspension of processing may be restricted pursuant to Article 35(4) and Article 37(2) of the Personal Information Protection Act.</p>
         <p>(7) Requests for correction and deletion cannot be made if the personal information is specified as a collection target under other laws and regulations.</p>
+      </div>
+
+      <!-- Article 7-2 -->
+      <div class="article-section" id="en-7-2">
+        <h3>Article 7-2 (Account Withdrawal and Deletion)</h3>
+        <p>(1) Users may request account withdrawal (account deletion) at any time directly within the app.</p>
+        <p><strong>How to delete your account in the app:</strong></p>
+        <ol>
+          <li>Open the app → Go to Settings (⚙️)</li>
+          <li>Tap the "Delete Account" button</li>
+          <li>Enter the confirmation text as instructed</li>
+          <li>Tap the Delete button to complete the withdrawal request</li>
+        </ol>
+        <p>(2) After submitting a withdrawal request, a grace period is provided. During this period, you may cancel the withdrawal by logging back into the app.</p>
+        <p>(3) Once the grace period expires, your account and all associated personal information will be permanently deleted and cannot be recovered.</p>
+        <p>(4) Data deleted includes: account information (Google/Apple linked ID), game progress data, purchase history, nicknames, and all other personal information collected during service use.</p>
+        <p>(5) However, information that must be retained under applicable laws (e.g., payment records) will be stored for the period prescribed by such laws before destruction.</p>
+        <p>(6) If you are unable to delete your account within the app, you may request account deletion by emailing support@layerlab.io.</p>
       </div>
 
       <!-- Article 8 -->
