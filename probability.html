@@ -324,27 +324,26 @@
   <main class="content">
     <h1 class="page-title">확률 정보 안내</h1>
     <p class="page-desc">바드캣 키우기의 아이템 획득 확률 정보를 안내해 드립니다.</p>
-    <p class="update-date">최종 업데이트: 2026년 3월 11일</p>
+    <p class="update-date">최종 업데이트: 2026년 3월 26일</p>
 
     <nav class="section-nav">
-      <a href="#summon-gear" class="active">장비 소환</a>
-      <a href="#summon-skill">스킬 소환</a>
-      <a href="#summon-buddy">버디 소환</a>
+      <a href="#summon" class="active">소환</a>
       <a href="#summon-accessory">악세서리 소환</a>
       <a href="#town-building">마을 건물</a>
       <a href="#trait">특성</a>
       <a href="#chest">상자</a>
       <a href="#roulette">일일 룰렛</a>
+      <a href="#flea-market">플리마켓</a>
     </nav>
 
     <!-- ════════════════════════════════════ -->
-    <!-- 장비 소환 -->
+    <!-- 소환 (장비/스킬/버디 공통) -->
     <!-- ════════════════════════════════════ -->
-    <section id="summon-gear" class="prob-section">
-      <h2>장비 소환 확률</h2>
-      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 장비가 등장할 확률이 증가합니다.</p>
+    <section id="summon" class="prob-section">
+      <h2>소환 확률</h2>
+      <p class="section-desc">장비, 스킬, 버디 소환의 등급별 확률은 동일합니다. 소환 레벨이 올라갈수록 높은 등급의 아이템이 등장할 확률이 증가합니다.</p>
 
-      <div class="level-selector" data-target="gear">
+      <div class="level-selector" data-target="summon">
         <label>소환 레벨:</label>
         <button class="level-btn active" data-level="1">1</button>
         <button class="level-btn" data-level="2">2</button>
@@ -359,7 +358,7 @@
       </div>
 
       <div class="prob-table-wrap">
-        <table class="prob-table" id="table-gear">
+        <table class="prob-table" id="table-summon">
           <thead>
             <tr>
               <th>등급</th>
@@ -373,79 +372,10 @@
 
       <div class="notice-box">
         <strong>안내사항</strong>
+        - 장비, 스킬, 버디 소환의 등급별 확률은 동일합니다.<br>
         - 확률은 소수점 이하 절사 없이 표시됩니다.<br>
         - 소환 레벨은 소환 횟수에 따라 자동으로 상승합니다.<br>
         - 각 등급 내 개별 아이템은 동일한 확률로 획득됩니다.
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════ -->
-    <!-- 스킬 소환 -->
-    <!-- ════════════════════════════════════ -->
-    <section id="summon-skill" class="prob-section">
-      <h2>스킬 소환 확률</h2>
-      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 스킬이 등장할 확률이 증가합니다.</p>
-
-      <div class="level-selector" data-target="skill">
-        <label>소환 레벨:</label>
-        <button class="level-btn active" data-level="1">1</button>
-        <button class="level-btn" data-level="2">2</button>
-        <button class="level-btn" data-level="3">3</button>
-        <button class="level-btn" data-level="4">4</button>
-        <button class="level-btn" data-level="5">5</button>
-        <button class="level-btn" data-level="6">6</button>
-        <button class="level-btn" data-level="7">7</button>
-        <button class="level-btn" data-level="8">8</button>
-        <button class="level-btn" data-level="9">9</button>
-        <button class="level-btn" data-level="10">10</button>
-      </div>
-
-      <div class="prob-table-wrap">
-        <table class="prob-table" id="table-skill">
-          <thead>
-            <tr>
-              <th>등급</th>
-              <th>확률</th>
-              <th class="prob-bar-cell"></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════ -->
-    <!-- 버디 소환 -->
-    <!-- ════════════════════════════════════ -->
-    <section id="summon-buddy" class="prob-section">
-      <h2>버디 소환 확률</h2>
-      <p class="section-desc">소환 레벨이 올라갈수록 높은 등급의 버디가 등장할 확률이 증가합니다.</p>
-
-      <div class="level-selector" data-target="buddy">
-        <label>소환 레벨:</label>
-        <button class="level-btn active" data-level="1">1</button>
-        <button class="level-btn" data-level="2">2</button>
-        <button class="level-btn" data-level="3">3</button>
-        <button class="level-btn" data-level="4">4</button>
-        <button class="level-btn" data-level="5">5</button>
-        <button class="level-btn" data-level="6">6</button>
-        <button class="level-btn" data-level="7">7</button>
-        <button class="level-btn" data-level="8">8</button>
-        <button class="level-btn" data-level="9">9</button>
-        <button class="level-btn" data-level="10">10</button>
-      </div>
-
-      <div class="prob-table-wrap">
-        <table class="prob-table" id="table-buddy">
-          <thead>
-            <tr>
-              <th>등급</th>
-              <th>확률</th>
-              <th class="prob-bar-cell"></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
       </div>
     </section>
 
@@ -716,6 +646,48 @@
       </div>
     </section>
 
+    <!-- ════════════════════════════════════ -->
+    <!-- 플리마켓 -->
+    <!-- ════════════════════════════════════ -->
+    <section id="flea-market" class="prob-section">
+      <h2>플리마켓 확률</h2>
+      <p class="section-desc">플리마켓 레벨이 올라갈수록 더 많은 슬롯과 높은 등급의 아이템이 등장합니다.</p>
+
+      <div class="level-selector" data-target="flea-market">
+        <label>플리마켓 레벨:</label>
+        <button class="level-btn active" data-level="1">1</button>
+        <button class="level-btn" data-level="2">2</button>
+        <button class="level-btn" data-level="3">3</button>
+        <button class="level-btn" data-level="4">4</button>
+        <button class="level-btn" data-level="5">5</button>
+      </div>
+
+      <div class="prob-table-wrap">
+        <table class="prob-table" id="table-flea-market">
+          <thead>
+            <tr>
+              <th>슬롯</th>
+              <th>분류</th>
+              <th>등급</th>
+              <th>아이템</th>
+              <th>수량</th>
+              <th>확률(%)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="notice-box">
+        <strong>안내사항</strong>
+        - 등급 내 획득 확률은 동일합니다.<br>
+        - 각 슬롯 등장 아이템은 고정이며, 리스트 내 확률에 따라 등장합니다.<br>
+        - 이미 보유 중인 냥냥이 조각은 등장하지 않습니다.<br>
+        - 동일 냥냥이 조각 구매 시 당일에는 다시 등장하지 않습니다.<br>
+        - 1슬롯의 모든 조각 구매 시 3슬롯 이후에서 등장하는 아이템이 나타납니다.
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -845,6 +817,331 @@
       });
     }
 
+    // ── Flea Market data ──
+    const fleaMarketData = {
+      1: [
+        { slot: '1', category: '냥냥이 조각', tier: 'UNCOMMON', item: '블랑 조각', qty: 5, prob: '100' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 1, prob: '60' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 2, prob: '25' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 3, prob: '15' },
+        { slot: '3~6', category: '소환 상자', tier: 'COMMON', item: '나무 소환 상자', qty: 1, prob: '8' },
+        { slot: '3~6', category: '소환 상자', tier: 'UNCOMMON', item: '행운 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~6', category: '장비', tier: 'COMMON', item: '4분음표', qty: 1, prob: '2.7' },
+        { slot: '3~6', category: '장비', tier: 'COMMON', item: '8분음표', qty: 1, prob: '2.7' },
+        { slot: '3~6', category: '장비', tier: 'COMMON', item: '거꾸로 음표', qty: 1, prob: '2.7' },
+        { slot: '3~6', category: '장비', tier: 'COMMON', item: '진주', qty: 1, prob: '2.7' },
+        { slot: '3~6', category: '장비', tier: 'COMMON', item: '구름', qty: 1, prob: '2.7' },
+        { slot: '3~6', category: '장비', tier: 'UNCOMMON', item: '가벼운 쉼표', qty: 1, prob: '2' },
+        { slot: '3~6', category: '장비', tier: 'UNCOMMON', item: '포르테', qty: 1, prob: '2' },
+        { slot: '3~6', category: '장비', tier: 'UNCOMMON', item: '시계', qty: 1, prob: '2' },
+        { slot: '3~6', category: '장비', tier: 'UNCOMMON', item: '그림자', qty: 1, prob: '2' },
+        { slot: '3~6', category: '장비', tier: 'UNCOMMON', item: '나비', qty: 1, prob: '2' },
+        { slot: '3~6', category: '장비', tier: 'RARE', item: '그린 피아노', qty: 1, prob: '1' },
+        { slot: '3~6', category: '장비', tier: 'RARE', item: '차가운 음자리', qty: 1, prob: '1' },
+        { slot: '3~6', category: '장비', tier: 'RARE', item: '깃털', qty: 1, prob: '1' },
+        { slot: '3~6', category: '장비', tier: 'RARE', item: '비누 거품', qty: 1, prob: '1' },
+        { slot: '3~6', category: '장비', tier: 'RARE', item: '태양', qty: 1, prob: '1' },
+        { slot: '3~6', category: '장비', tier: 'EPIC', item: '4분 쉼표', qty: 1, prob: '0.5' },
+        { slot: '3~6', category: '장비', tier: 'EPIC', item: '활활 음표', qty: 1, prob: '0.5' },
+        { slot: '3~6', category: '장비', tier: 'EPIC', item: '부들', qty: 1, prob: '0.5' },
+        { slot: '3~6', category: '스킬', tier: 'COMMON', item: '부메랑 악보', qty: 1, prob: '4.5' },
+        { slot: '3~6', category: '스킬', tier: 'COMMON', item: '하멜른의 피리', qty: 1, prob: '4.5' },
+        { slot: '3~6', category: '스킬', tier: 'COMMON', item: '천상의 멜로디', qty: 1, prob: '4.5' },
+        { slot: '3~6', category: '스킬', tier: 'UNCOMMON', item: '거대한 쉼표', qty: 1, prob: '3.34' },
+        { slot: '3~6', category: '스킬', tier: 'UNCOMMON', item: '음표 미사일', qty: 1, prob: '3.33' },
+        { slot: '3~6', category: '스킬', tier: 'UNCOMMON', item: '친구들의 행진', qty: 1, prob: '3.33' },
+        { slot: '3~6', category: '스킬', tier: 'RARE', item: '체인 샤프닝', qty: 1, prob: '1.67' },
+        { slot: '3~6', category: '스킬', tier: 'RARE', item: '골드 냠냠', qty: 1, prob: '1.67' },
+        { slot: '3~6', category: '스킬', tier: 'RARE', item: '칼바람 프레스토', qty: 1, prob: '1.66' },
+        { slot: '3~6', category: '스킬', tier: 'EPIC', item: '냥냥 펀치', qty: 1, prob: '0.75' },
+        { slot: '3~6', category: '스킬', tier: 'EPIC', item: '슈팅 스타라이트', qty: 1, prob: '0.75' },
+        { slot: '3~6', category: '버디', tier: 'COMMON', item: '개굴', qty: 1, prob: '2.25' },
+        { slot: '3~6', category: '버디', tier: 'COMMON', item: '핑크', qty: 1, prob: '2.25' },
+        { slot: '3~6', category: '버디', tier: 'COMMON', item: '끼룩이', qty: 1, prob: '2.25' },
+        { slot: '3~6', category: '버디', tier: 'COMMON', item: '치코', qty: 1, prob: '2.25' },
+        { slot: '3~6', category: '버디', tier: 'COMMON', item: '크리피', qty: 1, prob: '2.25' },
+        { slot: '3~6', category: '버디', tier: 'COMMON', item: '노리', qty: 1, prob: '2.25' },
+        { slot: '3~6', category: '버디', tier: 'UNCOMMON', item: '캐논', qty: 1, prob: '1.67' },
+        { slot: '3~6', category: '버디', tier: 'UNCOMMON', item: '피스', qty: 1, prob: '1.67' },
+        { slot: '3~6', category: '버디', tier: 'UNCOMMON', item: '단델리온', qty: 1, prob: '1.67' },
+        { slot: '3~6', category: '버디', tier: 'UNCOMMON', item: '해바라기', qty: 1, prob: '1.67' },
+        { slot: '3~6', category: '버디', tier: 'UNCOMMON', item: '도토리', qty: 1, prob: '1.66' },
+        { slot: '3~6', category: '버디', tier: 'UNCOMMON', item: '오비스', qty: 1, prob: '1.66' },
+        { slot: '3~6', category: '버디', tier: 'RARE', item: '크로우', qty: 1, prob: '0.84' },
+        { slot: '3~6', category: '버디', tier: 'RARE', item: '몽당연필', qty: 1, prob: '0.84' },
+        { slot: '3~6', category: '버디', tier: 'RARE', item: '고스트', qty: 1, prob: '0.83' },
+        { slot: '3~6', category: '버디', tier: 'RARE', item: '아카시아', qty: 1, prob: '0.83' },
+        { slot: '3~6', category: '버디', tier: 'RARE', item: '더스티', qty: 1, prob: '0.83' },
+        { slot: '3~6', category: '버디', tier: 'RARE', item: '루나', qty: 1, prob: '0.83' },
+        { slot: '3~6', category: '버디', tier: 'EPIC', item: '이온', qty: 1, prob: '0.5' },
+        { slot: '3~6', category: '버디', tier: 'EPIC', item: '이겔', qty: 1, prob: '0.5' },
+        { slot: '3~6', category: '버디', tier: 'EPIC', item: '캔디', qty: 1, prob: '0.5' },
+        { slot: '3~6', category: '버디', tier: 'LEGENDARY', item: '그리폰', qty: 1, prob: '0.5' },
+      ],
+      2: [
+        { slot: '1', category: '냥냥이 조각', tier: 'UNCOMMON', item: '블랑 조각', qty: 5, prob: '50' },
+        { slot: '1', category: '냥냥이 조각', tier: 'RARE', item: '먹방이 조각', qty: 5, prob: '50' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 2, prob: '60' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 4, prob: '25' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 6, prob: '15' },
+        { slot: '3~7', category: '소환 상자', tier: 'COMMON', item: '나무 소환 상자', qty: 1, prob: '7' },
+        { slot: '3~7', category: '소환 상자', tier: 'UNCOMMON', item: '행운 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~7', category: '스킬', tier: 'COMMON', item: '부메랑 악보', qty: 1, prob: '2.84' },
+        { slot: '3~7', category: '스킬', tier: 'COMMON', item: '하멜른의 피리', qty: 1, prob: '2.83' },
+        { slot: '3~7', category: '스킬', tier: 'COMMON', item: '천상의 멜로디', qty: 1, prob: '2.83' },
+        { slot: '3~7', category: '스킬', tier: 'UNCOMMON', item: '거대한 쉼표', qty: 1, prob: '3' },
+        { slot: '3~7', category: '스킬', tier: 'UNCOMMON', item: '음표 미사일', qty: 1, prob: '3' },
+        { slot: '3~7', category: '스킬', tier: 'UNCOMMON', item: '친구들의 행진', qty: 1, prob: '3' },
+        { slot: '3~7', category: '스킬', tier: 'RARE', item: '체인 샤프닝', qty: 1, prob: '3' },
+        { slot: '3~7', category: '스킬', tier: 'RARE', item: '골드 냠냠', qty: 1, prob: '3' },
+        { slot: '3~7', category: '스킬', tier: 'RARE', item: '칼바람 프레스토', qty: 1, prob: '3' },
+        { slot: '3~7', category: '스킬', tier: 'EPIC', item: '냥냥 펀치', qty: 1, prob: '1' },
+        { slot: '3~7', category: '스킬', tier: 'EPIC', item: '슈팅 스타라이트', qty: 1, prob: '1' },
+        { slot: '3~7', category: '스킬', tier: 'EPIC', item: '드랍 더 비트', qty: 1, prob: '1' },
+        { slot: '3~7', category: '스킬', tier: 'LEGENDARY', item: '심벌즈 폭풍', qty: 1, prob: '0.5' },
+        { slot: '3~7', category: '장비', tier: 'COMMON', item: '4분음표', qty: 1, prob: '1.7' },
+        { slot: '3~7', category: '장비', tier: 'COMMON', item: '8분음표', qty: 1, prob: '1.7' },
+        { slot: '3~7', category: '장비', tier: 'COMMON', item: '거꾸로 음표', qty: 1, prob: '1.7' },
+        { slot: '3~7', category: '장비', tier: 'COMMON', item: '진주', qty: 1, prob: '1.7' },
+        { slot: '3~7', category: '장비', tier: 'COMMON', item: '구름', qty: 1, prob: '1.7' },
+        { slot: '3~7', category: '장비', tier: 'UNCOMMON', item: '가벼운 쉼표', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'UNCOMMON', item: '포르테', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'UNCOMMON', item: '시계', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'UNCOMMON', item: '그림자', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'UNCOMMON', item: '나비', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'RARE', item: '그린 피아노', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'RARE', item: '차가운 음자리', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'RARE', item: '깃털', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'RARE', item: '비누 거품', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'RARE', item: '태양', qty: 1, prob: '1.8' },
+        { slot: '3~7', category: '장비', tier: 'EPIC', item: '4분 쉼표', qty: 1, prob: '0.6' },
+        { slot: '3~7', category: '장비', tier: 'EPIC', item: '활활 음표', qty: 1, prob: '0.6' },
+        { slot: '3~7', category: '장비', tier: 'EPIC', item: '부들', qty: 1, prob: '0.6' },
+        { slot: '3~7', category: '장비', tier: 'EPIC', item: '뽀뽀', qty: 1, prob: '0.6' },
+        { slot: '3~7', category: '장비', tier: 'EPIC', item: '클로버', qty: 1, prob: '0.6' },
+        { slot: '3~7', category: '장비', tier: 'LEGENDARY', item: '웅웅 음표', qty: 1, prob: '0.5' },
+        { slot: '3~7', category: '장비', tier: 'LEGENDARY', item: '황금 깃털', qty: 1, prob: '0.167' },
+        { slot: '3~7', category: '장비', tier: 'LEGENDARY', item: '도넛', qty: 1, prob: '0.166' },
+      ],
+      3: [
+        { slot: '1', category: '냥냥이 조각', tier: 'UNCOMMON', item: '블랑 조각', qty: 5, prob: '33' },
+        { slot: '1', category: '냥냥이 조각', tier: 'RARE', item: '먹방이 조각', qty: 5, prob: '33' },
+        { slot: '1', category: '냥냥이 조각', tier: 'EPIC', item: '한밤이 조각', qty: 5, prob: '34' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 3, prob: '60' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 5, prob: '25' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 7, prob: '15' },
+        { slot: '3~8', category: '소환 상자', tier: 'UNCOMMON', item: '행운 소환 상자', qty: 1, prob: '7.5' },
+        { slot: '3~8', category: '소환 상자', tier: 'RARE', item: '실버 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~8', category: '소환 상자', tier: 'RARE', item: '골드 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~8', category: '스킬', tier: 'COMMON', item: '부메랑 악보', qty: 1, prob: '2.84' },
+        { slot: '3~8', category: '스킬', tier: 'COMMON', item: '하멜른의 피리', qty: 1, prob: '2.83' },
+        { slot: '3~8', category: '스킬', tier: 'COMMON', item: '천상의 멜로디', qty: 1, prob: '2.83' },
+        { slot: '3~8', category: '스킬', tier: 'UNCOMMON', item: '거대한 쉼표', qty: 1, prob: '3' },
+        { slot: '3~8', category: '스킬', tier: 'UNCOMMON', item: '음표 미사일', qty: 1, prob: '3' },
+        { slot: '3~8', category: '스킬', tier: 'UNCOMMON', item: '친구들의 행진', qty: 1, prob: '3' },
+        { slot: '3~8', category: '스킬', tier: 'RARE', item: '체인 샤프닝', qty: 1, prob: '3' },
+        { slot: '3~8', category: '스킬', tier: 'RARE', item: '골드 냠냠', qty: 1, prob: '3' },
+        { slot: '3~8', category: '스킬', tier: 'RARE', item: '칼바람 프레스토', qty: 1, prob: '3' },
+        { slot: '3~8', category: '스킬', tier: 'EPIC', item: '냥냥 펀치', qty: 1, prob: '1' },
+        { slot: '3~8', category: '스킬', tier: 'EPIC', item: '슈팅 스타라이트', qty: 1, prob: '1' },
+        { slot: '3~8', category: '스킬', tier: 'EPIC', item: '드랍 더 비트', qty: 1, prob: '1' },
+        { slot: '3~8', category: '장비', tier: 'COMMON', item: '4분음표', qty: 1, prob: '1.7' },
+        { slot: '3~8', category: '장비', tier: 'COMMON', item: '8분음표', qty: 1, prob: '1.7' },
+        { slot: '3~8', category: '장비', tier: 'COMMON', item: '거꾸로 음표', qty: 1, prob: '1.7' },
+        { slot: '3~8', category: '장비', tier: 'COMMON', item: '진주', qty: 1, prob: '1.7' },
+        { slot: '3~8', category: '장비', tier: 'COMMON', item: '구름', qty: 1, prob: '1.7' },
+        { slot: '3~8', category: '장비', tier: 'UNCOMMON', item: '가벼운 쉼표', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'UNCOMMON', item: '포르테', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'UNCOMMON', item: '시계', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'UNCOMMON', item: '그림자', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'UNCOMMON', item: '나비', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'RARE', item: '그린 피아노', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'RARE', item: '차가운 음자리', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'RARE', item: '깃털', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'RARE', item: '비누 거품', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'RARE', item: '태양', qty: 1, prob: '1.8' },
+        { slot: '3~8', category: '장비', tier: 'EPIC', item: '4분 쉼표', qty: 1, prob: '0.6' },
+        { slot: '3~8', category: '장비', tier: 'EPIC', item: '활활 음표', qty: 1, prob: '0.6' },
+        { slot: '3~8', category: '장비', tier: 'EPIC', item: '부들', qty: 1, prob: '0.6' },
+        { slot: '3~8', category: '장비', tier: 'EPIC', item: '뽀뽀', qty: 1, prob: '0.6' },
+        { slot: '3~8', category: '장비', tier: 'EPIC', item: '클로버', qty: 1, prob: '0.6' },
+        { slot: '3~8', category: '장비', tier: 'LEGENDARY', item: '웅웅 음표', qty: 1, prob: '0.167' },
+        { slot: '3~8', category: '장비', tier: 'LEGENDARY', item: '황금 깃털', qty: 1, prob: '0.36' },
+        { slot: '3~8', category: '장비', tier: 'LEGENDARY', item: '도넛', qty: 1, prob: '0.36' },
+        { slot: '3~8', category: '장비', tier: 'LEGENDARY', item: '퍼즐 조각', qty: 1, prob: '0.36' },
+        { slot: '3~8', category: '장비', tier: 'LEGENDARY', item: '초콜릿 포르테', qty: 1, prob: '0.36' },
+        { slot: '3~8', category: '장비', tier: 'MYTHIC', item: '벚꽃 쉼표', qty: 1, prob: '0.25' },
+        { slot: '3~8', category: '장비', tier: 'MYTHIC', item: '호박 음표', qty: 1, prob: '0.25' },
+      ],
+      4: [
+        { slot: '1', category: '냥냥이 조각', tier: 'UNCOMMON', item: '블랑 조각', qty: 5, prob: '25' },
+        { slot: '1', category: '냥냥이 조각', tier: 'RARE', item: '먹방이 조각', qty: 5, prob: '25' },
+        { slot: '1', category: '냥냥이 조각', tier: 'EPIC', item: '한밤이 조각', qty: 5, prob: '25' },
+        { slot: '1', category: '냥냥이 조각', tier: 'LEGENDARY', item: '파운시 조각', qty: 5, prob: '25' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 5, prob: '60' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 7, prob: '25' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 10, prob: '15' },
+        { slot: '3~9', category: '소환 상자', tier: 'RARE', item: '실버 소환 상자', qty: 1, prob: '7.5' },
+        { slot: '3~9', category: '소환 상자', tier: 'EPIC', item: '골드 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~9', category: '소환 상자', tier: 'LEGENDARY', item: '자이언트 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~9', category: '스킬', tier: 'COMMON', item: '부메랑 악보', qty: 1, prob: '2.84' },
+        { slot: '3~9', category: '스킬', tier: 'COMMON', item: '하멜른의 피리', qty: 1, prob: '2.83' },
+        { slot: '3~9', category: '스킬', tier: 'COMMON', item: '천상의 멜로디', qty: 1, prob: '2.83' },
+        { slot: '3~9', category: '스킬', tier: 'UNCOMMON', item: '거대한 쉼표', qty: 1, prob: '3' },
+        { slot: '3~9', category: '스킬', tier: 'UNCOMMON', item: '음표 미사일', qty: 1, prob: '3' },
+        { slot: '3~9', category: '스킬', tier: 'UNCOMMON', item: '친구들의 행진', qty: 1, prob: '3' },
+        { slot: '3~9', category: '스킬', tier: 'RARE', item: '체인 샤프닝', qty: 1, prob: '3.4' },
+        { slot: '3~9', category: '스킬', tier: 'RARE', item: '골드 냠냠', qty: 1, prob: '3.3' },
+        { slot: '3~9', category: '스킬', tier: 'RARE', item: '칼바람 프레스토', qty: 1, prob: '3.3' },
+        { slot: '3~9', category: '스킬', tier: 'EPIC', item: '냥냥 펀치', qty: 1, prob: '1.67' },
+        { slot: '3~9', category: '스킬', tier: 'EPIC', item: '슈팅 스타라이트', qty: 1, prob: '1.67' },
+        { slot: '3~9', category: '스킬', tier: 'EPIC', item: '드랍 더 비트', qty: 1, prob: '1.66' },
+        { slot: '3~9', category: '스킬', tier: 'LEGENDARY', item: '심벌즈 폭풍', qty: 1, prob: '0.5' },
+        { slot: '3~9', category: '스킬', tier: 'LEGENDARY', item: '장대비 랩소디', qty: 1, prob: '0.25' },
+        { slot: '3~9', category: '스킬', tier: 'LEGENDARY', item: '크레센도', qty: 1, prob: '0.25' },
+        { slot: '3~9', category: '장비', tier: 'COMMON', item: '4분음표', qty: 1, prob: '0.54' },
+        { slot: '3~9', category: '장비', tier: 'COMMON', item: '8분음표', qty: 1, prob: '0.54' },
+        { slot: '3~9', category: '장비', tier: 'COMMON', item: '거꾸로 음표', qty: 1, prob: '0.54' },
+        { slot: '3~9', category: '장비', tier: 'COMMON', item: '진주', qty: 1, prob: '0.54' },
+        { slot: '3~9', category: '장비', tier: 'COMMON', item: '구름', qty: 1, prob: '0.54' },
+        { slot: '3~9', category: '장비', tier: 'UNCOMMON', item: '가벼운 쉼표', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'UNCOMMON', item: '포르테', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'UNCOMMON', item: '시계', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'UNCOMMON', item: '그림자', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'UNCOMMON', item: '나비', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'RARE', item: '그린 피아노', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'RARE', item: '차가운 음자리', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'RARE', item: '깃털', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'RARE', item: '비누 거품', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'RARE', item: '태양', qty: 1, prob: '2' },
+        { slot: '3~9', category: '장비', tier: 'EPIC', item: '4분 쉼표', qty: 1, prob: '1' },
+        { slot: '3~9', category: '장비', tier: 'EPIC', item: '활활 음표', qty: 1, prob: '1' },
+        { slot: '3~9', category: '장비', tier: 'EPIC', item: '부들', qty: 1, prob: '1' },
+        { slot: '3~9', category: '장비', tier: 'EPIC', item: '뽀뽀', qty: 1, prob: '1' },
+        { slot: '3~9', category: '장비', tier: 'EPIC', item: '클로버', qty: 1, prob: '1' },
+        { slot: '3~9', category: '장비', tier: 'MYTHIC', item: '어흥 방울', qty: 1, prob: '0.5' },
+      ],
+      5: [
+        { slot: '1', category: '냥냥이 조각', tier: 'UNCOMMON', item: '블랑 조각', qty: 5, prob: '20' },
+        { slot: '1', category: '냥냥이 조각', tier: 'RARE', item: '먹방이 조각', qty: 5, prob: '20' },
+        { slot: '1', category: '냥냥이 조각', tier: 'EPIC', item: '한밤이 조각', qty: 5, prob: '20' },
+        { slot: '1', category: '냥냥이 조각', tier: 'LEGENDARY', item: '파운시 조각', qty: 5, prob: '20' },
+        { slot: '1', category: '냥냥이 조각', tier: 'MYTHIC', item: '힙냥이 조각', qty: 5, prob: '20' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 7, prob: '60' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 10, prob: '25' },
+        { slot: '2', category: '별보석', tier: '', item: '별보석', qty: 15, prob: '15' },
+        { slot: '3~10', category: '소환 상자', tier: 'RARE', item: '실버 소환 상자', qty: 1, prob: '5' },
+        { slot: '3~10', category: '소환 상자', tier: 'EPIC', item: '골드 소환 상자', qty: 1, prob: '3' },
+        { slot: '3~10', category: '소환 상자', tier: 'LEGENDARY', item: '자이언트 소환 상자', qty: 1, prob: '2' },
+        { slot: '3~10', category: '스킬', tier: 'COMMON', item: '부메랑 악보', qty: 1, prob: '0.9' },
+        { slot: '3~10', category: '스킬', tier: 'COMMON', item: '하멜른의 피리', qty: 1, prob: '0.9' },
+        { slot: '3~10', category: '스킬', tier: 'COMMON', item: '천상의 멜로디', qty: 1, prob: '0.9' },
+        { slot: '3~10', category: '스킬', tier: 'UNCOMMON', item: '거대한 쉼표', qty: 1, prob: '3.4' },
+        { slot: '3~10', category: '스킬', tier: 'UNCOMMON', item: '음표 미사일', qty: 1, prob: '3.3' },
+        { slot: '3~10', category: '스킬', tier: 'UNCOMMON', item: '친구들의 행진', qty: 1, prob: '3.3' },
+        { slot: '3~10', category: '스킬', tier: 'RARE', item: '체인 샤프닝', qty: 1, prob: '3.4' },
+        { slot: '3~10', category: '스킬', tier: 'RARE', item: '골드 냠냠', qty: 1, prob: '3.3' },
+        { slot: '3~10', category: '스킬', tier: 'RARE', item: '칼바람 프레스토', qty: 1, prob: '3.3' },
+        { slot: '3~10', category: '스킬', tier: 'EPIC', item: '냥냥 펀치', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '스킬', tier: 'EPIC', item: '슈팅 스타라이트', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '스킬', tier: 'EPIC', item: '드랍 더 비트', qty: 1, prob: '1.66' },
+        { slot: '3~10', category: '스킬', tier: 'LEGENDARY', item: '심벌즈 폭풍', qty: 1, prob: '0.6' },
+        { slot: '3~10', category: '스킬', tier: 'LEGENDARY', item: '장대비 랩소디', qty: 1, prob: '0.6' },
+        { slot: '3~10', category: '스킬', tier: 'LEGENDARY', item: '크레센도', qty: 1, prob: '0.6' },
+        { slot: '3~10', category: '장비', tier: 'COMMON', item: '4분음표', qty: 1, prob: '0.45' },
+        { slot: '3~10', category: '장비', tier: 'COMMON', item: '8분음표', qty: 1, prob: '0.45' },
+        { slot: '3~10', category: '장비', tier: 'COMMON', item: '거꾸로 음표', qty: 1, prob: '0.45' },
+        { slot: '3~10', category: '장비', tier: 'COMMON', item: '진주', qty: 1, prob: '0.45' },
+        { slot: '3~10', category: '장비', tier: 'COMMON', item: '구름', qty: 1, prob: '0.45' },
+        { slot: '3~10', category: '버디', tier: 'UNCOMMON', item: '캐논', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'UNCOMMON', item: '피스', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'UNCOMMON', item: '단델리온', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'UNCOMMON', item: '해바라기', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'UNCOMMON', item: '도토리', qty: 1, prob: '1.66' },
+        { slot: '3~10', category: '버디', tier: 'UNCOMMON', item: '오비스', qty: 1, prob: '1.66' },
+        { slot: '3~10', category: '버디', tier: 'RARE', item: '크로우', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'RARE', item: '몽당연필', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'RARE', item: '고스트', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'RARE', item: '아카시아', qty: 1, prob: '1.67' },
+        { slot: '3~10', category: '버디', tier: 'RARE', item: '더스티', qty: 1, prob: '1.66' },
+        { slot: '3~10', category: '버디', tier: 'RARE', item: '루나', qty: 1, prob: '1.66' },
+        { slot: '3~10', category: '버디', tier: 'EPIC', item: '이온', qty: 1, prob: '0.84' },
+        { slot: '3~10', category: '버디', tier: 'EPIC', item: '이겔', qty: 1, prob: '0.84' },
+        { slot: '3~10', category: '버디', tier: 'EPIC', item: '캔디', qty: 1, prob: '0.83' },
+        { slot: '3~10', category: '버디', tier: 'EPIC', item: '응아', qty: 1, prob: '0.83' },
+        { slot: '3~10', category: '버디', tier: 'EPIC', item: '달관이', qty: 1, prob: '0.83' },
+        { slot: '3~10', category: '버디', tier: 'EPIC', item: '비', qty: 1, prob: '0.83' },
+        { slot: '3~10', category: '버디', tier: 'LEGENDARY', item: '그리폰', qty: 1, prob: '0.3' },
+        { slot: '3~10', category: '버디', tier: 'LEGENDARY', item: '덩크', qty: 1, prob: '0.3' },
+        { slot: '3~10', category: '버디', tier: 'LEGENDARY', item: '번개 구름', qty: 1, prob: '0.3' },
+        { slot: '3~10', category: '버디', tier: 'LEGENDARY', item: '유니멜로', qty: 1, prob: '0.3' },
+        { slot: '3~10', category: '버디', tier: 'LEGENDARY', item: '노래버섯', qty: 1, prob: '0.3' },
+        { slot: '3~10', category: '버디', tier: 'LEGENDARY', item: '플러피', qty: 1, prob: '0.3' },
+        { slot: '3~10', category: '버디', tier: 'MYTHIC', item: '루미토', qty: 1, prob: '0.084' },
+        { slot: '3~10', category: '버디', tier: 'MYTHIC', item: '무지개 구름', qty: 1, prob: '0.084' },
+        { slot: '3~10', category: '버디', tier: 'MYTHIC', item: '해골', qty: 1, prob: '0.083' },
+        { slot: '3~10', category: '버디', tier: 'MYTHIC', item: '엠버', qty: 1, prob: '0.083' },
+        { slot: '3~10', category: '버디', tier: 'MYTHIC', item: '핸디', qty: 1, prob: '0.083' },
+        { slot: '3~10', category: '버디', tier: 'MYTHIC', item: '임프', qty: 1, prob: '0.083' },
+      ]
+    };
+
+    const fleaTierColorMap = {
+      'COMMON': 'var(--tier-common)',
+      'UNCOMMON': 'var(--tier-uncommon)',
+      'RARE': 'var(--tier-rare)',
+      'EPIC': 'var(--tier-epic)',
+      'LEGENDARY': 'var(--tier-legendary)',
+      'MYTHIC': 'var(--tier-mythic)',
+      'EXOTIC': 'var(--tier-exotic)',
+      '': '#6B7280'
+    };
+
+    const fleaTierNameMap = {
+      'COMMON': '커먼',
+      'UNCOMMON': '언커먼',
+      'RARE': '레어',
+      'EPIC': '에픽',
+      'LEGENDARY': '레전더리',
+      'MYTHIC': '미스틱',
+      'EXOTIC': '이그조틱',
+      '': '-'
+    };
+
+    function renderFleaMarketTable(level) {
+      const tbody = document.querySelector('#table-flea-market tbody');
+      tbody.innerHTML = '';
+      const rows = fleaMarketData[level];
+      let prevSlot = '';
+
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        const showSlot = row.slot !== prevSlot;
+        prevSlot = row.slot;
+
+        const tierDot = row.tier
+          ? `<span class="tier-dot" style="background:${fleaTierColorMap[row.tier]}"></span>`
+          : '';
+        const tierLabel = fleaTierNameMap[row.tier] || '-';
+
+        tr.innerHTML = `
+          <td>${showSlot ? row.slot : ''}</td>
+          <td>${row.category}</td>
+          <td>${tierDot}<span class="tier-name">${tierLabel}</span></td>
+          <td>${row.item}${row.category === '별보석' ? ' x' + row.qty : ''}</td>
+          <td>${row.category !== '별보석' ? row.qty : '-'}</td>
+          <td class="prob-value">${row.prob}%</td>
+        `;
+
+        if (showSlot && rows.filter(r => r.slot === row.slot).length > 1) {
+          // 슬롯 그룹 구분을 위한 상단 보더
+          tr.style.borderTop = '2px solid var(--border)';
+        }
+
+        tbody.appendChild(tr);
+      });
+    }
+
     // Initialize tables
     function initSummonTable(type) {
       renderTable('table-' + type, summonData[type][1], 1000000);
@@ -854,11 +1151,10 @@
       renderTable('table-town', townData[1], 100000);
     }
 
-    initSummonTable('gear');
-    initSummonTable('skill');
-    initSummonTable('buddy');
+    renderTable('table-summon', summonData['gear'][1], 1000000);
     initSummonTable('accessory');
     initTownTable();
+    renderFleaMarketTable(1);
 
     // Level selector events
     document.querySelectorAll('.level-selector').forEach(selector => {
@@ -869,8 +1165,12 @@
           btn.classList.add('active');
           const level = parseInt(btn.dataset.level);
 
-          if (target === 'town') {
+          if (target === 'flea-market') {
+            renderFleaMarketTable(level);
+          } else if (target === 'town') {
             renderTable('table-town', townData[level], 100000);
+          } else if (target === 'summon') {
+            renderTable('table-summon', summonData['gear'][level], 1000000);
           } else {
             renderTable('table-' + target, summonData[target][level], 1000000);
           }
