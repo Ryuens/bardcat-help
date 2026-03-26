@@ -96,7 +96,7 @@
       margin-bottom: 32px;
     }
 
-    /* ── Section Nav ── */
+    /* ── Section Nav (Tab style) ── */
     .section-nav {
       display: flex;
       flex-wrap: wrap;
@@ -104,19 +104,20 @@
       margin-bottom: 32px;
     }
 
-    .section-nav a {
+    .section-nav button {
       padding: 10px 18px;
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 8px;
-      text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       color: var(--text);
+      cursor: pointer;
+      font-family: inherit;
       transition: all 0.2s;
     }
 
-    .section-nav a:hover, .section-nav a.active {
+    .section-nav button:hover, .section-nav button.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
@@ -125,7 +126,11 @@
     /* ── Section ── */
     .prob-section {
       margin-bottom: 48px;
-      scroll-margin-top: 80px;
+      display: none;
+    }
+
+    .prob-section.active {
+      display: block;
     }
 
     .prob-section h2 {
@@ -327,22 +332,22 @@
     <p class="page-desc">바드캣 키우기의 아이템 획득 확률 정보를 안내해 드립니다.</p>
     <p class="update-date">최종 업데이트: 2026년 3월 26일</p>
 
-    <nav class="section-nav">
-      <a href="#summon" class="active">소환</a>
-      <a href="#summon-accessory">악세서리 소환</a>
-      <a href="#town-building">마을 건물</a>
-      <a href="#trait">특성</a>
-      <a href="#chest">상자</a>
-      <a href="#roulette">일일 룰렛</a>
-      <a href="#flea-market">플리마켓</a>
-      <a href="#bee-reward">벌꿀 보상</a>
-      <a href="#artifact">유물</a>
+    <nav class="section-nav" id="section-nav">
+      <button class="active" data-tab="summon">소환</button>
+      <button data-tab="summon-accessory">악세서리 소환</button>
+      <button data-tab="town-building">마을 건물</button>
+      <button data-tab="trait">특성</button>
+      <button data-tab="chest">상자</button>
+      <button data-tab="roulette">일일 룰렛</button>
+      <button data-tab="flea-market">플리마켓</button>
+      <button data-tab="bee-reward">벌꿀 보상</button>
+      <button data-tab="artifact">유물</button>
     </nav>
 
     <!-- ════════════════════════════════════ -->
     <!-- 소환 (장비/스킬/버디 공통) -->
     <!-- ════════════════════════════════════ -->
-    <section id="summon" class="prob-section">
+    <section id="summon" class="prob-section active">
       <h2>소환 확률</h2>
       <p class="section-desc">장비, 스킬, 버디 소환의 등급별 확률은 동일합니다. 소환 레벨이 올라갈수록 높은 등급의 아이템이 등장할 확률이 증가합니다.</p>
 
@@ -1290,19 +1295,28 @@
       });
     });
 
-    // Section nav active state
-    const navLinks = document.querySelectorAll('.section-nav a');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          const link = document.querySelector(`.section-nav a[href="#${entry.target.id}"]`);
-          if (link) link.classList.add('active');
-        }
-      });
-    }, { threshold: 0.3 });
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('#section-nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.prob-section').forEach(s => s.classList.remove('active'));
+      const btn = document.querySelector(`#section-nav button[data-tab="${tabId}"]`);
+      const section = document.getElementById(tabId);
+      if (btn) btn.classList.add('active');
+      if (section) section.classList.add('active');
+    }
 
-    document.querySelectorAll('.prob-section').forEach(s => observer.observe(s));
+    document.querySelectorAll('#section-nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTab(btn.dataset.tab);
+        history.replaceState(null, '', '#' + btn.dataset.tab);
+      });
+    });
+
+    // URL hash support (for in-app links like probability.html#summon-accessory)
+    if (window.location.hash) {
+      const tabId = window.location.hash.slice(1);
+      switchTab(tabId);
+    }
   </script>
 
 </body>
